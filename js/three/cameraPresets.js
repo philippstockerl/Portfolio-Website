@@ -18,7 +18,7 @@ export const camPresets = [
 
   // 4: Certificates — grid right, content left (mirror)
   { pos: [0,0,100], rotate: false, target: [0,0,0],
-    world: { pos:[40,-30,0], yaw: 0.00, scale: 0.4 }, showWorld: false, showHelpers: true },
+    world: { pos:[40,-30,0], yaw: 0.00, scale: 0.4 }, showWorld: true, showHelpers: true },
 
   // 5: Contact — pulled back a bit
   { pos: [50,50,50], rotate: false, target: [0,0,0],
@@ -26,11 +26,11 @@ export const camPresets = [
 
   // 6: Hidden world demo
   { pos: [0,100,200], rotate: false, target: [0,0,0],
-    world: { pos:[0,0,0], yaw: 0.0, scale: 1 }, showWorld: false, showHelpers: false },
+    world: { pos:[0,0,0], yaw: 0.0, scale: 1 }, showWorld: true, showHelpers: true },
 
   // 7: No helpers preset
   { pos: [100,100,100], rotate: false, target: [0,0,0],
-    world: { pos:[0,0,0], yaw: 0, scale: 1 }, showWorld: false, showHelpers: false }
+    world: { pos:[0,0,0], yaw: 0, scale: 1 }, showWorld: true, showHelpers: false }
 ];
 
 // Map section IDs to camera preset indices
