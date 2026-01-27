@@ -112,9 +112,16 @@ const translations = {
     proj4Title: "SAP Fiori & ERP-Prozessintegration",
     proj4Subtitle: "Praktika bei 4process AG & msg systems AG",
     proj4Desc: "Entwicklung von SAP Fiori Apps und Anpassung von S/4HANA Geschäftsprozessen. Integration von Analytics und Workflow-Optimierung im ERP-Umfeld.",
-    proj5Title: "Geschäftsprozessoptimierung (BPMN)",
-    proj5Subtitle: "Operational Information Systems, Universität Passau",
-    proj5Desc: "Analyse und Neugestaltung von Geschäftsprozessen mit BPMN zur Verbesserung von Durchlaufzeiten und Effizienz. Einsatz von Process Mining und digitalen Transformationstechniken.",
+    
+    
+    
+    proj5Title: "Robust and Adaptive Path Planning for Autonomous Vehicles in Spatio-Temporal Cost Fields",
+    proj5Subtitle: "Bachelor Arbeit, Lehrstuhl für Business Decisions and Data Sience, Universität Passau",
+    proj5Desc: "Entiwcklung und Implementierung eines experimentellen Frameworks in Python um verschiedene Algorithmen für das Shortest-Path Problem unter Kosten-Unischerheit zu evaluieren.",
+    
+    proj6Title: "Web Design",
+    proj6Subtitle: "Web and Data Engineering, Universität Passau",
+    proj6Desc: "Design und Implementierung von Front-end und Back-end elementen für eine Konzeptionelle Rezept-Plattform mit SQL Datenbank anbindung.",
 
     // Education
     edu1Title: "B.Sc. Wirtschaftsinformatik",
