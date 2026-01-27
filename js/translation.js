@@ -16,20 +16,28 @@ const translations = {
 
     // Projects
     proj1Title: "Minimum-Cost-Flow Optimization",
-    proj1Subtitle: "Chair of Supply Chain & Operations Management, University of Passau (Prof. Dr. Alena Otto)",
+    proj1Subtitle: "Chair of Supply Chain & Operations Management, University of Passau",
     proj1Desc: "Developed and implemented a minimum-cost network flow model for optimizing logistics and supply chain delivery costs. Compared algorithmic solutions and documented results in a scientific paper.",
+    
     proj2Title: "Facility Location under Uncertainty",
     proj2Subtitle: "Bachelor Seminar, Chair of Supply Chain & Operations Management, University of Passau",
     proj2Desc: "Designed and solved facility location problems considering uncertain demand. Applied integer programming and scenario analysis to support strategic decision-making.",
+    
     proj3Title: "Operations Research & Decision Models",
     proj3Subtitle: "Management Science & Data Science, University of Passau",
     proj3Desc: "Solved real-world optimization cases: blending, knapsack, cutting stock, bin packing, and travelling salesman problems. Used Python (Gurobi), IBM CPLEX, and R for model development.",
+    
     proj4Title: "SAP Fiori & ERP Process Integration",
     proj4Subtitle: "Internships at 4process AG & msg systems AG",
     proj4Desc: "Developed SAP Fiori apps and customized S/4HANA business processes. Focused on integrating analytics and workflow optimization within ERP environments.",
-    proj5Title: "Business Process Optimization (BPMN)",
-    proj5Subtitle: "Operational Information Systems, University of Passau",
-    proj5Desc: "Analyzed and redesigned business processes using BPMN to improve lead times and operational efficiency. Applied process mining and digital transformation techniques.",
+    
+    proj5Title: "Robust and Adaptive Path Planning for Autonomous Vehicles in Spatio-Temporal Cost Fields",
+    proj5Subtitle: "Bachelor Thesis, Chair of Business Decisions and Data Sience, University of Passau",
+    proj5Desc: "Designed and implemented an experimental framework in Python to evaluate different algorithms for the shortest-path problem under cost uncertainty.",
+
+    proj6Title: "Web Design",
+    proj6Subtitle: "Web and Data Engineering, University of Passau",
+    proj6Desc: "Designed and implemented front- and back-end elements for a conceptual food recipe platform with SQL databank.",
 
     // Education
     edu1Title: "B.Sc. Information Systems",
@@ -93,7 +101,7 @@ const translations = {
 
     // Projects
     proj1Title: "Minimum-Cost-Flow Optimierung",
-    proj1Subtitle: "Lehrstuhl für Supply Chain & Operations Management, Universität Passau (Prof. Dr. Alena Otto)",
+    proj1Subtitle: "Lehrstuhl für Supply Chain & Operations Management, Universität Passau",
     proj1Desc: "Entwicklung und Implementierung eines Minimum-Cost-Network-Flow-Modells zur Optimierung von Logistik- und Lieferkettenkosten. Vergleich von Lösungsansätzen und wissenschaftliche Dokumentation.",
     proj2Title: "Facility Location unter Unsicherheit",
     proj2Subtitle: "Bachelorseminar, Lehrstuhl für Supply Chain & Operations Management, Universität Passau",
