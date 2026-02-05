@@ -28,7 +28,9 @@ export async function load({
   const video = document.createElement('video');
   const isIOSDevice = (() => {
     const ua = navigator.userAgent || '';
-    return /iPad|iPhone|iPod/.test(ua) || (ua.includes('Mac') && 'ontouchend' in document);
+    const iOSUA = /iPad|iPhone|iPod/.test(ua);
+    const iPadOS = navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
+    return iOSUA || iPadOS;
   })();
   const sources = [];
   if (isIOSDevice && srcMp4) {
@@ -63,6 +65,8 @@ export async function load({
     console.warn('[loaderVideoPlane] video error', video.currentSrc || video.src, video.error);
     tryFallback();
   });
+  video.addEventListener('stalled', tryFallback, { once: true });
+  video.addEventListener('abort', tryFallback, { once: true });
 
   const tryPlay = () => video.play().catch(() => {});
   tryPlay();
@@ -85,7 +89,15 @@ export async function load({
       try { video.currentTime = 0.001; } catch {}
     }
   });
-  video.addEventListener('loadeddata', tryPlay, { once: true });
+  const fallbackTimer = setTimeout(() => {
+    if (video.readyState < 2) tryFallback();
+  }, 2000);
+  const clearFallbackTimer = () => clearTimeout(fallbackTimer);
+  video.addEventListener('loadeddata', () => {
+    clearFallbackTimer();
+    tryPlay();
+  }, { once: true });
+  video.addEventListener('canplay', clearFallbackTimer, { once: true });
 
   const tex = new THREE.VideoTexture(video);
   tex.colorSpace = THREE.SRGBColorSpace;
