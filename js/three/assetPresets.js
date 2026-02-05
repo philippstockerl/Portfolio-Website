@@ -13,7 +13,7 @@ export const assetPresetsDark = {
 {
   id: 'xy-front-left',
   type: 'video',
-  src: 'media/videos/randomField.webm',
+  src: 'media/videos/randomfield.webm',
   loop: true,          // only this one loops
   size: [70, 70],
   pos: [-65, 50, 0.12],
