@@ -1,9 +1,5 @@
 // assetPresets.js
-// Theme-aware asset presets for grid animations.
-// Optional per-asset overlay fields: href, label (or title), cta.
-// Asset types: "video" | "image" (GIFs use "image").
 
-// Swap these to your actual rendered files.
 const FORMULATION_DARK = 'media/videos/test/1080p60/Formulation.webm';
 const FORMULATION_LIGHT = 'media/videos/BudgetedRobustManimLight/1080p60/FormulationLight.webm';
 
