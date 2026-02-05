@@ -1,7 +1,9 @@
 // assetPresets.js
 
 const FORMULATION_DARK = 'media/videos/test/1080p60/Formulation.webm';
+const FORMULATION_DARK_MP4 = 'media/videos/test/1080p60/Formulation_720p30.mp4';
 const FORMULATION_LIGHT = 'media/videos/BudgetedRobustManimLight/1080p60/FormulationLight.webm';
+const FORMULATION_LIGHT_MP4 = 'media/videos/BudgetedRobustManimLight/1080p60/FormulationLight_720p30.mp4';
 
 export const assetPresetsDark = {
   0: [
@@ -27,6 +29,7 @@ export const assetPresetsDark = {
       id: 'xy-front-left',
       type: 'video',
       src: FORMULATION_DARK,
+      srcMp4: FORMULATION_DARK_MP4,
       size: [150, 100],
       pos: [-25, 50, 0.12],
       rot: [0, 0, 0],
@@ -39,6 +42,7 @@ export const assetPresetsDark = {
       id: 'xy-front-right',
       type: 'video',
       src: FORMULATION_DARK,
+      srcMp4: FORMULATION_DARK_MP4,
       size: [150, 100],
       pos: [25, 50, 0.12],
       rot: [0, Math.PI, 0],
@@ -54,6 +58,7 @@ export const assetPresetsDark = {
       id: 'manim-hero-xz',
       type: 'video',
       src: FORMULATION_DARK,
+      srcMp4: FORMULATION_DARK_MP4,
       size: [120, 68],
       pos: [0, 0.12, 0],
       rot: [-Math.PI / 2, 0, 0],
@@ -66,6 +71,7 @@ export const assetPresetsDark = {
       id: 'manim-hero-xy',
       type: 'video',
       src: FORMULATION_DARK,
+      srcMp4: FORMULATION_DARK_MP4,
       size: [90, 50],
       pos: [0, 0, 0.12],
       rot: [0, 0, 0],
@@ -78,6 +84,7 @@ export const assetPresetsDark = {
       id: 'manim-hero-yz',
       type: 'video',
       src: FORMULATION_DARK,
+      srcMp4: FORMULATION_DARK_MP4,
       size: [90, 50],
       pos: [0.12, 0, 0],
       rot: [0, Math.PI / 2, 0],
@@ -90,6 +97,7 @@ export const assetPresetsDark = {
       id: 'xy-front-left',
       type: 'video',
       src: FORMULATION_DARK,
+      srcMp4: FORMULATION_DARK_MP4,
       size: [150, 100],
       pos: [-25, 50, 0.12],
       rot: [0, 0, 0],
@@ -105,6 +113,7 @@ export const assetPresetsDark = {
       id: 'xy-front-right',
       type: 'video',
       src: FORMULATION_DARK,
+      srcMp4: FORMULATION_DARK_MP4,
       size: [150, 100],
       pos: [25, 50, 0.12],
       rot: [0, Math.PI, 0],
@@ -120,6 +129,7 @@ export const assetPresetsDark = {
       id: 'yz-front-posz',
       type: 'video',
       src: FORMULATION_DARK,
+      srcMp4: FORMULATION_DARK_MP4,
       size: [150, 100],
       pos: [0.12, 50, 25],
       rot: [0, Math.PI / 2, 0],
@@ -135,6 +145,7 @@ export const assetPresetsDark = {
       id: 'yz-front-negz',
       type: 'video',
       src: FORMULATION_DARK,
+      srcMp4: FORMULATION_DARK_MP4,
       size: [150, 100],
       pos: [0.12, 50, -25],
       rot: [0, -Math.PI / 2, 0],
@@ -180,6 +191,7 @@ export const assetPresetsLight = {
       id: 'xy-front-left',
       type: 'video',
       src: FORMULATION_LIGHT,
+      srcMp4: FORMULATION_LIGHT_MP4,
       size: [150, 100],
       pos: [-25, 50, 0.12],
       rot: [0, 0, 0],
@@ -192,6 +204,7 @@ export const assetPresetsLight = {
       id: 'xy-front-right',
       type: 'video',
       src: FORMULATION_LIGHT,
+      srcMp4: FORMULATION_LIGHT_MP4,
       size: [150, 100],
       pos: [25, 50, 0.12],
       rot: [0, Math.PI, 0],
@@ -207,6 +220,7 @@ export const assetPresetsLight = {
       id: 'manim-hero-xz',
       type: 'video',
       src: FORMULATION_LIGHT,
+      srcMp4: FORMULATION_LIGHT_MP4,
       size: [120, 68],
       pos: [0, 0.12, 0],
       rot: [-Math.PI / 2, 0, 0],
@@ -219,6 +233,7 @@ export const assetPresetsLight = {
       id: 'manim-hero-xy',
       type: 'video',
       src: FORMULATION_LIGHT,
+      srcMp4: FORMULATION_LIGHT_MP4,
       size: [90, 50],
       pos: [0, 0, 0.12],
       rot: [0, 0, 0],
@@ -231,6 +246,7 @@ export const assetPresetsLight = {
       id: 'manim-hero-yz',
       type: 'video',
       src: FORMULATION_LIGHT,
+      srcMp4: FORMULATION_LIGHT_MP4,
       size: [90, 50],
       pos: [0.12, 0, 0],
       rot: [0, Math.PI / 2, 0],

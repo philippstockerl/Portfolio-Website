@@ -12,6 +12,7 @@ function resolveSide(side) {
 
 export async function load({
   src,
+  srcMp4,
   size = [120, 68],
   pos = [0, 0, 0.1],
   rot = [-Math.PI / 2, 0, 0],
@@ -25,8 +26,22 @@ export async function load({
   if (!src) throw new Error('loaderVideoPlane: "src" is required');
 
   const video = document.createElement('video');
+  const isIOSDevice = (() => {
+    const ua = navigator.userAgent || '';
+    return /iPad|iPhone|iPod/.test(ua) || (ua.includes('Mac') && 'ontouchend' in document);
+  })();
+  const sources = [];
+  if (isIOSDevice && srcMp4) {
+    sources.push(srcMp4);
+    sources.push(src);
+  } else {
+    sources.push(src);
+    if (srcMp4) sources.push(srcMp4);
+  }
+  let sourceIndex = 0;
+
   video.crossOrigin = 'anonymous';
-  video.src = src;
+  video.src = sources[sourceIndex];
   video.loop = !!loop;
   video.muted = true;
   video.autoplay = true;
@@ -37,8 +52,16 @@ export async function load({
   video.setAttribute('playsinline', '');
   video.style.display = 'none';
   document.body.appendChild(video);
+  const tryFallback = () => {
+    if (sourceIndex + 1 >= sources.length) return;
+    sourceIndex += 1;
+    video.src = sources[sourceIndex];
+    try { video.load(); } catch {}
+    tryPlay();
+  };
   video.addEventListener('error', () => {
-    console.warn('[loaderVideoPlane] video error', src, video.error);
+    console.warn('[loaderVideoPlane] video error', video.currentSrc || video.src, video.error);
+    tryFallback();
   });
 
   const tryPlay = () => video.play().catch(() => {});
