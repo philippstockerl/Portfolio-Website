@@ -8,8 +8,9 @@ import {
   setWorldSpin,
 } from './threeScene.js';
 
-import { camPresets } from './cameraPresets.js';
+import { getCamPresetsForWidth } from './cameraPresets.js';
 import { fadeGrids, fadeHelpers, animateWorldOpacity } from './fadeController.js';
+import { applyAssetPreset } from './assetManager.js';
 
 // ---------- state ----------
 let lastCamPos = [0, 0, 5];
@@ -55,7 +56,8 @@ function animateVector3(current, target, duration, onUpdate, onComplete) {
 // ---------- core ----------
 export function applyPreset(index, prefersReduced = false) {
   animToken++;
-  const p = camPresets[index] ?? camPresets[0];
+  const presets = getCamPresetsForWidth(window.innerWidth);
+  const p = presets[index] ?? presets[0];
 
   // Fallback positions if world state not ready yet
   const fromPos = lastCamPos;
@@ -86,7 +88,7 @@ export function applyPreset(index, prefersReduced = false) {
   }
 
   // Spin world if preset requires it
-  setWorldSpin(!prefersReduced && !!p.rotate, 0.001);
+  setWorldSpin(!prefersReduced && !!p.rotate, 0.003);
 
   // Respect preset visibility flags with unified fade logic for sync
   const fadeInDuration = 800;
@@ -115,6 +117,7 @@ export function applyPreset(index, prefersReduced = false) {
   lastShowHelpers = p.showHelpers;
 
   lastPresetIndex = index;
+  applyAssetPreset(index);
 }
 
 // Safe wrapper (no checks, just calls applyPreset)

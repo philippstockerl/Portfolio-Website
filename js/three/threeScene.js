@@ -4,9 +4,36 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.m
 // Shared fade duration for helpers and grids
 const FADE_DURATION = 1000;
 
+// Grid color themes (tweak here)
+const GRID_THEMES = {
+  dark: { main: 0xb8beca, grid: 0x8e95a3, opacity: 0.5 },
+  light: { main: 0x4b5160, grid: 0x7b828f, opacity: 0.35 }
+};
+
+// Glass panel themes (tweak here)
+const GLASS_THEMES = {
+  dark: {
+    color: 0x8da2ff,
+    opacity: 0.03,
+    transmission: 0.35,
+    roughness: 0.18,
+    clearcoat: 0.4,
+    clearcoatRoughness: 0.2
+  },
+  light: {
+    color: 0xbfd0ff,
+    opacity: 0.14,
+    transmission: 0.3,
+    roughness: 0.22,
+    clearcoat: 0.35,
+    clearcoatRoughness: 0.25
+  }
+};
+
 const mixers = [];
 const helpers = [];
 const grids = [];
+const glassPanels = [];
 const axes = [];
 
 export const scene    = new THREE.Scene();
@@ -21,12 +48,14 @@ export const world = new THREE.Group();
 export const modelsGroup = new THREE.Group();
 export const gridsGroup = new THREE.Group();
 export const axesGroup = new THREE.Group();
+export const gridAssetsGroup = new THREE.Group();
 worldRoot.add(spinGroup);
 spinGroup.add(world);
 world.add(modelsGroup);
 scene.add(worldRoot);
 scene.add(gridsGroup);
 scene.add(axesGroup);
+gridsGroup.add(gridAssetsGroup);
 
 // transparent BG
 renderer.setClearColor(0x000000, 0);
@@ -34,8 +63,9 @@ scene.background = null;
 
 // --- build your grids/axes into `gridsGroup` and `axesGroup` exactly like before ------------------
 (function buildGridsAndAxes() {
-  const size = 200, divisions = 30;
-  const colorMain = 0x333333, colorGrid = 0x111111;
+  const size = 240, divisions = 20;
+  const colorMain = GRID_THEMES.dark.main;
+  const colorGrid = GRID_THEMES.dark.grid;
 
   const gridXY = new THREE.GridHelper(size, divisions, colorMain, colorGrid);
   gridXY.rotation.x = -Math.PI/2;
@@ -45,8 +75,45 @@ scene.background = null;
   gridYZ.rotation.z =  Math.PI/2;
 
   [gridXY, gridXZ, gridYZ].forEach(g => {
-    g.material.opacity = 1; g.material.transparent = true; g.material.depthWrite = false; gridsGroup.add(g);
+    g.material.opacity = GRID_THEMES.dark.opacity;
+    g.material.transparent = true;
+    g.material.depthWrite = false;
+    g.material.depthTest = false;
+    g.renderOrder = 2;
+    gridsGroup.add(g);
     grids.push(g);
+  });
+
+  const makeGlassMaterial = (theme = 'dark') => {
+    const cfg = GLASS_THEMES[theme] ?? GLASS_THEMES.dark;
+    return new THREE.MeshPhysicalMaterial({
+      color: cfg.color,
+      transparent: true,
+      opacity: cfg.opacity,
+      transmission: cfg.transmission,
+      roughness: cfg.roughness,
+      metalness: 0,
+      ior: 1.3,
+      thickness: 1.2,
+      clearcoat: cfg.clearcoat,
+      clearcoatRoughness: cfg.clearcoatRoughness,
+      side: THREE.DoubleSide,
+      depthWrite: false
+    });
+  };
+
+  const planeGeo = new THREE.PlaneGeometry(size, size);
+  const glassXY = new THREE.Mesh(planeGeo, makeGlassMaterial('dark'));
+  glassXY.rotation.x = -Math.PI / 2;
+  const glassXZ = new THREE.Mesh(planeGeo, makeGlassMaterial('dark'));
+  glassXZ.rotation.y = -Math.PI / 2;
+  const glassYZ = new THREE.Mesh(planeGeo, makeGlassMaterial('dark'));
+  glassYZ.rotation.z = Math.PI / 2;
+
+  [glassXY, glassXZ, glassYZ].forEach((p) => {
+    p.renderOrder = 1;
+    gridsGroup.add(p);
+    glassPanels.push(p);
   });
 
   const axisLength = 100, radius = 0.5, radialSegs = 8;
@@ -60,6 +127,40 @@ scene.background = null;
   axesGroup.add(x, y, z);
   axes.push(x, y, z);
 })();
+
+function applyGridTheme(theme = 'dark') {
+  const cfg = GRID_THEMES[theme] ?? GRID_THEMES.dark;
+  grids.forEach((g) => {
+    if (typeof g.setColors === 'function') {
+      g.setColors(cfg.main, cfg.grid);
+    }
+    const mats = Array.isArray(g.material) ? g.material : [g.material];
+    mats.forEach((mat) => {
+      if (!mat) return;
+      mat.opacity = cfg.opacity;
+      mat.transparent = true;
+      mat.depthWrite = false;
+      mat.depthTest = false;
+      if (mat.color) {
+        mat.color.set(cfg.grid);
+      }
+      mat.needsUpdate = true;
+    });
+  });
+
+  const glassCfg = GLASS_THEMES[theme] ?? GLASS_THEMES.dark;
+  glassPanels.forEach((panel) => {
+    const mat = panel.material;
+    if (!mat) return;
+    mat.color?.set(glassCfg.color);
+    mat.opacity = glassCfg.opacity;
+    mat.transmission = glassCfg.transmission;
+    mat.roughness = glassCfg.roughness;
+    mat.clearcoat = glassCfg.clearcoat;
+    mat.clearcoatRoughness = glassCfg.clearcoatRoughness;
+    mat.needsUpdate = true;
+  });
+}
 
 // lights
 scene.add(new THREE.AmbientLight(0x888888));
@@ -123,7 +224,11 @@ function animate(t) {
   world.scale.setScalar(ns);
 
   // optional spin
-  if (spinEnabled) spinGroup.rotation.y += spinSpeed;
+  if (spinEnabled) {
+    spinGroup.rotation.y += spinSpeed;
+    gridsGroup.rotation.y += spinSpeed;
+    axesGroup.rotation.y += spinSpeed;
+  }
 
   const delta = clock.getDelta();
   mixers.forEach(mixer => mixer.update(delta));
@@ -256,4 +361,9 @@ export function animateGridsOpacity(show) {
     grids.forEach(g => g.visible = true);
   }
   animate();
+}
+
+// Theme-aware grid colors
+export function setGridTheme(theme = 'dark') {
+  applyGridTheme(theme);
 }

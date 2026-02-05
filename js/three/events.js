@@ -39,12 +39,13 @@ export function setupReducedMotion(mediaReduced) {
 }
 
 // ---------- tab visibility ----------
-export function setupVisibilityChange(prefersReduced, getLastPresetIndex, camPresets, setWorldSpin) {
+export function setupVisibilityChange(prefersReduced, getLastPresetIndex, getPresets, setWorldSpin) {
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
       setWorldSpin(false);
     } else {
-      const p = camPresets[getLastPresetIndex()] ?? camPresets[0];
+      const presets = typeof getPresets === 'function' ? getPresets() : getPresets;
+      const p = presets[getLastPresetIndex()] ?? presets[0];
       setWorldSpin(!prefersReduced && !!p.rotate, 0.001);
     }
   });
@@ -58,5 +59,18 @@ export function setupTagEvents() {
 
     const activeSectionId = getActiveSectionId();
     await handleTagClick(tag, projectsData, activeSectionId);
+  });
+}
+
+// ---------- project preset buttons ----------
+export function setupProjectPresetButtons(prefersReduced = false) {
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.project-preset-btn[data-preset]');
+    if (!btn) return;
+
+    const presetIndex = Number(btn.dataset.preset);
+    if (!Number.isFinite(presetIndex)) return;
+
+    applyPreset(presetIndex, prefersReduced);
   });
 }

@@ -3,7 +3,6 @@ const translations = {
     // Navigation
     navAbout: "About",
     navProjects: "Projects",
-    navEducation: "Education",
     navExperience: "Experience",
     navSkills: "Skills",
 
@@ -38,17 +37,7 @@ const translations = {
     proj6Title: "Web Design",
     proj6Subtitle: "Web and Data Engineering, University of Passau",
     proj6Desc: "Designed and implemented front- and back-end elements for a conceptual food recipe platform with SQL databank.",
-
-    // Education
-    edu1Title: "B.Sc. Information Systems",
-    edu1Subtitle: "University of Passau",
-    edu1Desc: "Focus on optimization, business analytics, and data science.",
-    edu2Title: "B.Sc. Business Administration & Economics",
-    edu2Subtitle: "University of Passau",
-    edu2Desc: "Emphasis on ERP systems and business process management.",
-    edu3Title: "General Entrance Qualification for Universities of Applied Sciences",
-    edu3Subtitle: "State Vocational High School (Fachoberschule), Cham",
-    edu3Desc: "Concentration in Economics and Business Management.",
+    projView3D: "View 3D",
 
     // Experience
     exp1Title: "ERP & SAP Intern — Business Process Integration & Development",
@@ -82,13 +71,12 @@ const translations = {
     skill6Desc: "Effective collaboration in international and interdisciplinary teams.",
 
     // Footer
-    footer: "© 2025 Philipp Stockerl"
+    footer: "© 2026 Philipp Stockerl"
   },
   de: {
     // Navigation
     navAbout: "Über mich",
     navProjects: "Projekte",
-    navEducation: "Ausbildung",
     navExperience: "Erfahrung",
     navSkills: "Fähigkeiten",
 
@@ -115,17 +103,7 @@ const translations = {
     proj5Title: "Geschäftsprozessoptimierung (BPMN)",
     proj5Subtitle: "Operational Information Systems, Universität Passau",
     proj5Desc: "Analyse und Neugestaltung von Geschäftsprozessen mit BPMN zur Verbesserung von Durchlaufzeiten und Effizienz. Einsatz von Process Mining und digitalen Transformationstechniken.",
-
-    // Education
-    edu1Title: "B.Sc. Wirtschaftsinformatik",
-    edu1Subtitle: "Universität Passau",
-    edu1Desc: "Schwerpunkt auf Optimierung, Business Analytics und Data Science.",
-    edu2Title: "B.Sc. Betriebswirtschaftslehre & Volkswirtschaftslehre",
-    edu2Subtitle: "Universität Passau",
-    edu2Desc: "Fokus auf ERP-Systeme und Geschäftsprozessmanagement.",
-    edu3Title: "Allgemeine Fachhochschulreife",
-    edu3Subtitle: "Staatliche Berufsoberschule (Fachoberschule), Cham",
-    edu3Desc: "Schwerpunkt Wirtschaft und Betriebswirtschaftslehre.",
+    projView3D: "3D Ansicht",
 
     // Experience
     exp1Title: "ERP & SAP Praktikant — Prozessintegration & Entwicklung",
@@ -159,7 +137,7 @@ const translations = {
     skill6Desc: "Effektive Zusammenarbeit in internationalen und interdisziplinären Teams.",
 
     // Footer
-    footer: "© 2025 Philipp Stockerl"
+    footer: "© 2026 Philipp Stockerl"
   }
 };
 

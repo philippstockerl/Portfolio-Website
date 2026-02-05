@@ -26,8 +26,6 @@ export function initScrollManager(sections) {
             cleanupIfNeeded('projects', id);
           } else if (activeSectionId === 'certificates') {
             cleanupIfNeeded('certificates', id);
-          } else if (activeSectionId === 'education') {
-            cleanupIfNeeded('education', id);
           }
         }
 
