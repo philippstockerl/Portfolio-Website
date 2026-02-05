@@ -253,7 +253,10 @@ export const assetPresetsLight = {
       side: 'double',
       fadeIn: 1000,
       fadeOut: 600,
-      delayIn: 500
+      delayIn: 500,
+      label: 'My Projects',
+      href: '#projects',
+      cta: 'Open case ↗'
     }
   ],
   4: [],
