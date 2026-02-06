@@ -1,0 +1,17 @@
+[
+  {
+    "input": "media/videos/BudgetedRobustManimDark/1080p60/Formulation.webm",
+    "duration": 4.599,
+    "fps": 30,
+    "total_frames": 138,
+    "cols": 9,
+    "rows": 16,
+    "frame_width": 454,
+    "frame_height": 256,
+    "sheet_size": [
+      4086,
+      4096
+    ],
+    "sheet_path": "media/sprites/Formulation_4096px_30fps_9x16.png"
+  }
+]

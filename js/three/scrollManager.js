@@ -7,10 +7,34 @@ import { cleanupIfNeeded } from './modelManager.js';
 import { sectionPresets } from './cameraPresets.js';
 
 let activeSectionId = null;
+let manualLockId = null;
+let manualLockUntil = 0;
+
+function isManualLocked(nextId) {
+  if (!manualLockId) return false;
+  if (performance.now() > manualLockUntil) {
+    manualLockId = null;
+    manualLockUntil = 0;
+    return false;
+  }
+  return nextId !== manualLockId;
+}
+
+export function lockActiveSection(id, duration = 1200) {
+  if (!id) return;
+  manualLockId = id;
+  manualLockUntil = performance.now() + Math.max(0, duration);
+}
 
 // ---------- main initializer ----------
 export function initScrollManager(sections) {
   console.log("Tracking sections:", sections.map(s => s.id));
+  const footerEl = document.getElementById('footer');
+  const isFooterVisible = () => {
+    if (!footerEl) return false;
+    const r = footerEl.getBoundingClientRect();
+    return r.top < window.innerHeight && r.bottom > 0;
+  };
 
   // Debounced callback
   let __scrollSnapTimeout;
@@ -29,6 +53,13 @@ export function initScrollManager(sections) {
           }
         }
 
+        if (isManualLocked(id)) return;
+        if (manualLockId && id === manualLockId) {
+          manualLockId = null;
+          manualLockUntil = 0;
+        }
+
+        if (isFooterVisible()) return;
         const presetIdx = sectionPresets[id] ?? visibleIndex;
 
         if (presetIdx !== getLastPresetIndex()) {
@@ -44,6 +75,7 @@ export function initScrollManager(sections) {
   window.addEventListener('scroll', () => {
     clearTimeout(window.__scrollTimeout);
     window.__scrollTimeout = setTimeout(() => {
+      if (isFooterVisible()) return;
       const center = window.innerHeight / 2;
       let bestIdx = 0, bestDist = Infinity;
       sections.forEach((sec, i) => {
@@ -52,6 +84,11 @@ export function initScrollManager(sections) {
         if (dist < bestDist) { bestDist = dist; bestIdx = i; }
       });
       const id = sections[bestIdx]?.id || '';
+      if (isManualLocked(id)) return;
+      if (manualLockId && id === manualLockId) {
+        manualLockId = null;
+        manualLockUntil = 0;
+      }
       const presetIdx = sectionPresets[id] ?? bestIdx;
 
       if (presetIdx !== getLastPresetIndex()) {

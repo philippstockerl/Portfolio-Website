@@ -223,7 +223,7 @@ if (sidebar) {
     () => {
       showSidebar();
       clearTimeout(__sidebarScrollTimer);
-      __sidebarScrollTimer = setTimeout(hideSidebar, 300);
+      __sidebarScrollTimer = setTimeout(hideSidebar, 2000);
     },
     { passive: true }
   );

@@ -4,10 +4,8 @@ export const camPresets = [
   { pos: [200,50,200], rotate: true, target: [0,20,100],
     world: { pos:[0,0,0], yaw: 0.0, scale: 0.8 }, showWorld: true, showHelpers: true },
 
-  // 1: Projects with Animations 
-  { pos: [100,50,200
-    
-  ], rotate: false, target: [0,20,-100],
+  // 1: Projects Main Overview
+  { pos: [100,50,200], rotate: false, target: [0,20,-100],
     world: { pos:[0,0,0], yaw: 0.0, scale: 0.8 }, showWorld: true, showHelpers: true },
 
   // 2: Experience — grid visible, slightly right
@@ -26,8 +24,8 @@ export const camPresets = [
   { pos: [50,50,50], rotate: false, target: [0,0,0],
     world: { pos:[0,0,0], yaw: 0.0, scale: 1 }, showWorld: true, showHelpers: true },
 
-  // 6: Hidden world demo
-  { pos: [0,100,200], rotate: false, target: [0,0,0],
+  // 6: My Skills
+  { pos: [0,100,300], rotate: true, target: [0,0,0],
     world: { pos:[0,0,0], yaw: 0.0, scale: 1 }, showWorld: true, showHelpers: true },
 
   // 7: No helpers preset
@@ -94,6 +92,6 @@ export const sectionPresets = {
   projects: 1,
   certificates: 4,
   contact: 5,
-  hidden: 6,
+  skills: 6,
   nohelpers: 7
 };

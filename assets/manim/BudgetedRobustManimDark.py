@@ -1,9 +1,16 @@
 # manim_formulation.py
 from manim import *
+from manim import config
+
+config.transparent = True
+config.format = "png"
+config.pixel_width = 4096
+config.pixel_height = 2160
+config.save_last_frame = True
 
 class Formulation(Scene):
     def construct(self):
-        self.camera.background_color = WHITE
+        self.camera.background_opacity = 0
 
         eq_lines = [
             r"\min_{x\in\mathcal{U}} \max_{c\in\mathcal{U}} \sum_{i\in[n]} c_i x_i",

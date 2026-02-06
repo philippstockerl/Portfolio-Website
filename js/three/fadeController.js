@@ -18,6 +18,9 @@ export function fadeObject(obj, targetOpacity, duration = 800, onComplete) {
     return;
   }
 
+  obj.userData = obj.userData || {};
+  const fadeToken = (obj.userData.__fadeToken = (obj.userData.__fadeToken || 0) + 1);
+
   const mats = [];
   obj.traverse((child) => {
     const material = child.material;
@@ -48,6 +51,7 @@ export function fadeObject(obj, targetOpacity, duration = 800, onComplete) {
   const startTime = performance.now();
 
   function animate() {
+    if (obj.userData.__fadeToken !== fadeToken) return;
     const now = performance.now();
     const elapsed = now - startTime;
     const t = Math.min(elapsed / duration, 1);
@@ -60,7 +64,7 @@ export function fadeObject(obj, targetOpacity, duration = 800, onComplete) {
       requestAnimationFrame(animate);
     } else {
       console.log("[fadeObject] completed fade to", targetOpacity, "for", mats.length, "materials");
-      if (onComplete) onComplete();
+      if (obj.userData.__fadeToken === fadeToken && onComplete) onComplete();
     }
   }
 

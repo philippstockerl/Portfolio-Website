@@ -577,32 +577,49 @@ body.theme-light .section-slab::after {
     padding-right: 0;
   }
 
-  nav ul {
-    display: none;
-    flex-direction: column;
-    gap: 1rem;
-    margin-top: 1rem;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    left: 0;
-    background: rgba(0,0,0,0.95);
-    padding: 1rem 0;
-    border-radius: 0 0 12px 12px;
-    z-index: 20;
-    text-align: center;
+  header nav {
+    padding: 0;
   }
 
-  nav ul.active {
+  header nav::before {
+    display: none;
+  }
+
+  header nav ul {
+    display: none;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-top: 0.75rem;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: min(78vw, 320px);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(9, 12, 24, 0.6));
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    padding: 0.75rem 0.5rem;
+    border-radius: 18px;
+    z-index: 20;
+    text-align: center;
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    box-shadow:
+      0 20px 45px rgba(0, 0, 0, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  }
+
+  header nav ul.active {
     display: flex;
   }
 
-  nav ul li a {
-    font-size: 1.1rem;
+  header nav ul li a {
+    font-size: 0.95rem;
     color: var(--text);
+    letter-spacing: 0.03em;
   }
 
-  nav ul li a:hover {
+  header nav ul li a:hover {
     color: var(--accent);
   }
 }
@@ -697,13 +714,11 @@ body.theme-light .section-slab::after {
 }
 
 .hero-box {
-  padding-left: clamp(5rem, 12vw, 150rem);
-  padding-right: clamp(2rem, 4vw, 6rem);
   position: relative;
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  padding: 2.75rem 3.25rem;
+  padding: 2.75rem 3.25rem 2.75rem clamp(3rem, 8vw, 10rem);
   border-radius: 0;
 }
 
@@ -840,8 +855,16 @@ body.theme-light .hero-box__bg::after {
 
 .intro-text {
   color: var(--accent);
-  font-size: 1rem;
+  font-size: 1.2rem;
   margin-bottom: 1rem;
+  margin-top: 3rem;
+}
+
+.intro-text2 {
+  color: var(--accent);
+  font-size:1.2rem;
+  margin-bottom: 1rem;
+
 }
 
 #hero h1 {
@@ -1335,8 +1358,8 @@ footer {
   }
 }
 
-/* Tablets (<= 992px) */
-@media (max-width: 992px) {
+/* Tablets (<= 1200px) */
+@media (max-width: 1200px) {
   .content-sections {
     flex-direction: column;
     padding: 4rem 1.5rem;
@@ -1346,8 +1369,36 @@ footer {
     top: unset;
     padding-left: 0;
     flex-direction: row;
-    gap: 1rem;
+    gap: 0.75rem;
     justify-content: center;
+    width: 100%;
+  }
+  .content-sidebar nav {
+    width: min(720px, 92vw);
+    margin: 0 auto;
+    padding: 0.55rem 0.9rem;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .content-sidebar nav::before {
+    border-radius: inherit;
+  }
+  .content-sidebar nav ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.45rem 1rem;
+  }
+  .content-sidebar a {
+    padding: 0.35rem 0.6rem;
+    letter-spacing: 0.07em;
+    font-size: 0.82rem;
+  }
+  .content-sidebar a.active {
+    padding-left: 0;
+  }
+  .content-sidebar a::before {
+    display: none;
   }
   body:not(.sidebar-scrolling) .content-sidebar,
   body.sidebar-scrolling .content-sidebar {

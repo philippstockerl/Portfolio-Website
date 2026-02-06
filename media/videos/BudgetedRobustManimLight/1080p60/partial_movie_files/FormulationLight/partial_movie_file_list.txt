@@ -1,8 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:/Users/philippstockerl/Portfolio-Website/media/videos/BudgetedRobustManimLight/1080p60/partial_movie_files/FormulationLight/197815117_1736911938_223132457.webm'
-file 'file:/Users/philippstockerl/Portfolio-Website/media/videos/BudgetedRobustManimLight/1080p60/partial_movie_files/FormulationLight/3853254357_2256235759_820469422.webm'
-file 'file:/Users/philippstockerl/Portfolio-Website/media/videos/BudgetedRobustManimLight/1080p60/partial_movie_files/FormulationLight/3853254357_3289481738_1930547471.webm'
-file 'file:/Users/philippstockerl/Portfolio-Website/media/videos/BudgetedRobustManimLight/1080p60/partial_movie_files/FormulationLight/3853254357_3113986774_2693077277.webm'
-file 'file:/Users/philippstockerl/Portfolio-Website/media/videos/BudgetedRobustManimLight/1080p60/partial_movie_files/FormulationLight/3853254357_3591865379_3647608986.webm'
-file 'file:/Users/philippstockerl/Portfolio-Website/media/videos/BudgetedRobustManimLight/1080p60/partial_movie_files/FormulationLight/3853254357_3281327109_2435976100.webm'
-file 'file:/Users/philippstockerl/Portfolio-Website/media/videos/BudgetedRobustManimLight/1080p60/partial_movie_files/FormulationLight/3853254357_4217992463_4209831680.webm'

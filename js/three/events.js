@@ -4,7 +4,7 @@
 import { applyPreset } from './cameraController.js';
 import { handleTagClick } from './modelManager.js';
 import { projects as projectsData } from '../projectsSection/projectsData.js';
-import { getActiveSectionId } from './scrollManager.js';
+import { getActiveSectionId, lockActiveSection } from './scrollManager.js';
 import { sectionPresets } from './cameraPresets.js';
 
 // ---------- anchor smoothing ----------
@@ -18,6 +18,9 @@ export function setupAnchorSmoothing(prefersReduced) {
     if (!target) return;
 
     e.preventDefault();
+    if (!prefersReduced) {
+      lockActiveSection(id, 1400);
+    }
     target.scrollIntoView({
       behavior: prefersReduced ? 'auto' : 'smooth',
       block: 'start'

@@ -7,20 +7,20 @@ const translations = {
     navSkills: "Skills",
 
     // Hero
-    introText: "Hi, I'm",
     name: "Philipp Stockerl",
-    headline: "Bridging Data, Optimization & ERP Systems",
-    bio: "Analytical student specializing in Supply Chain & Operations Management, ERP System Integration, and Process Optimization.<br>Experienced in operations research, process digitalization, and data-driven business solutions. <br>Double degree candidate in <em>Business Administration & Economics</em> and <em>Information Systems</em> at University of Passau.",
+    introText: "Hi, I work on",
+    headline: "Optimization-Based Data Science<br>for Operational Decisions",
+    bio: "by applying mathematical optimization and data-driven models to operations, supply chains, and ERP-supported business processes.",
     downloadCV: "Download my CV",
 
     // Projects
-    proj1Title: "Minimum-Cost-Flow Optimization",
-    proj1Subtitle: "Chair of Supply Chain & Operations Management, University of Passau",
-    proj1Desc: "Developed and implemented a minimum-cost network flow model for optimizing logistics and supply chain delivery costs. Compared algorithmic solutions and documented results in a scientific paper.",
+    proj1Title: "Bachelor Thesis",
+    proj1Subtitle: "'Robust and Adaptive Path Planning for Autonomous Vehicles in Spatio-Temporal Cost Fields'",
+    proj1Desc: "Implementation of different algorithms for solving the shortest-path problem under cost uncertainty. Bridging operations research and robotics to establish algorithmic differences and logic of terrain traversal.",
     
-    proj2Title: "Facility Location under Uncertainty",
-    proj2Subtitle: "Bachelor Seminar, Chair of Supply Chain & Operations Management, University of Passau",
-    proj2Desc: "Designed and solved facility location problems considering uncertain demand. Applied integer programming and scenario analysis to support strategic decision-making.",
+    proj2Title: "Web Design",
+    proj2Subtitle: "Projects: WebPortfolio, Decision-Support-Interface Prototype, Group Project Recipe Platform",
+    proj2Desc: "Experience in designing web-interfaces.",
     
     proj3Title: "Operations Research & Decision Models",
     proj3Subtitle: "Management Science & Data Science, University of Passau",
@@ -81,10 +81,11 @@ const translations = {
     navSkills: "Fähigkeiten",
 
     // Hero
-    introText: "Hallo, ich bin",
-    name: "Philipp Stockerl",
-    headline: "Daten, Optimierung & ERP-Systeme verbinden",
-    bio: "Analytischer Student mit Spezialisierung auf Supply Chain & Operations Management, ERP-Systemintegration und Prozessoptimierung.<br>Erfahrung in Operations Research, Prozessdigitalisierung und datengetriebener Entscheidungsfindung.<br>Doppelstudium <em>Betriebswirtschaftslehre & Volkswirtschaftslehre</em> und <em>Wirtschaftsinformatik</em> an der Universität Passau.",
+    introText: "Hi, ich bin",
+    name: "Philipp Stockerl.",
+    secondIntro: "Student mit Fokus auf",
+    headline: "Optimierungs­gestützter Data Science<br>für operative Entscheidungen",
+    bio: "Anwendung mathematischer Optimierung und datengetriebener Modelle für Operations, Supply Chains und ERP-gestützte Geschäftsprozesse.",
     downloadCV: "Lebenslauf herunterladen",
 
     // Projects

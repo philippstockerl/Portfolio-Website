@@ -69,6 +69,10 @@ async function buildAsset(def) {
     const mod = await import('../loaders/loaderImagePlane.js');
     return mod.load(def);
   }
+  if (def.type === 'sprite') {
+    const mod = await import('../loaders/loaderSpritePlane.js');
+    return mod.load(def);
+  }
   console.warn('[assetManager] Unknown asset type:', def.type);
   return null;
 }
@@ -130,11 +134,18 @@ export async function applyAssetPreset(presetIndex, opts = {}) {
       if (!nextIds.has(id)) {
         const fadeOut = entry.def?.fadeOut ?? 600;
         const delayOut = entry.def?.delayOut ?? 0;
+        entry.outToken = (entry.outToken || 0) + 1;
+        const outToken = entry.outToken;
+        entry.pendingOut = true;
         if (entry.timers?.out) clearTimeout(entry.timers.out);
-        const doFade = () => fadeObject(entry.obj, 0, fadeOut, () => {
-          detachAndDispose(entry);
-          activeAssets.delete(id);
-        });
+        const doFade = () => {
+          if (entry.outToken !== outToken) return;
+          fadeObject(entry.obj, 0, fadeOut, () => {
+            if (entry.outToken !== outToken) return;
+            detachAndDispose(entry);
+            activeAssets.delete(id);
+          });
+        };
         if (delayOut > 0) {
           entry.timers = entry.timers || {};
           entry.timers.out = setTimeout(doFade, delayOut);
@@ -160,6 +171,16 @@ export async function applyAssetPreset(presetIndex, opts = {}) {
         existing.def = def;
         applyTransform(existing.obj, def);
         applyMetadata(existing.obj, def);
+        if (existing.timers?.out) {
+          clearTimeout(existing.timers.out);
+          existing.timers.out = null;
+        }
+        if (existing.pendingOut) {
+          existing.pendingOut = false;
+          existing.outToken = (existing.outToken || 0) + 1;
+          const restoreFade = def.fadeIn ?? 300;
+          fadeObject(existing.obj, 1, restoreFade);
+        }
         continue;
       }
     }

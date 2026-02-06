@@ -17,40 +17,60 @@ export const assetPresetsDark = {
   pos: [-65, 50, 0.12],
   rot: [0, 0, 0],
   side: 'front',
-  label: 'My Projects',
-  href: '#projects',
-  cta: 'Open case ↗'
+  label: 'My Bachelor Thesis',
+  href: 'https://philippstockerl-bachelorthesis-autonomousvehicleroutingdss.streamlit.app/',
+  cta: 'Visit my Web Demo here! ↗'
+},
+
+{
+  id: 'latex-xy',
+  type: 'image',
+  src: 'media/images/BudgetedRobustManimDark/Formulation_ManimCE_v0.19.1.png',
+  size: [150, 100],
+  pos: [80, 50, 0.12],
+  rot: [0, 0, 0],
+  side: 'front',
+  depthTest: false,
+  renderOrder: 5,
+  reveal: { mode: 'wipe', duration: 900, delay: 150, direction: 'x+' },
+  fadeIn: 800,
+  fadeOut: 600
+},
+
+{
+  id: 'WorkInProgress',
+  type: 'image',
+  src: 'media/images/WorkInProgress.png',
+  size: [100, 100],
+  pos: [0.12, 50, -50],
+  rot: [0, Math.PI / 2 + Math.PI, 0],
+  side: 'front',
+  depthTest: false,
+  renderOrder: 5,
+  reveal: { mode: 'wipe', duration: 900, delay: 150, direction: 'x+' },
+  fadeIn: 800,
+  fadeOut: 600
 }
+
+
 
     
   ],
   1: [
-    {
-      id: 'xy-front-left',
-      type: 'video',
-      src: FORMULATION_DARK,
-      srcMp4: FORMULATION_DARK_MP4,
-      size: [150, 100],
-      pos: [-25, 50, 0.12],
-      rot: [0, 0, 0],
-      side: 'front',
-      fadeIn: 900,
-      fadeOut: 500,
-      delayIn: 250
-    },
-    {
-      id: 'xy-front-right',
-      type: 'video',
-      src: FORMULATION_DARK,
-      srcMp4: FORMULATION_DARK_MP4,
-      size: [150, 100],
-      pos: [25, 50, 0.12],
-      rot: [0, Math.PI, 0],
-      side: 'front',
-      fadeIn: 900,
-      fadeOut: 500,
-      delayIn: 250
-    }
+  {
+    id: 'latex-xy',
+    type: 'image',
+    src: 'media/images/BudgetedRobustManimDark/Formulation_ManimCE_v0.19.1.png',
+    size: [150, 100],
+    pos: [-40, 50, 0.12],
+    rot: [0, 0, 0],
+    side: 'front',
+    depthTest: false,
+    renderOrder: 5,
+    reveal: { mode: 'wipe', duration: 900, delay: 150, direction: 'x+' },
+    fadeIn: 800,
+    fadeOut: 600
+  },
   ],
   2: [],
   3: [
@@ -159,7 +179,43 @@ export const assetPresetsDark = {
     }
   ],
   5: [],
-  6: [],
+
+  // Skills Section
+  6: [
+    {
+      id: 'prog-skills',
+      type: 'image',
+      src: 'media/images/ProgrammingSkills.png',
+      size: [100, 50],
+      pos: [60, 0.12, 50],
+      rot: [-Math.PI / 2, 0, 0],
+      side: 'double',
+      depthTest: false,
+      renderOrder: 5,
+      reveal: { mode: 'wipe', duration: 900, delay: 150, direction: 'x+' },
+      fadeIn: 800,
+      label: 'My Programming Skills',
+      href: 'https://github.com/philippstockerl',
+      cta: 'Visit my Git! ↗'
+    },
+
+    {
+      id: 'prog-skills-name-card',
+      type: 'image',
+      src: 'media/images/ProgrammingSkillsNameCard.png',
+      size: [100, 50],
+      pos: [60, 50, 0.12],
+      rot: [0, 0, 0],
+      side: 'front',
+      depthTest: false,
+      renderOrder: 5,
+      reveal: { mode: 'wipe', duration: 900, delay: 150, direction: 'x+' },
+      fadeIn: 800,
+      label: 'My Programming Skills',
+      href: 'https://github.com/philippstockerl',
+      cta: 'Visit my Git! ↗'
+    }
+  ],
   7: [],
   // 8–13: Project detail presets (match data-preset buttons in index.html)
   8: [],
@@ -261,7 +317,23 @@ export const assetPresetsLight = {
   ],
   4: [],
   5: [],
-  6: [],
+
+  // Skills Section
+  6: [
+    {
+  id: 'prog-skills',
+  type: 'image',
+  src: 'media/images/ProgrammingSkills.png',
+  size: [150, 100],
+  pos: [80, 50, 0.12],
+  rot: [0, 0, 0],
+  side: 'double',
+  depthTest: false,
+  renderOrder: 5,
+  reveal: { mode: 'wipe', duration: 900, delay: 150, direction: 'x+' },
+  fadeIn: 800,
+  fadeOut: 600
+}],
   7: [],
   // 8–13: Project detail presets (match data-preset buttons in index.html)
   8: [],
