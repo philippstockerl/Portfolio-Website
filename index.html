@@ -232,34 +232,69 @@
 
         <div class="section-slab experience-slab">
         <section id="experience" class="experience-content">
-          <div class="content-box experience-box hover-pop">
-            <h3 data-i18n="exp1Title"></h3>
-            <h4 data-i18n="exp1Subtitle"></h4>
-            <p data-i18n="exp1Desc"></p>
-            <div class="tags">
-              <span class="tag">ERP</span>
-              <span class="tag">SAP S/4HANA</span>
-              <span class="tag">Customizing & Development</span>
-            </div>
-          </div>
-          <div class="content-box experience-box hover-pop">
-            <h3 data-i18n="exp2Title"></h3>
-            <h4 data-i18n="exp2Subtitle"></h4>
-            <p data-i18n="exp2Desc"></p>
-            <div class="tags">
-              <span class="tag">Negotiation</span>
-              <span class="tag">Procurement & production management</span>
-              <span class="tag">Harvard concept</span>
-            </div>
-          </div>
-          <div class="content-box experience-box hover-pop">
-            <h3 data-i18n="exp3Title"></h3>
-            <h4 data-i18n="exp3Subtitle"></h4>
-            <p data-i18n="exp3Desc"></p>
-            <div class="tags">
-              <span class="tag">Data Science</span>
-              <span class="tag">Predictive Modeling</span>
-              <span class="tag">Business Decisions</span>
+          <div class="experience-carousel-wrap" aria-label="Experience carousel">
+            <div class="experience-carousel-track">
+              <article class="content-box experience-box hover-pop">
+                <h3 data-i18n="exp1Title"></h3>
+                <h4 data-i18n="exp1Subtitle"></h4>
+                <p data-i18n="exp1Desc"></p>
+                <div class="tags">
+                  <span class="tag">ERP</span>
+                  <span class="tag">SAP S/4HANA</span>
+                  <span class="tag">Customizing & Development</span>
+                </div>
+              </article>
+              <article class="content-box experience-box hover-pop">
+                <h3 data-i18n="exp2Title"></h3>
+                <h4 data-i18n="exp2Subtitle"></h4>
+                <p data-i18n="exp2Desc"></p>
+                <div class="tags">
+                  <span class="tag">Negotiation</span>
+                  <span class="tag">Procurement & production management</span>
+                  <span class="tag">Harvard concept</span>
+                </div>
+              </article>
+              <article class="content-box experience-box hover-pop">
+                <h3 data-i18n="exp3Title"></h3>
+                <h4 data-i18n="exp3Subtitle"></h4>
+                <p data-i18n="exp3Desc"></p>
+                <div class="tags">
+                  <span class="tag">Data Science</span>
+                  <span class="tag">Predictive Modeling</span>
+                  <span class="tag">Business Decisions</span>
+                </div>
+              </article>
+
+              <article class="content-box experience-box hover-pop" aria-hidden="true">
+                <h3 data-i18n="exp1Title"></h3>
+                <h4 data-i18n="exp1Subtitle"></h4>
+                <p data-i18n="exp1Desc"></p>
+                <div class="tags">
+                  <span class="tag">ERP</span>
+                  <span class="tag">SAP S/4HANA</span>
+                  <span class="tag">Customizing & Development</span>
+                </div>
+              </article>
+              <article class="content-box experience-box hover-pop" aria-hidden="true">
+                <h3 data-i18n="exp2Title"></h3>
+                <h4 data-i18n="exp2Subtitle"></h4>
+                <p data-i18n="exp2Desc"></p>
+                <div class="tags">
+                  <span class="tag">Negotiation</span>
+                  <span class="tag">Procurement & production management</span>
+                  <span class="tag">Harvard concept</span>
+                </div>
+              </article>
+              <article class="content-box experience-box hover-pop" aria-hidden="true">
+                <h3 data-i18n="exp3Title"></h3>
+                <h4 data-i18n="exp3Subtitle"></h4>
+                <p data-i18n="exp3Desc"></p>
+                <div class="tags">
+                  <span class="tag">Data Science</span>
+                  <span class="tag">Predictive Modeling</span>
+                  <span class="tag">Business Decisions</span>
+                </div>
+              </article>
             </div>
           </div>
         </section>
@@ -288,15 +323,26 @@
     });
 
     const themeToggle = document.getElementById("themeToggle");
-    const savedTheme = localStorage.getItem("theme") || "dark";
+    const THEME_PREF_KEY = "themePreference";
+    const themeMediaQuery = window.matchMedia?.("(prefers-color-scheme: dark)");
 
-    function setTheme(theme) {
-      const isLight = theme === "light";
+    function getStoredThemePreference() {
+      const stored = localStorage.getItem(THEME_PREF_KEY);
+      return stored === "light" || stored === "dark" ? stored : null;
+    }
+
+    function getSystemTheme() {
+      return themeMediaQuery?.matches ? "dark" : "light";
+    }
+
+    function setTheme(theme, { persist = true } = {}) {
+      const nextTheme = theme === "light" ? "light" : "dark";
+      const isLight = nextTheme === "light";
       document.body.classList.toggle("theme-light", isLight);
       document.body.classList.toggle("theme-dark", !isLight);
-      localStorage.setItem("theme", isLight ? "light" : "dark");
+      if (persist) localStorage.setItem(THEME_PREF_KEY, nextTheme);
       updateThemeButton();
-      window.dispatchEvent(new CustomEvent("themechange", { detail: { theme: isLight ? "light" : "dark" } }));
+      window.dispatchEvent(new CustomEvent("themechange", { detail: { theme: nextTheme } }));
     }
 
     function updateThemeButton() {
@@ -305,11 +351,25 @@
       themeToggle.setAttribute("aria-pressed", isLight ? "true" : "false");
     }
 
-    setTheme(savedTheme);
+    const savedThemePreference = getStoredThemePreference();
+    setTheme(savedThemePreference || getSystemTheme(), { persist: false });
+
+    if (themeMediaQuery) {
+      const onSystemThemeChange = (event) => {
+        if (getStoredThemePreference()) return;
+        setTheme(event.matches ? "dark" : "light", { persist: false });
+      };
+
+      if (typeof themeMediaQuery.addEventListener === "function") {
+        themeMediaQuery.addEventListener("change", onSystemThemeChange);
+      } else if (typeof themeMediaQuery.addListener === "function") {
+        themeMediaQuery.addListener(onSystemThemeChange);
+      }
+    }
 
     themeToggle.addEventListener("click", () => {
       const isLight = document.body.classList.contains("theme-light");
-      setTheme(isLight ? "dark" : "light");
+      setTheme(isLight ? "dark" : "light", { persist: true });
     });
   </script>
 

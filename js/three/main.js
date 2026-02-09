@@ -54,6 +54,20 @@ setupProjectPresetButtons(prefersReduced);
 initScrollSpy();
 initBoxSpy();
 
+// ---------- full-bleed wrapper alignment ----------
+function syncViewportAlignedWraps() {
+  const wraps = document.querySelectorAll('.projects-carousel-wrap, .experience-carousel-wrap');
+  wraps.forEach((wrap) => {
+    wrap.style.setProperty('--viewport-offset', '0px');
+    const left = wrap.getBoundingClientRect().left;
+    wrap.style.setProperty('--viewport-offset', `${left}px`);
+  });
+}
+
+requestAnimationFrame(syncViewportAlignedWraps);
+window.addEventListener('load', syncViewportAlignedWraps);
+window.addEventListener('resize', syncViewportAlignedWraps);
+
 // ---------- light snap to nearest section ----------
 const snapSections = Array.from(document.querySelectorAll('main section[id]'));
 let __snapTimer;
