@@ -130,36 +130,48 @@ if (projectsCarousel) {
     return bestIdx;
   };
 
-  const updateIndicator = () => {
-    if (!projectsIndicator || !cards.length) return;
+  const setActiveCard = () => {
     const idx = getClosestIndex();
-    const total = cards.length;
-    projectsIndicator.innerHTML = '';
-
-    const dots = document.createElement('span');
-    dots.className = 'carousel-dots';
-
-    for (let i = 0; i < total; i += 1) {
-      const dot = document.createElement('span');
-      dot.className = `dot${i === idx ? ' active' : ''}`;
-      dots.appendChild(dot);
-    }
-
-    projectsIndicator.appendChild(dots);
+    cards.forEach((card, i) => {
+      card.classList.toggle('active', i === idx);
+    });
   };
 
-  const syncCarouselHeightForIndex = (idx) => {
-    const card = cards[idx];
-    if (!card) return;
+  const updateIndicator = () => {
+    if (!cards.length) return;
+    const idx = getClosestIndex();
+    if (projectsIndicator) {
+      const total = cards.length;
+      projectsIndicator.innerHTML = '';
+
+      const dots = document.createElement('span');
+      dots.className = 'carousel-dots';
+
+      for (let i = 0; i < total; i += 1) {
+        const dot = document.createElement('span');
+        dot.className = `dot${i === idx ? ' active' : ''}`;
+        dots.appendChild(dot);
+      }
+
+      projectsIndicator.appendChild(dots);
+    }
+    setActiveCard();
+  };
+
+  const syncCarouselHeight = () => {
+    if (!cards.length) return;
     const pad = getCarouselPad();
-    const height = card.offsetHeight + pad * 2;
+    let maxHeight = 0;
+    cards.forEach((card) => {
+      maxHeight = Math.max(maxHeight, card.offsetHeight);
+    });
+    const height = maxHeight + pad * 2;
     projectsCarousel.style.setProperty('--carousel-card-height', `${height}px`);
   };
 
   const scrollToIndex = (idx) => {
     const target = cards[idx];
     if (!target) return;
-    syncCarouselHeightForIndex(idx);
     isCardScrolling = true;
     projectsCarousel.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
     clearTimeout(scrollLockTimer);
@@ -203,11 +215,11 @@ if (projectsCarousel) {
   });
 
   window.addEventListener('resize', () => {
-    syncCarouselHeightForIndex(getClosestIndex());
+    syncCarouselHeight();
     updateIndicator();
   });
 
-  syncCarouselHeightForIndex(getClosestIndex());
+  syncCarouselHeight();
   updateIndicator();
 }
 

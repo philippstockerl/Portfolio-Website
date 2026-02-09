@@ -57,6 +57,13 @@
   --projects-box-fade-dir: to right;
   /* Content rail width for experience/projects boxes */
   --section-rail-width: clamp(320px, 46vw, 720px);
+  /* Carousel rail height */
+  --carousel-rail-height: min(70vh, 560px);
+  /* Carousel UI positioning */
+  --carousel-ui-inset-x: 1.75rem;
+  --carousel-ui-inset-y: 1.25rem;
+  --carousel-ui-gap: 0.6rem;
+  --carousel-indicator-height: 24px;
   /* Layout primitives */
   --page-max: 1100px;
   --page-pad: clamp(1.25rem, 4vw, 3rem);
@@ -759,6 +766,39 @@ body.sidebar-scrolling.theme-light .content-sidebar nav::before {
   border-radius: 10px;
 }
 
+/* Pulsating "View 3D" CTA */
+.project-preset-btn {
+  background: rgba(88, 138, 255, 0.15);
+  border: 1px solid rgba(120, 170, 255, 0.65);
+  color: #cfe1ff;
+  box-shadow: 0 0 0 0 rgba(92, 147, 255, 0.55);
+  animation: view3d-pulse 2.2s ease-in-out infinite;
+}
+
+.project-preset-btn:hover,
+.project-preset-btn:focus-visible {
+  animation: none;
+  background: rgba(88, 138, 255, 0.3);
+  box-shadow:
+    0 0 0 3px rgba(92, 147, 255, 0.25),
+    0 8px 24px rgba(16, 36, 84, 0.35);
+}
+
+@keyframes view3d-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(92, 147, 255, 0.55);
+    border-color: rgba(120, 170, 255, 0.55);
+  }
+  60% {
+    box-shadow: 0 0 0 12px rgba(92, 147, 255, 0);
+    border-color: rgba(120, 170, 255, 0.9);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(92, 147, 255, 0);
+    border-color: rgba(120, 170, 255, 0.55);
+  }
+}
+
 .btn {
   display: inline-block;
   padding: 0.75rem 1.5rem;
@@ -942,12 +982,17 @@ body.theme-light .section-slab::after {
 
 .projects-content__inner {
   position: relative;
+  min-height: var(--carousel-rail-height);
+  display: grid;
+  align-items: center;
 }
 
 .projects-carousel-wrap {
   position: relative;
   width: min(100%, var(--section-rail-width));
   margin-left: auto;
+  margin-right: 0;
+  height: 100%;
 }
 
 .projects-carousel {
@@ -957,16 +1002,16 @@ body.theme-light .section-slab::after {
   width: 100%;
   max-width: 100%;
   margin-left: 0;
-  --carousel-vertical-pad: 38px;
+  --carousel-vertical-pad: 0px;
   height: var(--carousel-card-height, auto);
   max-height: var(--carousel-card-height, none);
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  padding: var(--carousel-vertical-pad) 1rem;
+  padding: 0 1rem;
   scroll-snap-type: y mandatory;
-  scroll-padding: 1rem 0;
+  scroll-padding: 0;
   transition: height 0.3s ease;
   position: relative;
   z-index: 1;
@@ -984,6 +1029,16 @@ body.theme-light .section-slab::after {
   max-width: 100%;
   margin-left: 0;
   margin-right: 0;
+  min-height: var(--carousel-card-height, auto);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.projects-carousel .project-box.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 .projects-carousel .project-box::after {
@@ -996,8 +1051,8 @@ body.theme-light .section-slab::after {
 
 .projects-carousel-controls {
   position: absolute;
-  right: clamp(0.75rem, 2vw, 1.5rem);
-  top: clamp(1.5rem, 5vw, 4rem);
+  right: var(--carousel-ui-inset-x);
+  top: calc(var(--carousel-ui-inset-y) + var(--carousel-indicator-height) + var(--carousel-ui-gap));
   transform: none;
   z-index: 4;
   display: flex;
@@ -1042,13 +1097,14 @@ body.theme-light .projects-carousel-btn:hover {
 
 .projects-carousel-indicator {
   position: absolute;
-  right: clamp(0.75rem, 2vw, 1.5rem);
-  top: clamp(0.5rem, 2vw, 0.9rem);
+  right: var(--carousel-ui-inset-x);
+  top: var(--carousel-ui-inset-y);
   z-index: 4;
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
   padding: 0.35rem 0.7rem;
+  min-height: var(--carousel-indicator-height);
   border-radius: 999px;
   font-size: 0.7rem;
   letter-spacing: 0.2em;
