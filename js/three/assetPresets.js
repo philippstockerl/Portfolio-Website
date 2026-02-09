@@ -1,3 +1,7 @@
+import { beamPreset } from './beamPresets.js';
+import { cameraPreset } from './cameraPreset.js';
+
+
 // assetPresets.js
 
 const FORMULATION_DARK = 'media/videos/test/1080p60/Formulation.webm';
@@ -7,70 +11,39 @@ const FORMULATION_LIGHT_MP4 = 'media/videos/BudgetedRobustManimLight/1080p60/For
 
 export const assetPresetsDark = {
   0: [
+beamPreset({ enabled: false }),
 
-{
-  id: 'xy-front-left',
-  type: 'video',
-  src: 'media/videos/randomfield.webm',
-  loop: true,          // only this one loops
-  size: [70, 70],
-  pos: [-65, 50, 0.12],
-  rot: [0, 0, 0],
-  side: 'front',
-  label: 'My Bachelor Thesis',
-  href: 'https://philippstockerl-bachelorthesis-autonomousvehicleroutingdss.streamlit.app/',
-  cta: 'Visit my Web Demo here! ↗'
-},
 
-{
-  id: 'latex-xy',
-  type: 'image',
-  src: 'media/images/BudgetedRobustManimDark/Formulation_ManimCE_v0.19.1.png',
-  size: [150, 100],
-  pos: [80, 50, 0.12],
-  rot: [0, 0, 0],
-  side: 'front',
-  depthTest: false,
-  renderOrder: 5,
-  reveal: { mode: 'wipe', duration: 900, delay: 150, direction: 'x+' },
-  fadeIn: 800,
-  fadeOut: 600
-},
+    cameraPreset({
+      pos: [50, 80, 500],
+      target: [0, 0, 0],
+      rotate: true,
+      showWorld: true,
+      showHelpers: true,
+      world: { pos: [0, 0, 0], yaw: 0.12, pitch: 0, roll: 0, scale: 0.85 },
 
-{
-  id: 'WorkInProgress',
-  type: 'image',
-  src: 'media/images/WorkInProgress.png',
-  size: [100, 100],
-  pos: [0.12, 50, -50],
-  rot: [0, Math.PI / 2 + Math.PI, 0],
-  side: 'front',
-  depthTest: false,
-  renderOrder: 5,
-  reveal: { mode: 'wipe', duration: 900, delay: 150, direction: 'x+' },
-  fadeIn: 800,
-  fadeOut: 600
-}
+      
+      responsive: {
+        mobile:  { pos: [140, 40, 160], target: [0, 10, 60], world: { scale: 0.7 } },
+        laptop:  { pos: [180, 60, 200], target: [0, 20, 80], world: { scale: 0.85 } },
+        desktop: { pos: [220, 70, 220], target: [0, 25, 90], world: { scale: 1 } },
+        ultrawide: { pos: [260, 80, 240], target: [0, 30, 100], world: { scale: 1.1 } }
+      }
+    }),
+
+
+
+
 
 
 
     
   ],
+
+  // Projects Main
   1: [
-  {
-    id: 'latex-xy',
-    type: 'image',
-    src: 'media/images/BudgetedRobustManimDark/Formulation_ManimCE_v0.19.1.png',
-    size: [150, 100],
-    pos: [-40, 50, 0.12],
-    rot: [0, 0, 0],
-    side: 'front',
-    depthTest: false,
-    renderOrder: 5,
-    reveal: { mode: 'wipe', duration: 900, delay: 150, direction: 'x+' },
-    fadeIn: 800,
-    fadeOut: 600
-  },
+    beamPreset({ enabled: false }),
+
   ],
   2: [],
   3: [
@@ -182,6 +155,7 @@ export const assetPresetsDark = {
 
   // Skills Section
   6: [
+        beamPreset({ enabled: false }),
     {
       id: 'prog-skills',
       type: 'image',
@@ -214,13 +188,89 @@ export const assetPresetsDark = {
       label: 'My Programming Skills',
       href: 'https://github.com/philippstockerl',
       cta: 'Visit my Git! ↗'
+    },
+
+
+    {
+  id: 'WorkInProgress',
+  type: 'image',
+  src: 'media/images/WorkInProgress.png',
+  size: [100, 100],
+  pos: [0.12, 50, -50],
+  rot: [0, Math.PI / 2 + Math.PI, 0],
+  side: 'front',
+  depthTest: false,
+  renderOrder: 5,
+  reveal: { mode: 'wipe', duration: 900, delay: 150, direction: 'x+' },
+  fadeIn: 800,
+  fadeOut: 600
     }
   ],
   7: [],
-  // 8–13: Project detail presets (match data-preset buttons in index.html)
-  8: [],
-  9: [],
-  10: [],
+  // 8–13: Project detail presets
+
+  // Bachelor Thesis
+  8: [
+    beamPreset({ enabled: true, speed: 6, glowSegment: 20, segmentMin: 3, segmentMax: 8 }),
+  // Robust Formulation PNG
+    {
+    id: 'latex-xy',
+    type: 'image',
+    src: 'media/images/BudgetedRobustManimDark/Formulation_ManimCE_v0.19.1.png',
+    size: [150, 100],
+    pos: [-40, 50, 0.12],
+    rot: [0, 0, 0],
+    side: 'front',
+    depthTest: false,
+    renderOrder: 5,
+    reveal: { mode: 'wipe', duration: 900, delay: 150, direction: 'x+' },
+    fadeIn: 800,
+    fadeOut: 600
+  },
+
+    // Random Field GIF
+    {
+      id: 'xy-front-left',
+      type: 'video',
+      src: 'media/videos/randomfield.webm',
+      loop: true,          // only this one loops
+      size: [70, 70],
+      pos: [-65, 50, 0.12],
+      rot: [0, 0, 0],
+      side: 'front',
+      label: 'My Bachelor Thesis',
+      href: 'https://philippstockerl-bachelorthesis-autonomousvehicleroutingdss.streamlit.app/',
+      cta: 'Visit my Web Demo here! ↗'
+    },
+
+    // Robust Budgeted Min-Max
+    {
+      id: 'latex-xy',
+      type: 'image',
+      src: 'media/images/BudgetedRobustManimDark/Formulation_ManimCE_v0.19.1.png',
+      size: [150, 100],
+      pos: [80, 50, 0.12],
+      rot: [0, 0, 0],
+      side: 'front',
+      depthTest: false,
+      renderOrder: 5,
+      reveal: { mode: 'wipe', duration: 900, delay: 150, direction: 'x+' },
+      fadeIn: 800,
+      fadeOut: 600,
+    },
+  ],
+
+  // Bachelor Seminar
+  9: [
+        beamPreset({ enabled: false }),
+  ],
+
+  // Optimization Models (Gurobi)
+  10: [
+        beamPreset({ enabled: false }),
+  ],
+
+
   11: [],
   12: [],
   13: []

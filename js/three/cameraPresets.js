@@ -60,29 +60,70 @@ function scaleVec(vec, scale) {
   return vec.map(v => v * scale);
 }
 
-function buildVariant(presets, profile) {
-  return presets.map(p => ({
-    ...p,
-    pos: scaleVec(p.pos, profile.posScale),
-    target: scaleVec(p.target, profile.targetScale),
+function buildVariantForPreset(preset, profile) {
+  if (!preset) return preset;
+  return {
+    ...preset,
+    pos: scaleVec(preset.pos, profile.posScale),
+    target: scaleVec(preset.target, profile.targetScale),
     world: {
-      ...p.world,
-      pos: scaleVec(p.world?.pos, profile.worldPosScale),
-      scale: (p.world?.scale ?? 1) * profile.worldScale
+      ...preset.world,
+      pos: scaleVec(preset.world?.pos, profile.worldPosScale),
+      scale: (preset.world?.scale ?? 1) * profile.worldScale
     }
-  }));
+  };
 }
 
-export const camPresetsMobile = buildVariant(camPresets, VIEWPORT_PROFILES.mobile);
-export const camPresetsLaptop = buildVariant(camPresets, VIEWPORT_PROFILES.laptop);
-export const camPresetsDesktop = buildVariant(camPresets, VIEWPORT_PROFILES.desktop);
-export const camPresetsUltrawide = buildVariant(camPresets, VIEWPORT_PROFILES.ultrawide);
+const presetOverrides = new Map();
+
+function mergePreset(base, override) {
+  if (!override) return base;
+  const merged = {
+    ...base,
+    ...override,
+    world: {
+      ...base?.world,
+      ...override?.world
+    }
+  };
+  if (!merged.world || Object.keys(merged.world).length === 0) {
+    delete merged.world;
+  }
+  return merged;
+}
+
+function normalizeOverride(override) {
+  if (!override || typeof override !== 'object') return null;
+  const { type, reset, responsive, ...rest } = override;
+  if (reset) return null;
+  return rest;
+}
+
+export function setCameraPresetOverride(index, override) {
+  if (!Number.isFinite(index)) return;
+  const normalized = normalizeOverride(override);
+  if (!normalized) {
+    presetOverrides.delete(index);
+    return;
+  }
+  presetOverrides.set(index, normalized);
+}
+
+export function clearCameraPresetOverride(index) {
+  if (!Number.isFinite(index)) return;
+  presetOverrides.delete(index);
+}
 
 export function getCamPresetsForWidth(width = window.innerWidth) {
-  if (width < 768) return camPresetsMobile;
-  if (width < 1440) return camPresetsLaptop;      // MacBook-ish
-  if (width <= 1980) return camPresetsDesktop;    // 1980 class
-  return camPresetsUltrawide;
+  let profile = VIEWPORT_PROFILES.desktop;
+  if (width < 768) profile = VIEWPORT_PROFILES.mobile;
+  else if (width < 1440) profile = VIEWPORT_PROFILES.laptop;      // MacBook-ish
+  else if (width > 1980) profile = VIEWPORT_PROFILES.ultrawide;
+
+  return camPresets.map((base, index) => {
+    const merged = mergePreset(base, presetOverrides.get(index));
+    return buildVariantForPreset(merged, profile);
+  });
 }
 
 // Map section IDs to camera preset indices

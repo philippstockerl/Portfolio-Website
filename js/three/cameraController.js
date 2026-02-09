@@ -8,9 +8,9 @@ import {
   setWorldSpin,
 } from './threeScene.js';
 
-import { getCamPresetsForWidth } from './cameraPresets.js';
+import { getCamPresetsForWidth, setCameraPresetOverride, clearCameraPresetOverride } from './cameraPresets.js';
 import { fadeGrids, fadeHelpers, animateWorldOpacity } from './fadeController.js';
-import { applyAssetPreset } from './assetManager.js';
+import { applyAssetPreset, getCameraPresetForIndex } from './assetManager.js';
 
 // ---------- state ----------
 let lastCamPos = [0, 0, 5];
@@ -56,6 +56,13 @@ function animateVector3(current, target, duration, onUpdate, onComplete) {
 // ---------- core ----------
 export function applyPreset(index, prefersReduced = false) {
   animToken++;
+  const cameraOverride = getCameraPresetForIndex(index, window.innerWidth);
+  if (cameraOverride) {
+    setCameraPresetOverride(index, cameraOverride);
+  } else {
+    clearCameraPresetOverride(index);
+  }
+
   const presets = getCamPresetsForWidth(window.innerWidth);
   const p = presets[index] ?? presets[0];
 

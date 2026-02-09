@@ -16,7 +16,7 @@
   }
   </script>
 </head>
-<body>
+<body class="theme-dark">
 
   <!-- Three.js background -->
   <div id="three-container"></div>
@@ -74,7 +74,7 @@
     <section id="hero">
       <div class="hero-box">
         <div class="hero-box__bg"></div>
-        <div class="hero-box__content">
+        <div class="container hero-box__content">
           <h1 data-i18n="name"></h1>
           <p class="intro-text" data-i18n="introText"></p>
           <h2 data-i18n="headline"></h2>
@@ -128,101 +128,104 @@
             </g>
           </svg>
 
-          <div class="projects-carousel" aria-label="Projects carousel">
-          <div class="content-box project-box hover-pop">
-            <h3 data-i18n="proj1Title"></h3>
-            <h4 data-i18n="proj1Subtitle"></h4>
-            <p data-i18n="proj1Desc"></p>
-            <div class="tags">
-              <span class="tag">Simulation</span>
-              <span class="tag">Python</span>
-              <span class="tag" data-type="blender" data-src="./assets/blenderModels/networkFlow.glb">3D Model Example</span>
-            </div>
-            <div class="project-actions">
-              <button class="btn project-preset-btn" type="button" data-preset="8" data-i18n="projView3D"></button>
-            </div>
-          </div>
-          <div class="content-box project-box hover-pop">
-            <h3 data-i18n="proj2Title"></h3>
-            <h4 data-i18n="proj2Subtitle"></h4>
-            <p data-i18n="proj2Desc"></p>
-            <div class="tags">
-              <span class="tag">Random Facility Location</span>
-              <span class="tag">Guroby Python</span>
-            </div>
-            <div class="project-actions">
-              <button class="btn project-preset-btn" type="button" data-preset="9" data-i18n="projView3D"></button>
-            </div>
-          </div>
+          <div class="container projects-content__inner">
+            <div class="projects-carousel-wrap">
+              <div class="projects-carousel" aria-label="Projects carousel">
+                <div class="content-box project-box hover-pop">
+                  <h3 data-i18n="proj1Title"></h3>
+                  <h4 data-i18n="proj1Subtitle"></h4>
+                  <p data-i18n="proj1Desc"></p>
+                  <div class="tags">
+                    <span class="tag">Simulation</span>
+                    <span class="tag">Python</span>
+                    <span class="tag" data-type="blender" data-src="./assets/blenderModels/networkFlow.glb">3D Model Example</span>
+                  </div>
+                  <div class="project-actions">
+                    <button class="btn project-preset-btn" type="button" data-preset="8" data-i18n="projView3D"></button>
+                  </div>
+                </div>
+                <div class="content-box project-box hover-pop">
+                  <h3 data-i18n="proj2Title"></h3>
+                  <h4 data-i18n="proj2Subtitle"></h4>
+                  <p data-i18n="proj2Desc"></p>
+                  <div class="tags">
+                    <span class="tag">Random Facility Location</span>
+                    <span class="tag">Guroby Python</span>
+                  </div>
+                  <div class="project-actions">
+                    <button class="btn project-preset-btn" type="button" data-preset="9" data-i18n="projView3D"></button>
+                  </div>
+                </div>
 
 
-          <div class="content-box project-box hover-pop">
-            <h3 data-i18n="proj3Title"></h3>
-            <h4 data-i18n="proj3Subtitle"></h4>
-            <p data-i18n="proj3Desc"></p>
-            <div class="tags">
-              <span class="tag">Blending Problems</span>
-              <span class="tag">Knappsack Problems</span>
-              <span class="tag">Cutting Stock Problems</span>
-              <span class="tag">Bin Packing Problems</span>
-              <span class="tag">Travelling Salesman Problems</span>
-              <span class="tag">IBM CPLEX</span>
-            </div>
-            <div class="project-actions">
-              <button class="btn project-preset-btn" type="button" data-preset="10" data-i18n="projView3D"></button>
-            </div>
-          </div>
+                <div class="content-box project-box hover-pop">
+                  <h3 data-i18n="proj3Title"></h3>
+                  <h4 data-i18n="proj3Subtitle"></h4>
+                  <p data-i18n="proj3Desc"></p>
+                  <div class="tags">
+                    <span class="tag">Blending Problems</span>
+                    <span class="tag">Knappsack Problems</span>
+                    <span class="tag">Cutting Stock Problems</span>
+                    <span class="tag">Bin Packing Problems</span>
+                    <span class="tag">Travelling Salesman Problems</span>
+                    <span class="tag">IBM CPLEX</span>
+                  </div>
+                  <div class="project-actions">
+                    <button class="btn project-preset-btn" type="button" data-preset="10" data-i18n="projView3D"></button>
+                  </div>
+                </div>
 
 
-          <div class="content-box project-box hover-pop">
-            <h3 data-i18n="proj4Title"></h3>
-            <h4 data-i18n="proj4Subtitle"></h4>
-            <p data-i18n="proj4Desc"></p>
-            <div class="tags">
-              <span class="tag">Business Process Modelling (BPM)</span>
-              <span class="tag">UML</span>
-              <span class="tag">ABAP</span>
-            </div>
-            <div class="project-actions">
-              <button class="btn project-preset-btn" type="button" data-preset="11" data-i18n="projView3D"></button>
-            </div>
-          </div>
+                <div class="content-box project-box hover-pop">
+                  <h3 data-i18n="proj4Title"></h3>
+                  <h4 data-i18n="proj4Subtitle"></h4>
+                  <p data-i18n="proj4Desc"></p>
+                  <div class="tags">
+                    <span class="tag">Business Process Modelling (BPM)</span>
+                    <span class="tag">UML</span>
+                    <span class="tag">ABAP</span>
+                  </div>
+                  <div class="project-actions">
+                    <button class="btn project-preset-btn" type="button" data-preset="11" data-i18n="projView3D"></button>
+                  </div>
+                </div>
 
-          <div class="content-box project-box hover-pop">
-            <h3 data-i18n="proj5Title"></h3>
-            <h4 data-i18n="proj5Subtitle"></h4>
-            <p data-i18n="proj5Desc"></p>
-            <div class="tags">
-              <span class="tag">Network Flow Optimization</span>
-              <span class="tag">Guroby Python</span>
-            </div>
-            <div class="project-actions">
-              <button class="btn project-preset-btn" type="button" data-preset="12" data-i18n="projView3D"></button>
-            </div>
-          </div>
+                <div class="content-box project-box hover-pop">
+                  <h3 data-i18n="proj5Title"></h3>
+                  <h4 data-i18n="proj5Subtitle"></h4>
+                  <p data-i18n="proj5Desc"></p>
+                  <div class="tags">
+                    <span class="tag">Network Flow Optimization</span>
+                    <span class="tag">Guroby Python</span>
+                  </div>
+                  <div class="project-actions">
+                    <button class="btn project-preset-btn" type="button" data-preset="12" data-i18n="projView3D"></button>
+                  </div>
+                </div>
 
-          <div class="content-box project-box hover-pop">
-            <h3 data-i18n="proj6Title"></h3>
-            <h4 data-i18n="proj6Subtitle"></h4>
-            <p data-i18n="proj6Desc"></p>
-            <div class="tags">
-              <span class="tag">Group Project</span>
-              <span class="tag">HTML</span>
-              <span class="tag">JS</span>
-              <span class="tag">CSS</span>
-              <span class="tag">Java</span>
+                <div class="content-box project-box hover-pop">
+                  <h3 data-i18n="proj6Title"></h3>
+                  <h4 data-i18n="proj6Subtitle"></h4>
+                  <p data-i18n="proj6Desc"></p>
+                  <div class="tags">
+                    <span class="tag">Group Project</span>
+                    <span class="tag">HTML</span>
+                    <span class="tag">JS</span>
+                    <span class="tag">CSS</span>
+                    <span class="tag">Java</span>
+                  </div>
+                  <div class="project-actions">
+                    <button class="btn project-preset-btn" type="button" data-preset="13" data-i18n="projView3D"></button>
+                  </div>
+                </div>
+              </div>
+              <div class="projects-carousel-controls" aria-hidden="true">
+                <button class="projects-carousel-btn projects-carousel-prev" type="button" aria-label="Previous project">▲</button>
+                <button class="projects-carousel-btn projects-carousel-next" type="button" aria-label="Next project">▼</button>
+              </div>
+              <div class="projects-carousel-indicator" aria-hidden="true"></div>
             </div>
-            <div class="project-actions">
-              <button class="btn project-preset-btn" type="button" data-preset="13" data-i18n="projView3D"></button>
-            </div>
           </div>
-
-          </div>
-          <div class="projects-carousel-controls" aria-hidden="true">
-            <button class="projects-carousel-btn projects-carousel-prev" type="button" aria-label="Previous project">▲</button>
-            <button class="projects-carousel-btn projects-carousel-next" type="button" aria-label="Next project">▼</button>
-          </div>
-          <div class="projects-carousel-indicator" aria-hidden="true"></div>
 
         </section>
         </div>
@@ -286,8 +289,14 @@
 
     const themeToggle = document.getElementById("themeToggle");
     const savedTheme = localStorage.getItem("theme") || "dark";
-    if (savedTheme === "light") {
-      document.body.classList.add("theme-light");
+
+    function setTheme(theme) {
+      const isLight = theme === "light";
+      document.body.classList.toggle("theme-light", isLight);
+      document.body.classList.toggle("theme-dark", !isLight);
+      localStorage.setItem("theme", isLight ? "light" : "dark");
+      updateThemeButton();
+      window.dispatchEvent(new CustomEvent("themechange", { detail: { theme: isLight ? "light" : "dark" } }));
     }
 
     function updateThemeButton() {
@@ -296,15 +305,11 @@
       themeToggle.setAttribute("aria-pressed", isLight ? "true" : "false");
     }
 
-    updateThemeButton();
-    window.dispatchEvent(new CustomEvent("themechange", { detail: { theme: savedTheme } }));
+    setTheme(savedTheme);
 
     themeToggle.addEventListener("click", () => {
-      document.body.classList.toggle("theme-light");
       const isLight = document.body.classList.contains("theme-light");
-      localStorage.setItem("theme", isLight ? "light" : "dark");
-      updateThemeButton();
-      window.dispatchEvent(new CustomEvent("themechange", { detail: { theme: isLight ? "light" : "dark" } }));
+      setTheme(isLight ? "dark" : "light");
     });
   </script>
 

@@ -26,7 +26,9 @@ const mediaReduced = window.matchMedia?.('(prefers-reduced-motion: reduce)');
 let prefersReduced = !!mediaReduced?.matches;
 
 function getThemeFromDOM() {
-  return document.body.classList.contains('theme-light') ? 'light' : 'dark';
+  if (document.body.classList.contains('theme-light')) return 'light';
+  if (document.body.classList.contains('theme-dark')) return 'dark';
+  return 'dark';
 }
 
 const initialTheme = getThemeFromDOM();

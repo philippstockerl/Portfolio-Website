@@ -2,7 +2,7 @@
 // Loads and fades assets per camera preset based on assetPresets.
 
 import { fadeObject } from './fadeController.js';
-import { gridAssetsGroup, removeAndDispose } from './threeScene.js';
+import { gridAssetsGroup, removeAndDispose, applyBeamPreset } from './threeScene.js';
 import { assetPresetsDark, assetPresetsLight } from './assetPresets.js';
 
 const activeAssets = new Map(); // id -> { obj, def, timers }
@@ -25,6 +25,52 @@ export function setAssetTheme(theme) {
 
 export function getAssetTheme() {
   return activeTheme;
+}
+
+function getResponsiveKey(width = window.innerWidth) {
+  if (width < 768) return 'mobile';
+  if (width < 1440) return 'laptop';
+  if (width <= 1980) return 'desktop';
+  return 'ultrawide';
+}
+
+function stripCameraMeta(def = {}) {
+  const { type, responsive, reset, ...rest } = def;
+  return rest;
+}
+
+function mergeCameraDefs(base, override) {
+  if (!override) return base;
+  return {
+    ...base,
+    ...override,
+    world: {
+      ...base?.world,
+      ...override?.world
+    }
+  };
+}
+
+export function getCameraPresetForIndex(presetIndex, width = window.innerWidth) {
+  if (presetIndex == null) return null;
+  const presets = getPresetsForTheme(activeTheme);
+  const defs = presets[presetIndex] ?? [];
+  const cameraDefs = defs.filter((def) => def?.type === 'camera');
+  if (!cameraDefs.length) return null;
+  const def = cameraDefs[cameraDefs.length - 1];
+  if (!def || def.reset) return null;
+
+  const base = stripCameraMeta(def);
+  const responsive = def.responsive && typeof def.responsive === 'object'
+    ? def.responsive
+    : null;
+  if (!responsive) return base;
+
+  const key = getResponsiveKey(width);
+  const variant = responsive[key];
+  if (variant?.reset) return null;
+
+  return mergeCameraDefs(base, variant);
 }
 
 function normalizeScale(scale) {
@@ -119,7 +165,14 @@ export async function applyAssetPreset(presetIndex, opts = {}) {
 
   const presets = getPresetsForTheme(activeTheme);
   const nextDefs = presets[presetIndex] ?? [];
-  const nextIds = new Set(nextDefs.map(def => def.id));
+  const beamDefs = nextDefs.filter((def) => def?.type === 'beam');
+  if (beamDefs.length) {
+    applyBeamPreset(beamDefs[beamDefs.length - 1]);
+  }
+  const assetDefs = nextDefs.filter(
+    (def) => def?.type !== 'beam' && def?.type !== 'camera'
+  );
+  const nextIds = new Set(assetDefs.map(def => def.id));
 
   if (force) {
     for (const [id, entry] of activeAssets) {
@@ -157,7 +210,7 @@ export async function applyAssetPreset(presetIndex, opts = {}) {
   }
 
   // Load / update assets in the next preset
-  for (const def of nextDefs) {
+  for (const def of assetDefs) {
     if (!def?.id) continue;
 
     const existing = activeAssets.get(def.id);
