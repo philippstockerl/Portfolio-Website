@@ -977,7 +977,9 @@ body.theme-light .section-slab::after {
   max-width: 100%;
   overflow-x: hidden;
   min-height: 100vh;
-  padding-block: var(--section-gap);
+  padding-block: 0;
+  display: grid;
+  align-items: center;
 }
 
 .projects-content__inner {
@@ -985,6 +987,7 @@ body.theme-light .section-slab::after {
   min-height: var(--carousel-rail-height);
   display: grid;
   align-items: center;
+  justify-items: end;
 }
 
 .projects-carousel-wrap {
@@ -992,7 +995,8 @@ body.theme-light .section-slab::after {
   width: min(100%, var(--section-rail-width));
   margin-left: auto;
   margin-right: 0;
-  height: 100%;
+  height: var(--carousel-card-height, auto);
+  --carousel-ui-top: 0px;
 }
 
 .projects-carousel {
@@ -1022,14 +1026,13 @@ body.theme-light .section-slab::after {
 .projects-carousel .project-box {
   position: relative;
   margin-bottom: 0;
-  scroll-snap-align: start;
+  scroll-snap-align: center;
   scroll-snap-stop: always;
   box-shadow: none;
   width: 100%;
   max-width: 100%;
   margin-left: 0;
   margin-right: 0;
-  min-height: var(--carousel-card-height, auto);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s ease;
@@ -1052,7 +1055,7 @@ body.theme-light .section-slab::after {
 .projects-carousel-controls {
   position: absolute;
   right: var(--carousel-ui-inset-x);
-  top: calc(var(--carousel-ui-inset-y) + var(--carousel-indicator-height) + var(--carousel-ui-gap));
+  top: calc(var(--carousel-ui-top) + var(--carousel-ui-inset-y) + var(--carousel-indicator-height) + var(--carousel-ui-gap));
   transform: none;
   z-index: 4;
   display: flex;
@@ -1098,7 +1101,7 @@ body.theme-light .projects-carousel-btn:hover {
 .projects-carousel-indicator {
   position: absolute;
   right: var(--carousel-ui-inset-x);
-  top: var(--carousel-ui-inset-y);
+  top: calc(var(--carousel-ui-top) + var(--carousel-ui-inset-y));
   z-index: 4;
   display: inline-flex;
   align-items: center;
@@ -1403,6 +1406,10 @@ main section[id] {
   scroll-snap-stop: always;
   padding-block: 8vh;
   box-sizing: border-box;
+}
+
+#projects.projects-content {
+  padding-block: 0;
 }
 
 footer {

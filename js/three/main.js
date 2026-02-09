@@ -118,10 +118,12 @@ if (projectsCarousel) {
   const getClosestIndex = () => {
     if (!cards.length) return 0;
     const scrollTop = projectsCarousel.scrollTop;
+    const center = scrollTop + projectsCarousel.clientHeight / 2;
     let bestIdx = 0;
     let bestDist = Infinity;
     cards.forEach((card, i) => {
-      const dist = Math.abs(card.offsetTop - scrollTop);
+      const cardCenter = card.offsetTop + card.offsetHeight / 2;
+      const dist = Math.abs(cardCenter - center);
       if (dist < bestDist) {
         bestDist = dist;
         bestIdx = i;
@@ -135,6 +137,16 @@ if (projectsCarousel) {
     cards.forEach((card, i) => {
       card.classList.toggle('active', i === idx);
     });
+  };
+
+  const updateUiPosition = () => {
+    const wrap = projectsCarousel.closest('.projects-carousel-wrap');
+    if (!wrap || !cards.length) return;
+    const idx = getClosestIndex();
+    const card = cards[idx];
+    if (!card) return;
+    const top = Math.max(0, card.offsetTop - projectsCarousel.scrollTop);
+    wrap.style.setProperty('--carousel-ui-top', `${top}px`);
   };
 
   const updateIndicator = () => {
@@ -156,6 +168,7 @@ if (projectsCarousel) {
       projectsIndicator.appendChild(dots);
     }
     setActiveCard();
+    updateUiPosition();
   };
 
   const syncCarouselHeight = () => {
@@ -173,7 +186,8 @@ if (projectsCarousel) {
     const target = cards[idx];
     if (!target) return;
     isCardScrolling = true;
-    projectsCarousel.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
+    const offset = target.offsetTop - (projectsCarousel.clientHeight - target.offsetHeight) / 2;
+    projectsCarousel.scrollTo({ top: offset, behavior: 'smooth' });
     clearTimeout(scrollLockTimer);
     scrollLockTimer = setTimeout(() => {
       isCardScrolling = false;
@@ -212,11 +226,13 @@ if (projectsCarousel) {
       scrollToIndex(getClosestIndex());
     }, 80);
     updateIndicator();
+    updateUiPosition();
   });
 
   window.addEventListener('resize', () => {
     syncCarouselHeight();
     updateIndicator();
+    updateUiPosition();
   });
 
   syncCarouselHeight();
