@@ -14,22 +14,20 @@ export const assetPresetsDark = {
 beamPreset({ enabled: false }),
 
 
-    cameraPreset({
-      pos: [50, 80, 500],
-      target: [0, 0, 0],
-      rotate: true,
-      showWorld: true,
-      showHelpers: true,
-      world: { pos: [0, 0, 0], yaw: 0.12, pitch: 0, roll: 0, scale: 0.85 },
+cameraPreset({
+  pos: [200, 50, 200],
+  target: [0, 20, 100],
+  rotate: true,
+  world: { scale: 1 },
 
-      
-      responsive: {
-        mobile:  { pos: [140, 40, 160], target: [0, 10, 60], world: { scale: 0.7 } },
-        laptop:  { pos: [180, 60, 200], target: [0, 20, 80], world: { scale: 0.85 } },
-        desktop: { pos: [220, 70, 220], target: [0, 25, 90], world: { scale: 1 } },
-        ultrawide: { pos: [260, 80, 240], target: [0, 30, 100], world: { scale: 1.1 } }
-      }
-    }),
+  responsive: {
+    mobile: { world: { scale: 0.7 } },
+    laptop: { world: { scale: 0.85 } },
+    desktop: { world: { scale: 1 } },
+    ultrawide: { world: { scale: 1.1 } }
+  }
+})
+,
 
 
 
@@ -43,10 +41,34 @@ beamPreset({ enabled: false }),
   // Projects Main
   1: [
     beamPreset({ enabled: false }),
-
+    cameraPreset({
+      pos: [100, 50, 200],
+      target: [0, 20, -100],
+      rotate: false,
+      showWorld: true,
+      showHelpers: true,
+      world: { pos: [0, 0, 0], yaw: 0.0, scale: 0.8 }
+    }),
   ],
-  2: [],
+  2: [
+    cameraPreset({
+      pos: [180, 100, 120],
+      target: [0, 0, 0],
+      rotate: true,
+      showWorld: true,
+      showHelpers: true,
+      world: { pos: [0, 0, 0], yaw: 0.1, scale: 0.7 }
+    }),
+  ],
   3: [
+    cameraPreset({
+      pos: [220, 120, 80],
+      target: [0, 0, 0],
+      rotate: true,
+      showWorld: true,
+      showHelpers: true,
+      world: { pos: [0, 0, 0], yaw: 0.12, scale: 0.7 }
+    }),
     {
       id: 'manim-hero-xz',
       type: 'video',
@@ -86,7 +108,16 @@ beamPreset({ enabled: false }),
       fadeOut: 600,
       delayIn: 500
     }],
-  4: [{
+  4: [
+    cameraPreset({
+      pos: [0, 0, 100],
+      target: [0, 0, 0],
+      rotate: false,
+      showWorld: true,
+      showHelpers: true,
+      world: { pos: [40, -30, 0], yaw: 0.0, scale: 0.4 }
+    }),
+    {
       id: 'xy-front-left',
       type: 'video',
       src: FORMULATION_DARK,
@@ -151,11 +182,28 @@ beamPreset({ enabled: false }),
       cta: 'Open case ↗'
     }
   ],
-  5: [],
+  5: [
+    cameraPreset({
+      pos: [50, 50, 50],
+      target: [0, 0, 0],
+      rotate: false,
+      showWorld: true,
+      showHelpers: true,
+      world: { pos: [0, 0, 0], yaw: 0.0, scale: 1 }
+    }),
+  ],
 
   // Skills Section
   6: [
         beamPreset({ enabled: false }),
+        cameraPreset({
+          pos: [0, 100, 300],
+          target: [0, 0, 0],
+          rotate: true,
+          showWorld: true,
+          showHelpers: true,
+          world: { pos: [0, 0, 0], yaw: 0.0, scale: 1 }
+        }),
     {
       id: 'prog-skills',
       type: 'image',
@@ -206,12 +254,29 @@ beamPreset({ enabled: false }),
   fadeOut: 600
     }
   ],
-  7: [],
+  7: [
+    cameraPreset({
+      pos: [100, 100, 100],
+      target: [0, 0, 0],
+      rotate: false,
+      showWorld: true,
+      showHelpers: false,
+      world: { pos: [0, 0, 0], yaw: 0.0, scale: 1 }
+    }),
+  ],
   // 8–13: Project detail presets
 
   // Bachelor Thesis
   8: [
     beamPreset({ enabled: true, speed: 6, glowSegment: 20, segmentMin: 3, segmentMax: 8 }),
+    cameraPreset({
+      pos: [200, 50, 150],
+      target: [0, 20, -100],
+      rotate: true,
+      showWorld: true,
+      showHelpers: true,
+      world: { pos: [0, 0, 0], yaw: 0.0, scale: 0.8 }
+    }),
   // Robust Formulation PNG
     {
     id: 'latex-xy',
@@ -263,21 +328,72 @@ beamPreset({ enabled: false }),
   // Bachelor Seminar
   9: [
         beamPreset({ enabled: false }),
+        cameraPreset({
+          pos: [200, 50, 150],
+          target: [0, 20, -100],
+          rotate: true,
+          showWorld: true,
+          showHelpers: true,
+          world: { pos: [0, 0, 0], yaw: 0.0, scale: 0.8 }
+        }),
   ],
 
   // Optimization Models (Gurobi)
   10: [
         beamPreset({ enabled: false }),
+        cameraPreset({
+          pos: [200, 50, 150],
+          target: [0, 20, -100],
+          rotate: true,
+          showWorld: true,
+          showHelpers: true,
+          world: { pos: [0, 0, 0], yaw: 0.0, scale: 0.8 }
+        }),
   ],
 
 
-  11: [],
-  12: [],
-  13: []
+  11: [
+    cameraPreset({
+      pos: [200, 50, 150],
+      target: [0, 20, -100],
+      rotate: true,
+      showWorld: true,
+      showHelpers: true,
+      world: { pos: [0, 0, 0], yaw: 0.0, scale: 0.8 }
+    }),
+  ],
+  12: [
+    cameraPreset({
+      pos: [200, 50, 150],
+      target: [0, 20, -100],
+      rotate: true,
+      showWorld: true,
+      showHelpers: true,
+      world: { pos: [0, 0, 0], yaw: 0.0, scale: 0.8 }
+    }),
+  ],
+  13: [
+    cameraPreset({
+      pos: [200, 50, 150],
+      target: [0, 20, -100],
+      rotate: true,
+      showWorld: true,
+      showHelpers: true,
+      world: { pos: [0, 0, 0], yaw: 0.0, scale: 0.8 }
+    }),
+  ]
 };
 
 export const assetPresetsLight = {
   0: [
+    cameraPreset({
+      pos: [200, 50, 200],
+      target: [0, 20, 100],
+      rotate: true,
+      showWorld: true,
+      showHelpers: true,
+      world: { pos: [0, 0, 0], yaw: 0.0, scale: 0.8 }
+    }),
 {
   id: 'xy-front-left',
   type: 'video',
@@ -293,6 +409,14 @@ export const assetPresetsLight = {
 }
   ],
   1: [
+    cameraPreset({
+      pos: [100, 50, 200],
+      target: [0, 20, -100],
+      rotate: false,
+      showWorld: true,
+      showHelpers: true,
+      world: { pos: [0, 0, 0], yaw: 0.0, scale: 0.8 }
+    }),
     {
       id: 'xy-front-left',
       type: 'video',
@@ -320,8 +444,25 @@ export const assetPresetsLight = {
       delayIn: 250
     }
   ],
-  2: [],
+  2: [
+    cameraPreset({
+      pos: [180, 100, 120],
+      target: [0, 0, 0],
+      rotate: true,
+      showWorld: true,
+      showHelpers: true,
+      world: { pos: [0, 0, 0], yaw: 0.1, scale: 0.7 }
+    }),
+  ],
   3: [
+    cameraPreset({
+      pos: [220, 120, 80],
+      target: [0, 0, 0],
+      rotate: true,
+      showWorld: true,
+      showHelpers: true,
+      world: { pos: [0, 0, 0], yaw: 0.12, scale: 0.7 }
+    }),
     {
       id: 'manim-hero-xz',
       type: 'video',
@@ -365,11 +506,37 @@ export const assetPresetsLight = {
       cta: 'Open case ↗'
     }
   ],
-  4: [],
-  5: [],
+  4: [
+    cameraPreset({
+      pos: [0, 0, 100],
+      target: [0, 0, 0],
+      rotate: false,
+      showWorld: true,
+      showHelpers: true,
+      world: { pos: [40, -30, 0], yaw: 0.0, scale: 0.4 }
+    }),
+  ],
+  5: [
+    cameraPreset({
+      pos: [50, 50, 50],
+      target: [0, 0, 0],
+      rotate: false,
+      showWorld: true,
+      showHelpers: true,
+      world: { pos: [0, 0, 0], yaw: 0.0, scale: 1 }
+    }),
+  ],
 
   // Skills Section
   6: [
+    cameraPreset({
+      pos: [0, 100, 300],
+      target: [0, 0, 0],
+      rotate: true,
+      showWorld: true,
+      showHelpers: true,
+      world: { pos: [0, 0, 0], yaw: 0.0, scale: 1 }
+    }),
     {
   id: 'prog-skills',
   type: 'image',
@@ -384,14 +551,77 @@ export const assetPresetsLight = {
   fadeIn: 800,
   fadeOut: 600
 }],
-  7: [],
+  7: [
+    cameraPreset({
+      pos: [100, 100, 100],
+      target: [0, 0, 0],
+      rotate: false,
+      showWorld: true,
+      showHelpers: false,
+      world: { pos: [0, 0, 0], yaw: 0.0, scale: 1 }
+    }),
+  ],
   // 8–13: Project detail presets (match data-preset buttons in index.html)
-  8: [],
-  9: [],
-  10: [],
-  11: [],
-  12: [],
-  13: [],
+  8: [
+    cameraPreset({
+      pos: [200, 50, 150],
+      target: [0, 20, -100],
+      rotate: true,
+      showWorld: true,
+      showHelpers: true,
+      world: { pos: [0, 0, 0], yaw: 0.0, scale: 0.8 }
+    }),
+  ],
+  9: [
+    cameraPreset({
+      pos: [200, 50, 150],
+      target: [0, 20, -100],
+      rotate: true,
+      showWorld: true,
+      showHelpers: true,
+      world: { pos: [0, 0, 0], yaw: 0.0, scale: 0.8 }
+    }),
+  ],
+  10: [
+    cameraPreset({
+      pos: [200, 50, 150],
+      target: [0, 20, -100],
+      rotate: true,
+      showWorld: true,
+      showHelpers: true,
+      world: { pos: [0, 0, 0], yaw: 0.0, scale: 0.8 }
+    }),
+  ],
+  11: [
+    cameraPreset({
+      pos: [200, 50, 150],
+      target: [0, 20, -100],
+      rotate: true,
+      showWorld: true,
+      showHelpers: true,
+      world: { pos: [0, 0, 0], yaw: 0.0, scale: 0.8 }
+    }),
+  ],
+  12: [
+    cameraPreset({
+      pos: [200, 50, 150],
+      target: [0, 20, -100],
+      rotate: true,
+      showWorld: true,
+      showHelpers: true,
+      world: { pos: [0, 0, 0], yaw: 0.0, scale: 0.8 }
+    }),
+  ],
+  13: [
+    cameraPreset({
+      pos: [200, 50, 150],
+      target: [0, 20, -100],
+      rotate: true,
+      showWorld: true,
+      showHelpers: true,
+      world: { pos: [0, 0, 0], yaw: 0.0, scale: 0.8 }
+    }),
+  ],
   // 14-XX: GIFS
   14: [
     {

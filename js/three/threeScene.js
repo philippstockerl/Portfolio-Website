@@ -90,6 +90,7 @@ export const camera   = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
 
 // ── Group hierarchy: scene → worldRoot → spinGroup → world (your grids/axes/models go in `world`)
 // Helpers (grids and axes) are separate from world so they are not hidden when fading the world
+export const stageGroup = new THREE.Group();
 export const worldRoot = new THREE.Group();
 const spinGroup = new THREE.Group();
 export const world = new THREE.Group();
@@ -100,9 +101,10 @@ export const gridAssetsGroup = new THREE.Group();
 worldRoot.add(spinGroup);
 spinGroup.add(world);
 world.add(modelsGroup);
-scene.add(worldRoot);
-scene.add(gridsGroup);
-scene.add(axesGroup);
+scene.add(stageGroup);
+stageGroup.add(worldRoot);
+stageGroup.add(gridsGroup);
+stageGroup.add(axesGroup);
 gridsGroup.add(gridAssetsGroup);
 
 // transparent BG
@@ -401,7 +403,7 @@ let desiredWorldPos   = v3(0,0,0);
 let desiredWorldYaw   = 0;         // radians
 let desiredWorldPitch = 0;         // radians
 let desiredWorldRoll  = 0;         // radians
-let desiredWorldScale = 1;
+let desiredStageScale = 1;
 
 let spinEnabled = true;
 let spinSpeed   = 0.001;
@@ -440,10 +442,10 @@ function animate(t) {
   world.rotation.x += (desiredWorldPitch - world.rotation.x) * 0.06;
   // roll lerp
   world.rotation.z += (desiredWorldRoll - world.rotation.z) * 0.06;
-  // scale lerp
-  const cs = world.scale.x;
-  const ns = cs + (desiredWorldScale - cs) * 0.06;
-  world.scale.setScalar(ns);
+  // stage scale lerp (scales grids + assets + models together)
+  const cs = stageGroup.scale.x;
+  const ns = cs + (desiredStageScale - cs) * 0.06;
+  stageGroup.scale.setScalar(ns);
 
   // optional spin
   if (spinEnabled) {
@@ -481,7 +483,11 @@ export function setWorldTransform({ pos=[0,0,0], yaw=0, pitch=0, roll=0, scale=1
   desiredWorldYaw = yaw;
   desiredWorldPitch = pitch;
   desiredWorldRoll = roll;
-  desiredWorldScale = scale;
+  desiredStageScale = scale;
+}
+
+export function setStageScale(scale = 1) {
+  desiredStageScale = scale;
 }
 export function setWorldSpin(enabled, speed=spinSpeed) {
   spinEnabled = !!enabled;

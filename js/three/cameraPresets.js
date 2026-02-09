@@ -1,5 +1,6 @@
 // cameraPresets.js
 export const camPresets = [
+  
   // 0: Hero
   { pos: [200,50,200], rotate: true, target: [0,20,100],
     world: { pos:[0,0,0], yaw: 0.0, scale: 0.8 }, showWorld: true, showHelpers: true },
@@ -49,11 +50,12 @@ export const camPresets = [
 ];
 
 const VIEWPORT_PROFILES = {
-  mobile:   { posScale: 0.7,  targetScale: 0.7,  worldPosScale: 0.7,  worldScale: 0.7 },
-  laptop:   { posScale: 0.85, targetScale: 0.85, worldPosScale: 0.85, worldScale: 0.85 },
-  desktop:  { posScale: 1,    targetScale: 1,    worldPosScale: 1,    worldScale: 1 },
-  ultrawide:{ posScale: 1.15, targetScale: 1.15, worldPosScale: 1.15, worldScale: 1 }
+  mobile:   { posScale: 1, targetScale: 1, worldPosScale: 1, worldScale: 0.7 },
+  laptop:   { posScale: 1, targetScale: 1, worldPosScale: 1, worldScale: 0.85 },
+  desktop:  { posScale: 1, targetScale: 1, worldPosScale: 1, worldScale: 1 },
+  ultrawide:{ posScale: 1, targetScale: 1, worldPosScale: 1, worldScale: 1.1 }
 };
+
 
 function scaleVec(vec, scale) {
   if (!Array.isArray(vec)) return vec;
