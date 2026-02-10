@@ -69,6 +69,8 @@
   --carousel-ui-inset-y: 1.25rem;
   --carousel-ui-gap: 0.6rem;
   --carousel-indicator-height: 24px;
+  /* Glass vertical padding (hero/projects/experience) */
+  --glass-pad-y: clamp(2.5rem, 6vh, 5rem);
   /* Layout primitives */
   --page-max: 1100px;
   --page-pad: clamp(1.25rem, 4vw, 3rem);
@@ -141,7 +143,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 2rem 4rem;
-  scroll-snap-align: start;
+  scroll-snap-align: none;
   scroll-snap-stop: normal;
 }
 
@@ -287,6 +289,9 @@ nav a:hover {
 }
 
 @media (max-width: 768px) {
+  :root {
+    --glass-pad-y: clamp(2rem, 8vh, 3.5rem);
+  }
   header nav {
     padding: 0;
   }
@@ -372,6 +377,7 @@ nav a:hover {
   overflow: visible;
   display: grid;
   align-items: center;
+  scroll-snap-align: none;
 }
 
 .hero-box {
@@ -379,7 +385,7 @@ nav a:hover {
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  padding: 1rem;
+  padding: var(--glass-pad-y) 1rem;
   border-radius: 0;
 }
 
@@ -719,6 +725,34 @@ body.sidebar-scrolling.theme-light .content-sidebar nav::before {
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
 
+/* Dark theme: make project/experience cards more glassy than the slab */
+body.theme-dark .projects-carousel .project-box,
+body.theme-dark .experience-carousel-track .experience-box {
+  --box-bg: rgba(255, 255, 255, 0.08);
+  --box-border: rgba(255, 255, 255, 0.22);
+  --box-hover-bg: rgba(255, 255, 255, 0.14);
+  --box-hover-border: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(20px) saturate(165%);
+  -webkit-backdrop-filter: blur(20px) saturate(165%);
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.32),
+    0 0 18px rgba(120, 180, 255, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.32);
+}
+
+body.theme-dark .projects-carousel .project-box.hover-pop:hover,
+body.theme-dark .projects-carousel .project-box.active,
+body.theme-dark .experience-carousel-track .experience-box.hover-pop:hover,
+body.theme-dark .experience-carousel-track .experience-box.active {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(12, 18, 36, 0.35));
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.38),
+    0 0 26px rgba(140, 200, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -18px 36px rgba(0, 0, 0, 0.28);
+}
+
 .content-box.hover-pop:hover h3 {
   color: var(--text-strong);
 }
@@ -770,35 +804,55 @@ body.sidebar-scrolling.theme-light .content-sidebar nav::before {
 
 /* Pulsating "View 3D" CTA */
 .project-preset-btn {
-  background: rgba(88, 138, 255, 0.15);
-  border: 1px solid rgba(120, 170, 255, 0.65);
-  color: #cfe1ff;
-  box-shadow: 0 0 0 0 rgba(92, 147, 255, 0.55);
+  background: var(--view3d-bg);
+  border: 1px solid var(--view3d-border);
+  color: var(--view3d-text);
+  box-shadow: 0 0 0 0 var(--view3d-pulse-color);
   animation: view3d-pulse 2.2s ease-in-out infinite;
 }
 
 .project-preset-btn:hover,
 .project-preset-btn:focus-visible {
   animation: none;
-  background: rgba(88, 138, 255, 0.3);
+  background: var(--view3d-hover-bg);
   box-shadow:
-    0 0 0 3px rgba(92, 147, 255, 0.25),
-    0 8px 24px rgba(16, 36, 84, 0.35);
+    0 0 0 3px var(--view3d-hover-ring),
+    0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
 @keyframes view3d-pulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(92, 147, 255, 0.55);
-    border-color: rgba(120, 170, 255, 0.55);
+    box-shadow: 0 0 0 0 var(--view3d-pulse-color);
+    border-color: var(--view3d-border);
   }
   60% {
-    box-shadow: 0 0 0 12px rgba(92, 147, 255, 0);
-    border-color: rgba(120, 170, 255, 0.9);
+    box-shadow: 0 0 0 12px transparent;
+    border-color: var(--view3d-border-strong);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(92, 147, 255, 0);
-    border-color: rgba(120, 170, 255, 0.55);
+    box-shadow: 0 0 0 0 transparent;
+    border-color: var(--view3d-border);
   }
+}
+
+body.theme-dark {
+  --view3d-pulse-color: rgba(255, 255, 255, 0.55);
+  --view3d-bg: rgba(255, 255, 255, 0.08);
+  --view3d-hover-bg: rgba(255, 255, 255, 0.14);
+  --view3d-border: rgba(255, 255, 255, 0.3);
+  --view3d-border-strong: rgba(255, 255, 255, 0.6);
+  --view3d-text: rgba(255, 255, 255, 0.9);
+  --view3d-hover-ring: rgba(255, 255, 255, 0.2);
+}
+
+body.theme-light {
+  --view3d-pulse-color: rgba(0, 0, 0, 0.35);
+  --view3d-bg: rgba(0, 0, 0, 0.04);
+  --view3d-hover-bg: rgba(0, 0, 0, 0.08);
+  --view3d-border: rgba(0, 0, 0, 0.25);
+  --view3d-border-strong: rgba(0, 0, 0, 0.45);
+  --view3d-text: rgba(0, 0, 0, 0.75);
+  --view3d-hover-ring: rgba(0, 0, 0, 0.18);
 }
 
 .btn {
@@ -1013,7 +1067,7 @@ body.theme-light .section-slab::after {
   margin-right: 0;
   height: var(--carousel-card-height, auto);
   --projects-edge-pad-right: clamp(1.5rem, 4vw, 4rem);
-  --projects-glass-pad-y: clamp(2.5rem, 6vh, 5rem);
+  --projects-glass-pad-y: var(--glass-pad-y);
   padding: var(--projects-glass-pad-y) var(--projects-edge-pad-right) var(--projects-glass-pad-y) 1rem;
   justify-self: stretch;
   --carousel-ui-top: 0px;
@@ -1304,7 +1358,7 @@ section#experience.experience-content {
   align-items: stretch;
   overflow: hidden;
   --experience-edge-pad-right: clamp(1.5rem, 4vw, 4rem);
-  --experience-glass-pad-y: clamp(2.5rem, 6vh, 5rem);
+  --experience-glass-pad-y: var(--glass-pad-y);
   padding: var(--experience-glass-pad-y) var(--experience-edge-pad-right) var(--experience-glass-pad-y) 1rem;
   container-type: inline-size;
 }
@@ -1431,6 +1485,9 @@ body.theme-light .experience-carousel-wrap::after {
   margin: 0;
   align-self: stretch;
   container-type: inline-size;
+  opacity: 0.72;
+  filter: saturate(0.85) brightness(0.98);
+  transition: opacity 0.3s ease, filter 0.3s ease;
 }
 
 .experience-carousel-track .experience-box:first-of-type {
@@ -1439,6 +1496,13 @@ body.theme-light .experience-carousel-wrap::after {
 
 .experience-carousel-track .experience-box.active {
   transform: none;
+  opacity: 1;
+  filter: none;
+}
+
+.experience-carousel-track .experience-box.hover-pop:hover {
+  opacity: 1;
+  filter: none;
 }
 
 .experience-carousel-track .experience-box h3 {
@@ -1549,6 +1613,10 @@ body.theme-light .experience-carousel-wrap::after {
   object-fit: contain;
 }
 
+body.theme-dark .social-sidebar img {
+  filter: brightness(1.15) drop-shadow(0 0 6px rgba(255, 255, 255, 0.45));
+}
+
 .email-sidebar {
   right: 2rem;
   bottom: 6rem;
@@ -1562,10 +1630,37 @@ body.theme-light .experience-carousel-wrap::after {
   transition: color 0.3s;
   font-size: 0.85rem;
   letter-spacing: 0.1em;
+  text-shadow: 0 0 0 var(--email-pulse-color, transparent);
+  animation: email-pulse 4.2s ease-in-out infinite;
 }
 
 .email-sidebar a:hover {
   color: var(--text-strong);
+}
+
+body.theme-dark {
+  --email-pulse-color: rgba(255, 255, 255, 0.55);
+}
+
+body.theme-light {
+  --email-pulse-color: rgba(0, 0, 0, 0.45);
+}
+
+@keyframes email-pulse {
+  0%, 100% {
+    text-shadow: 0 0 0 var(--email-pulse-color);
+  }
+  50% {
+    text-shadow:
+      0 0 6px var(--email-pulse-color),
+      0 0 12px color-mix(in srgb, var(--email-pulse-color) 50%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .email-sidebar a {
+    animation: none;
+  }
 }
 
 /* Footer */
@@ -1823,7 +1918,6 @@ footer {
 
   .experience-carousel-wrap {
     --experience-edge-pad-right: clamp(0.75rem, 6vw, 1.5rem);
-    --experience-glass-pad-y: clamp(2rem, 8vh, 3.5rem);
     padding: var(--experience-glass-pad-y) var(--experience-edge-pad-right) var(--experience-glass-pad-y) 0.5rem;
   }
 
@@ -1837,7 +1931,6 @@ footer {
     margin-left: calc(-1 * var(--viewport-offset, 0px));
     margin-right: 0;
     --projects-edge-pad-right: clamp(0.75rem, 6vw, 1.5rem);
-    --projects-glass-pad-y: clamp(2rem, 8vh, 3.5rem);
     padding: var(--projects-glass-pad-y) var(--projects-edge-pad-right) var(--projects-glass-pad-y) 0.5rem;
   }
 

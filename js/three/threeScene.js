@@ -11,8 +11,8 @@ const GRID_STEP = GRID_SIZE / GRID_DIVISIONS;
 
 // Grid color themes (tweak here)
 const GRID_THEMES = {
-  dark: { main: 0xb8beca, grid: 0x8e95a3, opacity: 0.5 },
-  light: { main: 0x4b5160, grid: 0x7b828f, opacity: 0.35 }
+  dark: { main: 0xcdd2db, grid: 0xa3a9b6, opacity: 0.35 },
+  light: { main: 0x3a3f4c, grid: 0x5b6270, opacity: 0.3 }
 };
 
 // Glass panel themes (tweak here)

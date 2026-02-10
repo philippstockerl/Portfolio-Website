@@ -85,7 +85,7 @@ const translations = {
     // Hero
     introText: "Hi, ich bin",
     name: "Philipp Stockerl.",
-    secondIntro: "Student mit Fokus auf",
+    introText2: "Student mit Fokus auf",
     headline: "Optimierungs­gestützter Data Science<br>für operative Entscheidungen",
     bio: "Anwendung mathematischer Optimierung und datengetriebener Modelle für Operations, Supply Chains und ERP-gestützte Geschäftsprozesse.",
     downloadCV: "Lebenslauf herunterladen",

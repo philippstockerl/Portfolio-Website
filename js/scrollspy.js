@@ -32,23 +32,35 @@ export function initScrollSpy() {
 
 // Auto-highlight content boxes with IntersectionObserver
 export function initBoxSpy() {
-  const boxes = document.querySelectorAll(".content-box");
+  const boxes = Array.from(document.querySelectorAll(".experience-carousel-track .experience-box"));
+  const wrap = document.querySelector(".experience-carousel-wrap");
+  if (!boxes.length || !wrap) return;
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          boxes.forEach((b) => b.classList.remove("active"));
-          entry.target.classList.add("active");
-        }
-      });
-    },
-    {
-      root: null,
-      rootMargin: "-40% 0px -40% 0px", // active when near middle 20% of screen
-      threshold: 0,
-    }
-  );
+  const updateActive = () => {
+    const wrapRect = wrap.getBoundingClientRect();
+    const centerX = wrapRect.left + wrapRect.width / 2;
+    let bestBox = null;
+    let bestDist = Infinity;
+    boxes.forEach((box) => {
+      const rect = box.getBoundingClientRect();
+      const boxCenter = rect.left + rect.width / 2;
+      const dist = Math.abs(boxCenter - centerX);
+      if (dist < bestDist) {
+        bestDist = dist;
+        bestBox = box;
+      }
+    });
+    if (!bestBox) return;
+    boxes.forEach((b) => b.classList.toggle("active", b === bestBox));
+  };
+
+  const observer = new IntersectionObserver(updateActive, {
+    root: wrap,
+    rootMargin: "0px -40% 0px -40%",
+    threshold: 0,
+  });
 
   boxes.forEach((box) => observer.observe(box));
+  window.addEventListener("resize", updateActive, { passive: true });
+  updateActive();
 }

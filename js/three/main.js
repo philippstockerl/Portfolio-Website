@@ -71,18 +71,29 @@ window.addEventListener('resize', syncViewportAlignedWraps);
 // ---------- light snap to nearest section ----------
 const snapSections = Array.from(document.querySelectorAll('main section[id]'));
 let __snapTimer;
+let __topSnapTimer;
 let __snapping = false;
 let __lastScrollY = window.scrollY;
 let __scrollDir = 0;
 const heroSection = document.getElementById('hero');
 
+function scheduleHeroSnap(navSnapThreshold) {
+  if (!heroSection) return;
+  clearTimeout(__topSnapTimer);
+  __topSnapTimer = setTimeout(() => {
+    if (__snapping) return;
+    if (window.scrollY > navSnapThreshold) return;
+    __snapping = true;
+    heroSection.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'center' });
+    setTimeout(() => { __snapping = false; }, 450);
+  }, 5000);
+}
+
 function snapToClosestSection() {
   if (!snapSections.length || __snapping) return;
   const navSnapThreshold = window.innerHeight * 0.25;
-  if (__scrollDir < 0 && window.scrollY <= navSnapThreshold) {
-    __snapping = true;
-    window.scrollTo({ top: 0, left: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
-    setTimeout(() => { __snapping = false; }, 450);
+  if (window.scrollY <= navSnapThreshold) {
+    scheduleHeroSnap(navSnapThreshold);
     return;
   }
   const center = window.innerHeight / 2;
@@ -106,6 +117,7 @@ window.addEventListener(
   'scroll',
   () => {
     if (__snapping) return;
+    clearTimeout(__topSnapTimer);
     const currentY = window.scrollY;
     __scrollDir = currentY > __lastScrollY ? 1 : currentY < __lastScrollY ? -1 : 0;
     __lastScrollY = currentY;
