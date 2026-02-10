@@ -4,7 +4,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.m
 // Shared fade duration for helpers and grids
 const FADE_DURATION = 1000;
 
-// Grid dimensions (shared across helpers and beam)
+// Grid dimensions (shared across helpers)
 const GRID_SIZE = 240;
 const GRID_DIVISIONS = 20;
 const GRID_STEP = GRID_SIZE / GRID_DIVISIONS;
@@ -35,52 +35,11 @@ const GLASS_THEMES = {
   }
 };
 
-// Beam themes (tweak here)
-const BEAM_THEMES = {
-  dark: {
-    base: 0x6f7b94,
-    glow: 0x9bb6ff,
-    baseOpacity: 0.22,
-    glowOpacity: 0.85,
-    headOpacity: 0.95
-  },
-  light: {
-    base: 0x3e4656,
-    glow: 0x5876ff,
-    baseOpacity: 0.16,
-    glowOpacity: 0.75,
-    headOpacity: 0.85
-  }
-};
-
-const BEAM_CONFIG = {
-  points: 70,
-  segmentMin: 3,
-  segmentMax: 8,
-  glowSegment: 10,
-  speed: 5.5, // points per second
-  yOffset: 0.6
-};
-
 const mixers = [];
 const helpers = [];
 const grids = [];
 const glassPanels = [];
 const axes = [];
-const beamState = {
-  group: null,
-  points: [],
-  glowGeometry: null,
-  baseMaterial: null,
-  glowMaterial: null,
-  headMaterial: null,
-  head: null,
-  baseOpacity: BEAM_THEMES.dark.baseOpacity,
-  glowOpacity: BEAM_THEMES.dark.glowOpacity,
-  headOpacity: BEAM_THEMES.dark.headOpacity,
-  fade: 1,
-  enabled: true
-};
 
 let activeGridTheme = 'dark';
 
@@ -178,177 +137,6 @@ scene.background = null;
   axes.push(x, y, z);
 })();
 
-initBeam();
-
-function disposeBeam() {
-  if (!beamState.group) return;
-  gridAssetsGroup.remove(beamState.group);
-  beamState.group.traverse((obj) => {
-    if (obj.geometry) obj.geometry.dispose();
-    if (obj.material) {
-      if (Array.isArray(obj.material)) obj.material.forEach((m) => m.dispose());
-      else obj.material.dispose();
-    }
-  });
-  beamState.group = null;
-  beamState.points = [];
-  beamState.glowGeometry = null;
-  beamState.baseMaterial = null;
-  beamState.glowMaterial = null;
-  beamState.headMaterial = null;
-  beamState.head = null;
-}
-
-function buildBeamPath() {
-  const range = GRID_DIVISIONS / 2;
-  const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
-
-  let x = randInt(-range, range);
-  let z = randInt(-range, range);
-  let axis = Math.random() < 0.5 ? 'x' : 'z';
-  let dir = Math.random() < 0.5 ? -1 : 1;
-
-  const points = [new THREE.Vector3(x * GRID_STEP, BEAM_CONFIG.yOffset, z * GRID_STEP)];
-
-  while (points.length < BEAM_CONFIG.points) {
-    const segmentLen = randInt(BEAM_CONFIG.segmentMin, BEAM_CONFIG.segmentMax);
-    for (let i = 0; i < segmentLen && points.length < BEAM_CONFIG.points; i++) {
-      if (axis === 'x') {
-        if ((x >= range && dir > 0) || (x <= -range && dir < 0)) dir *= -1;
-        x += dir;
-      } else {
-        if ((z >= range && dir > 0) || (z <= -range && dir < 0)) dir *= -1;
-        z += dir;
-      }
-      points.push(new THREE.Vector3(x * GRID_STEP, BEAM_CONFIG.yOffset, z * GRID_STEP));
-    }
-    if (Math.random() < 0.7) axis = axis === 'x' ? 'z' : 'x';
-    if (Math.random() < 0.35) dir *= -1;
-  }
-
-  return points;
-}
-
-function initBeam() {
-  disposeBeam();
-  const points = buildBeamPath();
-  if (!points.length) return;
-
-  const baseGeometry = new THREE.BufferGeometry().setFromPoints(points);
-  const glowPoints = points.concat(points.slice(1));
-  const glowGeometry = new THREE.BufferGeometry().setFromPoints(glowPoints);
-  glowGeometry.setDrawRange(0, Math.min(BEAM_CONFIG.glowSegment, points.length));
-
-  const theme = BEAM_THEMES.dark;
-  const baseMaterial = new THREE.LineBasicMaterial({
-    color: theme.base,
-    transparent: true,
-    opacity: theme.baseOpacity,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false,
-    depthTest: false
-  });
-  const glowMaterial = new THREE.LineBasicMaterial({
-    color: theme.glow,
-    transparent: true,
-    opacity: theme.glowOpacity,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false,
-    depthTest: false
-  });
-
-  const baseLine = new THREE.Line(baseGeometry, baseMaterial);
-  const glowLine = new THREE.Line(glowGeometry, glowMaterial);
-  baseLine.renderOrder = 3;
-  glowLine.renderOrder = 4;
-  baseLine.frustumCulled = false;
-  glowLine.frustumCulled = false;
-
-  const headGeometry = new THREE.SphereGeometry(GRID_STEP * 0.2, 16, 16);
-  const headMaterial = new THREE.MeshBasicMaterial({
-    color: theme.glow,
-    transparent: true,
-    opacity: theme.headOpacity,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false,
-    depthTest: false
-  });
-  const head = new THREE.Mesh(headGeometry, headMaterial);
-  head.renderOrder = 5;
-  head.frustumCulled = false;
-  head.position.copy(points[0]);
-
-  const group = new THREE.Group();
-  group.add(baseLine, glowLine, head);
-  gridAssetsGroup.add(group);
-
-  beamState.group = group;
-  beamState.points = points;
-  beamState.glowGeometry = glowGeometry;
-  beamState.baseMaterial = baseMaterial;
-  beamState.glowMaterial = glowMaterial;
-  beamState.headMaterial = headMaterial;
-  beamState.head = head;
-  beamState.fade = beamState.fade ?? 1;
-
-  applyBeamTheme(activeGridTheme);
-  syncBeamOpacity();
-}
-
-function updateBeam(timeMs = 0) {
-  if (!beamState.enabled || !beamState.points.length || !beamState.glowGeometry) return;
-
-  const total = beamState.points.length;
-  const t = timeMs * 0.001;
-  const progress = (t * BEAM_CONFIG.speed) % total;
-  const idx = Math.floor(progress);
-  const frac = progress - idx;
-
-  beamState.glowGeometry.setDrawRange(
-    idx,
-    Math.min(BEAM_CONFIG.glowSegment, total)
-  );
-
-  const p0 = beamState.points[idx];
-  const p1 = beamState.points[(idx + 1) % total];
-  if (beamState.head) {
-    beamState.head.position.lerpVectors(p0, p1, frac);
-  }
-}
-
-function applyBeamTheme(theme = 'dark') {
-  const cfg = BEAM_THEMES[theme] ?? BEAM_THEMES.dark;
-  beamState.baseOpacity = cfg.baseOpacity;
-  beamState.glowOpacity = cfg.glowOpacity;
-  beamState.headOpacity = cfg.headOpacity;
-
-  if (beamState.baseMaterial) {
-    beamState.baseMaterial.color.set(cfg.base);
-    beamState.baseMaterial.needsUpdate = true;
-  }
-  if (beamState.glowMaterial) {
-    beamState.glowMaterial.color.set(cfg.glow);
-    beamState.glowMaterial.needsUpdate = true;
-  }
-  if (beamState.headMaterial) {
-    beamState.headMaterial.color.set(cfg.glow);
-    beamState.headMaterial.needsUpdate = true;
-  }
-  syncBeamOpacity();
-}
-
-function getBeamOpacityScale() {
-  return (beamState.enabled ? beamState.fade : 0);
-}
-
-function syncBeamOpacity() {
-  const scale = getBeamOpacityScale();
-  if (beamState.baseMaterial) beamState.baseMaterial.opacity = beamState.baseOpacity * scale;
-  if (beamState.glowMaterial) beamState.glowMaterial.opacity = beamState.glowOpacity * scale;
-  if (beamState.headMaterial) beamState.headMaterial.opacity = beamState.headOpacity * scale;
-  if (beamState.group) beamState.group.visible = scale > 0;
-}
-
 function applyGridTheme(theme = 'dark') {
   activeGridTheme = theme === 'light' ? 'light' : 'dark';
   const cfg = GRID_THEMES[theme] ?? GRID_THEMES.dark;
@@ -383,7 +171,6 @@ function applyGridTheme(theme = 'dark') {
     mat.needsUpdate = true;
   });
 
-  applyBeamTheme(theme);
 }
 
 // lights
@@ -456,8 +243,6 @@ function animate(t) {
 
   const delta = clock.getDelta();
   mixers.forEach(mixer => mixer.update(delta));
-
-  updateBeam(t);
 
   renderer.render(scene, camera);
 }
@@ -568,8 +353,6 @@ export function animateGridsOpacity(show) {
   const themeCfg = GRID_THEMES[activeGridTheme] ?? GRID_THEMES.dark;
   const endOpacity = show ? themeCfg.opacity : 0;
   const startTime = performance.now();
-  const beamFadeStart = beamState.fade ?? 1;
-  const beamFadeEnd = show ? 1 : 0;
   grids.forEach(g => {
     g.material.transparent = true;
     g.material.depthWrite = false;
@@ -580,9 +363,6 @@ export function animateGridsOpacity(show) {
     for (let i = 0; i < grids.length; i++) {
       grids[i].material.opacity = startOpacities[i] + (endOpacity - startOpacities[i]) * t;
     }
-    const beamFade = beamFadeStart + (beamFadeEnd - beamFadeStart) * t;
-    beamState.fade = beamFade;
-    syncBeamOpacity();
     if (t < 1) {
       requestAnimationFrame(animate);
     } else {
@@ -602,73 +382,4 @@ export function animateGridsOpacity(show) {
 // Theme-aware grid colors
 export function setGridTheme(theme = 'dark') {
   applyGridTheme(theme);
-}
-
-export function setBeamEnabled(enabled = true) {
-  beamState.enabled = !!enabled;
-  syncBeamOpacity();
-}
-
-export function applyBeamPreset(preset = {}) {
-  if (!preset || typeof preset !== 'object') return;
-
-  let rebuild = false;
-
-  const toInt = (value) => (Number.isFinite(value) ? Math.round(value) : null);
-
-  const nextPoints = toInt(preset.points);
-  if (nextPoints != null && nextPoints >= 2 && nextPoints !== BEAM_CONFIG.points) {
-    BEAM_CONFIG.points = nextPoints;
-    rebuild = true;
-  }
-
-  const nextSegMin = toInt(preset.segmentMin);
-  const nextSegMax = toInt(preset.segmentMax);
-  if (nextSegMin != null || nextSegMax != null) {
-    const min = Math.max(1, nextSegMin ?? BEAM_CONFIG.segmentMin);
-    const max = Math.max(1, nextSegMax ?? BEAM_CONFIG.segmentMax);
-    const safeMin = Math.min(min, max);
-    const safeMax = Math.max(min, max);
-    if (safeMin !== BEAM_CONFIG.segmentMin || safeMax !== BEAM_CONFIG.segmentMax) {
-      BEAM_CONFIG.segmentMin = safeMin;
-      BEAM_CONFIG.segmentMax = safeMax;
-      rebuild = true;
-    }
-  }
-
-  const nextYOffset = Number.isFinite(preset.yOffset) ? preset.yOffset : null;
-  if (nextYOffset != null && nextYOffset !== BEAM_CONFIG.yOffset) {
-    BEAM_CONFIG.yOffset = nextYOffset;
-    rebuild = true;
-  }
-
-  const nextSpeed = Number.isFinite(preset.speed) ? preset.speed : null;
-  if (nextSpeed != null) {
-    BEAM_CONFIG.speed = Math.max(0.1, nextSpeed);
-  }
-
-  const nextGlow = toInt(preset.glowSegment);
-  if (nextGlow != null) {
-    BEAM_CONFIG.glowSegment = Math.max(2, nextGlow);
-  }
-
-  if (preset.regenerate === true) {
-    rebuild = true;
-  }
-
-  if (typeof preset.enabled === 'boolean') {
-    beamState.enabled = preset.enabled;
-  }
-
-  if (BEAM_CONFIG.glowSegment > BEAM_CONFIG.points) {
-    BEAM_CONFIG.glowSegment = BEAM_CONFIG.points;
-  }
-
-  if (rebuild) {
-    initBeam();
-    return;
-  }
-
-  applyBeamTheme(activeGridTheme);
-  syncBeamOpacity();
 }

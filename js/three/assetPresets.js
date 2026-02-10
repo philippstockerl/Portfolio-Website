@@ -1,4 +1,3 @@
-import { beamPreset } from './beamPresets.js';
 import { cameraPreset } from './cameraPreset.js';
 
 
@@ -46,7 +45,6 @@ function buildLightPresets(basePresets) {
 
 export const assetPresetsDark = {
   0: [
-beamPreset({ enabled: false }),
 
 
 cameraPreset({
@@ -75,7 +73,6 @@ cameraPreset({
 
   // Projects Main
   1: [
-    beamPreset({ enabled: false }),
     cameraPreset({
       pos: [100, 50, 200],
       target: [0, 20, -100],
@@ -230,7 +227,6 @@ cameraPreset({
 
   // Skills Section
   6: [
-        beamPreset({ enabled: false }),
         cameraPreset({
           pos: [0, 100, 300],
           target: [0, 0, 0],
@@ -303,7 +299,6 @@ cameraPreset({
 
   // Bachelor Thesis
   8: [
-    beamPreset({ enabled: true, speed: 6, glowSegment: 20, segmentMin: 3, segmentMax: 8 }),
     cameraPreset({
       pos: [200, 50, 150],
       target: [0, 20, -100],
@@ -362,7 +357,6 @@ cameraPreset({
 
   // Bachelor Seminar
   9: [
-        beamPreset({ enabled: false }),
         cameraPreset({
           pos: [200, 50, 150],
           target: [0, 20, -100],
@@ -375,7 +369,6 @@ cameraPreset({
 
   // Optimization Models (Gurobi)
   10: [
-        beamPreset({ enabled: false }),
         cameraPreset({
           pos: [200, 50, 150],
           target: [0, 20, -100],
