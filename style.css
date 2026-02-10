@@ -1093,6 +1093,12 @@ body.theme-light .section-slab::after {
   z-index: -1;
 }
 
+.projects-carousel-wrap::before,
+.projects-carousel-wrap::after {
+  left: calc(-1 * var(--wrap-left, 0px));
+  transform: none;
+}
+
 @supports (width: 100dvw) {
   .projects-carousel-wrap::before,
   .projects-carousel-wrap::after {
@@ -1199,6 +1205,13 @@ body.theme-light .projects-carousel-wrap::after {
   z-index: 1;
   transform: perspective(1200px) rotateY(-9deg);
   transform-origin: left center;
+}
+
+@media (min-width: 1600px) {
+  .projects-carousel {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .projects-carousel .project-box {

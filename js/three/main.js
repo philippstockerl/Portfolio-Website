@@ -58,9 +58,19 @@ initBoxSpy();
 function syncViewportAlignedWraps() {
   const wraps = document.querySelectorAll('.projects-carousel-wrap, .experience-carousel-wrap');
   wraps.forEach((wrap) => {
-    const anchor = wrap.parentElement ?? wrap;
-    const left = anchor.getBoundingClientRect().left;
+    let anchor = wrap;
+    if (wrap.classList.contains('projects-carousel-wrap')) {
+      anchor = wrap.closest('.projects-content__inner') ?? wrap.parentElement ?? wrap;
+    }
+    const rect = anchor.getBoundingClientRect();
+    let left = rect.left;
+    if (anchor === wrap) {
+      const marginLeft = parseFloat(getComputedStyle(wrap).marginLeft) || 0;
+      left -= marginLeft;
+    }
     wrap.style.setProperty('--viewport-offset', `${left}px`);
+    const wrapLeft = wrap.getBoundingClientRect().left;
+    wrap.style.setProperty('--wrap-left', `${wrapLeft}px`);
   });
 }
 
