@@ -73,38 +73,38 @@
 
 body.theme-light {
   --bg: #ffffff;
-  --text: #111111;
+  --text: #121212;
   --text-strong: #000000;
-  --muted: #2f2f2f;
-  --accent: #1f1f1f;
-  --headline: #1c1c1c;
-  --nav-bg: rgba(0, 0, 0, 0.04);
-  --box-bg: #f5ecd4;
-  --box-border: #e6d6ad;
-  --box-hover-bg: #efe0b86b;
-  --box-hover-border: #dbc894;
-  --tag-bg: #e6d6ad;
-  --tag-text: #111111;
+  --muted: #3a3a3a;
+  --accent: #111111;
+  --headline: #1a1a1a;
+  --nav-bg: rgba(255, 255, 255, 0.88);
+  --box-bg: #ffffff;
+  --box-border: #d8d8d8;
+  --box-hover-bg: rgba(255, 255, 255, 0.9);
+  --box-hover-border: #cfcfcf;
+  --tag-bg: #f4f4f4;
+  --tag-text: #1a1a1a;
   --tag-hover: #000000;
-  --tag-pdf-bg: #d9c691;
+  --tag-pdf-bg: #f0f0f0;
   --tag-pdf-text: #111111;
-  --tag-pdf-border: #bda97a;
-  --tag-pdf-hover-bg: #111111;
-  --tag-pdf-hover-text: #ffffff;
-  --tag-pdf-hover-border: #111111;
-  --btn-border: #2d2d2d;
+  --tag-pdf-border: #dedede;
+  --tag-pdf-hover-bg: #e6e6e6;
+  --tag-pdf-hover-text: #000000;
+  --tag-pdf-hover-border: #cfcfcf;
+  --btn-border: #d0d0d0;
   --btn-text: #111111;
-  --btn-bg: #f5ecd4;
-  --btn-shadow: rgba(0, 0, 0, 0.12);
-  --btn-hover-bg: #2d2d2d;
-  --btn-hover-text: #ffffff;
-  --line: #c9ba8c;
-  --line-strong: #d8caa2;
-  --spotlight: rgba(0, 0, 0, 0.06);
-  --dots: rgba(0, 0, 0, 0.08);
-  --poly-edge: #8a7a52;
-  --poly-node: #2d2d2d;
-  --poly-node-stroke: #8a7a52;
+  --btn-bg: #ffffff;
+  --btn-shadow: rgba(0, 0, 0, 0.16);
+  --btn-hover-bg: #f0f0f0;
+  --btn-hover-text: #000000;
+  --line: #d6d6d6;
+  --line-strong: #c2c2c2;
+  --spotlight: rgba(0, 0, 0, 0.07);
+  --dots: rgba(0, 0, 0, 0.07);
+  --poly-edge: #b5b5b5;
+  --poly-node: #1a1a1a;
+  --poly-node-stroke: #b5b5b5;
 }
 
 /* Base Typography + Body */
@@ -137,7 +137,7 @@ header {
   align-items: center;
   padding: 2rem 4rem;
   scroll-snap-align: start;
-  scroll-snap-stop: always;
+  scroll-snap-stop: normal;
 }
 
 .header-logo {
@@ -192,9 +192,9 @@ body.theme-dark nav::before {
 }
 
 body.theme-light nav::before {
-  background: linear-gradient(135deg, rgba(245, 236, 212, 0.72), rgba(239, 224, 184, 0.62));
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  outline: 1px dashed rgba(0, 0, 0, 0.12);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(232, 232, 232, 0.9));
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  outline: 1px dashed rgba(0, 0, 0, 0.14);
   outline-offset: 6px;
 }
 
@@ -214,11 +214,11 @@ body.theme-dark header nav::before {
 
 body.theme-light header nav::before {
   box-shadow:
-    0 24px 60px rgba(0, 0, 0, 0.18),
-    0 6px 16px rgba(0, 0, 0, 0.12),
+    0 28px 70px rgba(0, 0, 0, 0.22),
+    0 8px 18px rgba(0, 0, 0, 0.16),
     0 0 24px rgba(255, 255, 255, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.55),
-    inset 0 -18px 38px rgba(0, 0, 0, 0.12);
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 -18px 38px rgba(0, 0, 0, 0.18);
 }
 
 nav ul {
@@ -314,6 +314,14 @@ nav a:hover {
       inset 0 1px 0 rgba(255, 255, 255, 0.14);
   }
 
+  body.theme-light header nav ul {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(232, 232, 232, 0.92));
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    box-shadow:
+      0 22px 50px rgba(0, 0, 0, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+
   header nav ul.active {
     display: flex;
   }
@@ -394,13 +402,13 @@ body.theme-dark .hero-box__bg {
 
 /* Hero box (light theme) */
 body.theme-light .hero-box__bg {
-  background: linear-gradient(135deg, rgba(245, 236, 212, 0.72), rgba(239, 224, 184, 0.62));
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(232, 232, 232, 0.9));
+  border: 1px solid rgba(0, 0, 0, 0.12);
   box-shadow:
-    0 30px 70px rgba(0, 0, 0, 0.18),
-    0 8px 20px rgba(0, 0, 0, 0.12),
+    0 34px 80px rgba(0, 0, 0, 0.22),
+    0 10px 24px rgba(0, 0, 0, 0.16),
     0 0 32px rgba(255, 255, 255, 0.35);
-  outline: 1px dashed rgba(0, 0, 0, 0.12);
+  outline: 1px dashed rgba(0, 0, 0, 0.14);
   outline-offset: 12px;
 }
 
@@ -537,6 +545,7 @@ body.theme-light .hero-box__bg::after {
   height: fit-content;
   transition: transform 0.35s ease, opacity 0.35s ease;
   will-change: transform, opacity;
+  z-index: 3;
 }
 
 body:not(.sidebar-scrolling) .content-sidebar {
@@ -629,11 +638,11 @@ body.theme-dark .content-sidebar nav::before {
 
 body.theme-light .content-sidebar nav::before {
   box-shadow:
-    0 24px 60px rgba(0, 0, 0, 0.18),
-    0 6px 16px rgba(0, 0, 0, 0.12),
+    0 26px 66px rgba(0, 0, 0, 0.22),
+    0 8px 18px rgba(0, 0, 0, 0.16),
     0 0 24px rgba(255, 255, 255, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.55),
-    inset 0 -18px 38px rgba(0, 0, 0, 0.12);
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 -18px 38px rgba(0, 0, 0, 0.18);
 }
 
 body.sidebar-scrolling.theme-dark .content-sidebar nav::before {
@@ -642,7 +651,7 @@ body.sidebar-scrolling.theme-dark .content-sidebar nav::before {
 }
 
 body.sidebar-scrolling.theme-light .content-sidebar nav::before {
-  background: linear-gradient(135deg, rgba(245, 236, 212, 0.92), rgba(239, 224, 184, 0.9));
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(232, 232, 232, 0.92));
   border-color: rgba(0, 0, 0, 0.12);
 }
 
@@ -817,6 +826,11 @@ body.sidebar-scrolling.theme-light .content-sidebar nav::before {
 .projects-slab {
   margin-bottom: 13rem;
   --projects-envelope-pad: clamp(5rem, 7vh, 10rem);
+  isolation: auto;
+}
+
+.experience-slab {
+  isolation: auto;
 }
 
 .projects-slab.section-slab::before,
@@ -889,17 +903,17 @@ body.theme-dark .section-slab::before {
 }
 
 body.theme-light .section-slab::before {
-  background: linear-gradient(135deg, rgba(245, 236, 212, 0.72), rgba(239, 224, 184, 0.62));
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-  border-right: 1px solid rgba(0, 0, 0, 0.08);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(232, 232, 232, 0.9));
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   border-left: 0;
   box-shadow:
-    0 28px 64px rgba(0, 0, 0, 0.18),
-    0 8px 18px rgba(0, 0, 0, 0.12),
+    0 32px 72px rgba(0, 0, 0, 0.22),
+    0 10px 22px rgba(0, 0, 0, 0.16),
     0 0 30px rgba(255, 255, 255, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.55),
-    inset 0 -22px 44px rgba(0, 0, 0, 0.12);
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 -22px 44px rgba(0, 0, 0, 0.18);
   outline: none;
   backdrop-filter: blur(10px) saturate(130%);
   -webkit-backdrop-filter: blur(10px) saturate(130%);
@@ -952,6 +966,11 @@ body.theme-light .section-slab::after {
   z-index: 1;
 }
 
+.projects-slab > *,
+.experience-slab > * {
+  z-index: auto;
+}
+
 .projects-slab.section-slab::before,
 .projects-slab.section-slab::after,
 .experience-slab.section-slab::before,
@@ -963,10 +982,9 @@ body.theme-light .section-slab::after {
 .projects-content {
   margin-top: 0;
   position: relative;
-  overflow: hidden;
-  isolation: isolate; /* allow negative z-index children to render behind content */
+  overflow: visible;
+  isolation: auto;
   max-width: 100%;
-  overflow-x: hidden;
   min-height: 100vh;
   min-height: 100svh;
   padding-block: 0;
@@ -979,19 +997,27 @@ body.theme-light .section-slab::after {
   min-height: var(--carousel-rail-height);
   display: grid;
   align-items: center;
-  justify-items: end;
+  justify-items: stretch;
 }
 
 .projects-carousel-wrap {
   position: relative;
-  isolation: isolate;
+  isolation: auto;
   width: 100vw;
   margin-left: calc(-1 * var(--viewport-offset, 0px));
   margin-right: 0;
   height: var(--carousel-card-height, auto);
-  padding: 1rem;
-  --projects-glass-pad-y: 1rem;
+  --projects-edge-pad-right: clamp(1.5rem, 4vw, 4rem);
+  --projects-glass-pad-y: clamp(2.5rem, 6vh, 5rem);
+  padding: var(--projects-glass-pad-y) var(--projects-edge-pad-right) var(--projects-glass-pad-y) 1rem;
+  justify-self: stretch;
   --carousel-ui-top: 0px;
+}
+
+@supports (width: 100dvw) {
+  .projects-carousel-wrap {
+    width: 100dvw;
+  }
 }
 
 .projects-carousel-wrap::before,
@@ -1005,7 +1031,7 @@ body.theme-light .section-slab::after {
   transform: translateX(-50%);
   border-radius: 0;
   pointer-events: none;
-  z-index: 0;
+  z-index: -1;
 }
 
 @supports (width: 100dvw) {
@@ -1033,17 +1059,17 @@ body.theme-dark .projects-carousel-wrap::before {
 }
 
 body.theme-light .projects-carousel-wrap::before {
-  background: linear-gradient(135deg, rgba(245, 236, 212, 0.72), rgba(239, 224, 184, 0.62));
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-  border-right: 1px solid rgba(0, 0, 0, 0.08);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(232, 232, 232, 0.9));
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   border-left: 0;
   box-shadow:
-    0 28px 64px rgba(0, 0, 0, 0.18),
-    0 8px 18px rgba(0, 0, 0, 0.12),
+    0 32px 72px rgba(0, 0, 0, 0.22),
+    0 10px 22px rgba(0, 0, 0, 0.16),
     0 0 30px rgba(255, 255, 255, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.55),
-    inset 0 -22px 44px rgba(0, 0, 0, 0.12);
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 -22px 44px rgba(0, 0, 0, 0.18);
   outline: none;
   backdrop-filter: blur(10px) saturate(130%);
   -webkit-backdrop-filter: blur(10px) saturate(130%);
@@ -1181,14 +1207,14 @@ body.theme-light .projects-carousel-wrap::after {
 }
 
 body.theme-light .projects-carousel-btn {
-  background: rgba(245, 236, 212, 0.85);
-  border-color: rgba(0, 0, 0, 0.15);
-  color: rgba(0, 0, 0, 0.7);
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.12);
+  color: rgba(0, 0, 0, 0.75);
 }
 
 body.theme-light .projects-carousel-btn:hover {
-  border-color: rgba(0, 0, 0, 0.35);
-  background: rgba(239, 224, 184, 0.95);
+  border-color: rgba(0, 0, 0, 0.28);
+  background: rgba(245, 245, 245, 0.98);
 }
 
 .projects-carousel-indicator {
@@ -1233,9 +1259,9 @@ body.theme-light .projects-carousel-btn:hover {
 }
 
 body.theme-light .projects-carousel-indicator {
-  background: rgba(245, 236, 212, 0.8);
-  border-color: rgba(0, 0, 0, 0.12);
-  color: rgba(0, 0, 0, 0.6);
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.65);
 }
 
 body.theme-light .projects-carousel-indicator .dot {
@@ -1256,7 +1282,7 @@ section#experience.experience-content {
   padding-block: 0;
   max-width: 100%;
   background: transparent;
-  overflow: hidden;
+  overflow: visible;
   display: grid;
   align-items: center;
   padding-left: 0;
@@ -1265,14 +1291,16 @@ section#experience.experience-content {
 
 .experience-carousel-wrap {
   position: relative;
-  isolation: isolate;
+  isolation: auto;
   width: 100vw;
   margin-left: calc(-1 * var(--viewport-offset, 0px));
   margin-right: 0;
   display: flex;
   align-items: stretch;
   overflow: hidden;
-  padding: 1rem;
+  --experience-edge-pad-right: clamp(1.5rem, 4vw, 4rem);
+  --experience-glass-pad-y: clamp(2.5rem, 6vh, 5rem);
+  padding: var(--experience-glass-pad-y) var(--experience-edge-pad-right) var(--experience-glass-pad-y) 1rem;
   container-type: inline-size;
 }
 
@@ -1287,7 +1315,7 @@ section#experience.experience-content {
   transform: translateX(-50%);
   border-radius: 0;
   pointer-events: none;
-  z-index: 0;
+  z-index: -1;
 }
 
 @supports (width: 100dvw) {
@@ -1315,17 +1343,17 @@ body.theme-dark .experience-carousel-wrap::before {
 }
 
 body.theme-light .experience-carousel-wrap::before {
-  background: linear-gradient(135deg, rgba(245, 236, 212, 0.72), rgba(239, 224, 184, 0.62));
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-  border-right: 1px solid rgba(0, 0, 0, 0.08);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(232, 232, 232, 0.9));
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   border-left: 0;
   box-shadow:
-    0 28px 64px rgba(0, 0, 0, 0.18),
-    0 8px 18px rgba(0, 0, 0, 0.12),
+    0 32px 72px rgba(0, 0, 0, 0.22),
+    0 10px 22px rgba(0, 0, 0, 0.16),
     0 0 30px rgba(255, 255, 255, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.55),
-    inset 0 -22px 44px rgba(0, 0, 0, 0.12);
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 -22px 44px rgba(0, 0, 0, 0.18);
   outline: none;
   backdrop-filter: blur(10px) saturate(130%);
   -webkit-backdrop-filter: blur(10px) saturate(130%);
@@ -1375,11 +1403,12 @@ body.theme-light .experience-carousel-wrap::after {
 
 .experience-carousel-track {
   --experience-gap: 1.25rem;
+  --experience-marquee-duration: 26s;
   display: flex;
   gap: var(--experience-gap);
   width: max-content;
   padding-right: var(--experience-gap);
-  animation: experience-marquee 38s linear infinite;
+  animation: experience-marquee var(--experience-marquee-duration) linear infinite;
   will-change: transform;
   position: relative;
   z-index: 1;
@@ -1700,7 +1729,7 @@ body {
 main section[id] {
   min-height: 100vh;
   scroll-snap-align: center;
-  scroll-snap-stop: always;
+  scroll-snap-stop: normal;
   padding-block: 8vh;
   box-sizing: border-box;
 }
@@ -1788,20 +1817,23 @@ footer {
   }
 
   .experience-carousel-wrap {
-    padding: 1rem 0.5rem;
+    --experience-edge-pad-right: clamp(0.75rem, 6vw, 1.5rem);
+    --experience-glass-pad-y: clamp(2rem, 8vh, 3.5rem);
+    padding: var(--experience-glass-pad-y) var(--experience-edge-pad-right) var(--experience-glass-pad-y) 0.5rem;
   }
 
   .experience-carousel-track {
     --experience-gap: 0.85rem;
-    animation-duration: 34s;
+    --experience-marquee-duration: 20s;
   }
 
   .projects-carousel-wrap {
     width: 100vw;
     margin-left: calc(-1 * var(--viewport-offset, 0px));
     margin-right: 0;
-    padding: 1rem 0.5rem;
-    --projects-glass-pad-y: 1rem;
+    --projects-edge-pad-right: clamp(0.75rem, 6vw, 1.5rem);
+    --projects-glass-pad-y: clamp(2rem, 8vh, 3.5rem);
+    padding: var(--projects-glass-pad-y) var(--projects-edge-pad-right) var(--projects-glass-pad-y) 0.5rem;
   }
 
   .projects-carousel {

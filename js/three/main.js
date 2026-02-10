@@ -58,8 +58,8 @@ initBoxSpy();
 function syncViewportAlignedWraps() {
   const wraps = document.querySelectorAll('.projects-carousel-wrap, .experience-carousel-wrap');
   wraps.forEach((wrap) => {
-    wrap.style.setProperty('--viewport-offset', '0px');
-    const left = wrap.getBoundingClientRect().left;
+    const anchor = wrap.parentElement ?? wrap;
+    const left = anchor.getBoundingClientRect().left;
     wrap.style.setProperty('--viewport-offset', `${left}px`);
   });
 }
@@ -78,7 +78,7 @@ const heroSection = document.getElementById('hero');
 
 function snapToClosestSection() {
   if (!snapSections.length || __snapping) return;
-  const navSnapThreshold = window.innerHeight * 0.4;
+  const navSnapThreshold = window.innerHeight * 0.25;
   if (__scrollDir < 0 && window.scrollY <= navSnapThreshold) {
     __snapping = true;
     window.scrollTo({ top: 0, left: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
@@ -93,6 +93,8 @@ function snapToClosestSection() {
     const dist = Math.abs(r.top + r.height / 2 - center);
     if (dist < bestDist) { bestDist = dist; bestIdx = i; }
   });
+  const snapThreshold = window.innerHeight * 0.18;
+  if (bestDist > snapThreshold) return;
   const target = snapSections[bestIdx];
   if (!target) return;
   __snapping = true;
@@ -108,7 +110,7 @@ window.addEventListener(
     __scrollDir = currentY > __lastScrollY ? 1 : currentY < __lastScrollY ? -1 : 0;
     __lastScrollY = currentY;
     clearTimeout(__snapTimer);
-    __snapTimer = setTimeout(snapToClosestSection, 160);
+    __snapTimer = setTimeout(snapToClosestSection, 260);
   },
   { passive: true }
 );
