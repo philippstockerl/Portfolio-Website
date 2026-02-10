@@ -565,7 +565,8 @@ export function animateHelpersOpacity(show, duration = FADE_DURATION) {
 export function animateGridsOpacity(show) {
   const duration = FADE_DURATION;
   const startOpacities = grids.map(g => g.material.opacity);
-  const endOpacity = show ? 1 : 0;
+  const themeCfg = GRID_THEMES[activeGridTheme] ?? GRID_THEMES.dark;
+  const endOpacity = show ? themeCfg.opacity : 0;
   const startTime = performance.now();
   const beamFadeStart = beamState.fade ?? 1;
   const beamFadeEnd = show ? 1 : 0;
