@@ -1792,6 +1792,22 @@ body::before {
   opacity: 0.18;
 }
 
+.poly-experience-a {
+  top: 1.5rem;
+  right: 2rem;
+  width: 260px;
+  height: 260px;
+  opacity: 0.16;
+}
+
+.poly-experience-b {
+  bottom: 1.5rem;
+  left: 1.5rem;
+  width: 220px;
+  height: 220px;
+  opacity: 0.14;
+}
+
 .poly-edge {
   fill: none;
   stroke: var(--accent);
