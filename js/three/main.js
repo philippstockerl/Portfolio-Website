@@ -157,12 +157,9 @@ if (projectsCarousel) {
 
   const updateUiPosition = () => {
     const wrap = projectsCarousel.closest('.projects-carousel-wrap');
-    if (!wrap || !cards.length) return;
-    const idx = getClosestIndex();
-    const card = cards[idx];
-    if (!card) return;
-    const top = Math.max(0, card.offsetTop - projectsCarousel.scrollTop);
-    wrap.style.setProperty('--carousel-ui-top', `${top}px`);
+    if (!wrap) return;
+    // Keep controls fixed in the top-right of the carousel viewport
+    wrap.style.setProperty('--carousel-ui-top', '0px');
   };
 
   const updateIndicator = () => {

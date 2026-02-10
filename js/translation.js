@@ -7,11 +7,13 @@ const translations = {
     navSkills: "Skills",
 
     // Hero
-    name: "Philipp Stockerl",
-    introText: "Hi, I work on",
-    headline: "Optimization-Based Data Science<br>for Operational Decisions",
+    introText: "Hello, I am",
+    name: "Philipp!",
+    introText2: "I study",
+    headline: "Optimization-Based Data Science<br>for Operational Decision Making",
     bio: "by applying mathematical optimization and data-driven models to operations, supply chains, and ERP-supported business processes.",
     downloadCV: "Download my CV",
+    downloadCVHref: "assets/PhilippStockerlCV.pdf",
 
     // Projects
     proj1Title: "Bachelor Thesis",
@@ -87,6 +89,7 @@ const translations = {
     headline: "Optimierungs­gestützter Data Science<br>für operative Entscheidungen",
     bio: "Anwendung mathematischer Optimierung und datengetriebener Modelle für Operations, Supply Chains und ERP-gestützte Geschäftsprozesse.",
     downloadCV: "Lebenslauf herunterladen",
+    downloadCVHref: "assets/PhilippStockerlCV_DE.pdf",
 
     // Projects
     proj1Title: "Minimum-Cost-Flow Optimierung",
@@ -147,6 +150,10 @@ function switchLanguage(lang) {
     const key = el.getAttribute("data-i18n");
     if (translations[lang][key]) {
       el.innerHTML = translations[lang][key];
+    }
+    const hrefKey = el.getAttribute("data-i18n-href");
+    if (hrefKey && translations[lang][hrefKey]) {
+      el.setAttribute("href", translations[lang][hrefKey]);
     }
   });
   localStorage.setItem("lang", lang);

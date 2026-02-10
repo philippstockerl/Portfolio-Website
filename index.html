@@ -4,7 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Philipp Stockerl WebPortfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="assets/logo.png">
   <script type="importmap">
@@ -75,11 +77,12 @@
       <div class="hero-box">
         <div class="hero-box__bg"></div>
         <div class="container hero-box__content">
-          <h1 data-i18n="name"></h1>
           <p class="intro-text" data-i18n="introText"></p>
+          <h1 data-i18n="name"></h1>
+          <p class="intro-text" data-i18n="introText2"></p>
           <h2 data-i18n="headline"></h2>
           <p class="bio" data-i18n="bio"></p>
-          <a href="assets/PhilippStockerlCV.pdf" class="btn" target="_blank" data-i18n="downloadCV"></a>
+          <a href="assets/PhilippStockerlCV.pdf" class="btn" target="_blank" data-i18n="downloadCV" data-i18n-href="downloadCVHref"></a>
         </div>
       </div>
 
