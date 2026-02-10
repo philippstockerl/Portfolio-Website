@@ -4,7 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Philipp Stockerl WebPortfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="assets/logo.png">
   <script type="importmap">
@@ -75,11 +77,12 @@
       <div class="hero-box">
         <div class="hero-box__bg"></div>
         <div class="container hero-box__content">
-          <h1 data-i18n="name"></h1>
           <p class="intro-text" data-i18n="introText"></p>
+          <h1 data-i18n="name"></h1>
+          <p class="intro-text" data-i18n="introText2"></p>
           <h2 data-i18n="headline"></h2>
           <p class="bio" data-i18n="bio"></p>
-          <a href="assets/PhilippStockerlCV.pdf" class="btn" target="_blank" data-i18n="downloadCV"></a>
+          <a href="assets/PhilippStockerlCV.pdf" class="btn" target="_blank" data-i18n="downloadCV" data-i18n-href="downloadCVHref"></a>
         </div>
       </div>
 
@@ -208,6 +211,29 @@
 
         <div class="section-slab experience-slab">
         <section id="experience" class="experience-content">
+          <!-- Decorative polygons with nodes (Experience) -->
+          <svg class="poly poly-experience poly-experience-a parallax-layer" data-speed="1.1" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <g>
+              <polygon class="poly-edge" points="26,36 180,24 204,128 112,196 28,150" />
+              <polygon class="poly-edge dashed" points="46,52 170,44 182,124 108,180 44,142" />
+              <circle class="poly-node" cx="26" cy="36" r="3"/>
+              <circle class="poly-node" cx="180" cy="24" r="3"/>
+              <circle class="poly-node" cx="204" cy="128" r="3"/>
+              <circle class="poly-node" cx="112" cy="196" r="3"/>
+              <circle class="poly-node" cx="28" cy="150" r="3"/>
+            </g>
+          </svg>
+          <svg class="poly poly-experience poly-experience-b parallax-layer" data-speed="0.9" viewBox="0 0 210 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <g>
+              <polygon class="poly-edge" points="24,40 168,22 196,112 142,196 36,170" />
+              <polygon class="poly-edge dashed" points="44,56 156,46 176,118 132,178 52,156" />
+              <circle class="poly-node" cx="24" cy="40" r="3"/>
+              <circle class="poly-node" cx="168" cy="22" r="3"/>
+              <circle class="poly-node" cx="196" cy="112" r="3"/>
+              <circle class="poly-node" cx="142" cy="196" r="3"/>
+              <circle class="poly-node" cx="36" cy="170" r="3"/>
+            </g>
+          </svg>
           <div class="experience-carousel-wrap" aria-label="Experience carousel">
             <div class="experience-carousel-track">
               <article class="content-box experience-box hover-pop">

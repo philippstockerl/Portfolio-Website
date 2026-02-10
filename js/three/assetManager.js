@@ -2,7 +2,7 @@
 // Loads and fades assets per camera preset based on assetPresets.
 
 import { fadeObject } from './fadeController.js';
-import { gridAssetsGroup, removeAndDispose, applyBeamPreset } from './threeScene.js';
+import { gridAssetsGroup, removeAndDispose } from './threeScene.js';
 import { assetPresetsDark, assetPresetsLight } from './assetPresets.js';
 
 const activeAssets = new Map(); // id -> { obj, def, timers }
@@ -165,13 +165,7 @@ export async function applyAssetPreset(presetIndex, opts = {}) {
 
   const presets = getPresetsForTheme(activeTheme);
   const nextDefs = presets[presetIndex] ?? [];
-  const beamDefs = nextDefs.filter((def) => def?.type === 'beam');
-  if (beamDefs.length) {
-    applyBeamPreset(beamDefs[beamDefs.length - 1]);
-  }
-  const assetDefs = nextDefs.filter(
-    (def) => def?.type !== 'beam' && def?.type !== 'camera'
-  );
+  const assetDefs = nextDefs.filter((def) => def?.type !== 'camera');
   const nextIds = new Set(assetDefs.map(def => def.id));
 
   if (force) {

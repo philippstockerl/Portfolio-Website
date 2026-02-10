@@ -58,9 +58,19 @@ initBoxSpy();
 function syncViewportAlignedWraps() {
   const wraps = document.querySelectorAll('.projects-carousel-wrap, .experience-carousel-wrap');
   wraps.forEach((wrap) => {
-    wrap.style.setProperty('--viewport-offset', '0px');
-    const left = wrap.getBoundingClientRect().left;
+    let anchor = wrap;
+    if (wrap.classList.contains('projects-carousel-wrap')) {
+      anchor = wrap.closest('.projects-content__inner') ?? wrap.parentElement ?? wrap;
+    }
+    const rect = anchor.getBoundingClientRect();
+    let left = rect.left;
+    if (anchor === wrap) {
+      const marginLeft = parseFloat(getComputedStyle(wrap).marginLeft) || 0;
+      left -= marginLeft;
+    }
     wrap.style.setProperty('--viewport-offset', `${left}px`);
+    const wrapLeft = wrap.getBoundingClientRect().left;
+    wrap.style.setProperty('--wrap-left', `${wrapLeft}px`);
   });
 }
 
@@ -71,18 +81,29 @@ window.addEventListener('resize', syncViewportAlignedWraps);
 // ---------- light snap to nearest section ----------
 const snapSections = Array.from(document.querySelectorAll('main section[id]'));
 let __snapTimer;
+let __topSnapTimer;
 let __snapping = false;
 let __lastScrollY = window.scrollY;
 let __scrollDir = 0;
 const heroSection = document.getElementById('hero');
 
+function scheduleHeroSnap(navSnapThreshold) {
+  if (!heroSection) return;
+  clearTimeout(__topSnapTimer);
+  __topSnapTimer = setTimeout(() => {
+    if (__snapping) return;
+    if (window.scrollY > navSnapThreshold) return;
+    __snapping = true;
+    heroSection.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'center' });
+    setTimeout(() => { __snapping = false; }, 450);
+  }, 5000);
+}
+
 function snapToClosestSection() {
   if (!snapSections.length || __snapping) return;
-  const navSnapThreshold = window.innerHeight * 0.4;
-  if (__scrollDir < 0 && window.scrollY <= navSnapThreshold) {
-    __snapping = true;
-    window.scrollTo({ top: 0, left: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
-    setTimeout(() => { __snapping = false; }, 450);
+  const navSnapThreshold = window.innerHeight * 0.25;
+  if (window.scrollY <= navSnapThreshold) {
+    scheduleHeroSnap(navSnapThreshold);
     return;
   }
   const center = window.innerHeight / 2;
@@ -93,6 +114,8 @@ function snapToClosestSection() {
     const dist = Math.abs(r.top + r.height / 2 - center);
     if (dist < bestDist) { bestDist = dist; bestIdx = i; }
   });
+  const snapThreshold = window.innerHeight * 0.18;
+  if (bestDist > snapThreshold) return;
   const target = snapSections[bestIdx];
   if (!target) return;
   __snapping = true;
@@ -104,11 +127,12 @@ window.addEventListener(
   'scroll',
   () => {
     if (__snapping) return;
+    clearTimeout(__topSnapTimer);
     const currentY = window.scrollY;
     __scrollDir = currentY > __lastScrollY ? 1 : currentY < __lastScrollY ? -1 : 0;
     __lastScrollY = currentY;
     clearTimeout(__snapTimer);
-    __snapTimer = setTimeout(snapToClosestSection, 160);
+    __snapTimer = setTimeout(snapToClosestSection, 260);
   },
   { passive: true }
 );
@@ -155,12 +179,9 @@ if (projectsCarousel) {
 
   const updateUiPosition = () => {
     const wrap = projectsCarousel.closest('.projects-carousel-wrap');
-    if (!wrap || !cards.length) return;
-    const idx = getClosestIndex();
-    const card = cards[idx];
-    if (!card) return;
-    const top = Math.max(0, card.offsetTop - projectsCarousel.scrollTop);
-    wrap.style.setProperty('--carousel-ui-top', `${top}px`);
+    if (!wrap) return;
+    // Keep controls fixed in the top-right of the carousel viewport
+    wrap.style.setProperty('--carousel-ui-top', '0px');
   };
 
   const updateIndicator = () => {
