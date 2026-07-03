@@ -1,358 +1,48 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Philipp Stockerl WebPortfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="assets/logo.png">
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js",
-      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.158.0/examples/jsm/"
-    }
-  }
-  </script>
-</head>
-<body class="theme-dark">
-
-  <!-- Three.js background -->
-  <div id="three-container"></div>
-
-
-    <!-- Social Sidebar -->
-    <div class="social-sidebar">
-    <ul>
-        <li>
-        <a href="https://github.com/philippstockerl" target="_blank" aria-label="GitHub">
-            <img src="assets/github.svg" alt="GitHub logo">
-        </a>
-        </li>
-        <li>
-        <a href="https://linkedin.com/in/philippstockerl" target="_blank" aria-label="LinkedIn">
-            <img src="assets/linkedin.svg" alt="LinkedIn logo">
-        </a>
-        </li>
-    </ul>
-    </div>
-
-    <!-- Email Sidebar -->
-    <div class="email-sidebar">
-    <a href="mailto:philipp.stockerl@hotmail.de">philipp.stockerl@hotmail.de</a>
-    </div>
-
-  <!-- Header -->
-  <header>
-    <div class="header-logo">
-      <img src="assets/logo.png" alt="Logo" class="logo">
-    </div>
-    <nav>
-      <ul>
-        <li><a href="#hero" data-i18n="navAbout"></a></li>
-        <li><a href="#projects" data-i18n="navProjects"></a></li>
-        <li><a href="#experience" data-i18n="navExperience"></a></li>
-        <li><a href="#skills" data-i18n="navSkills"></a></li>
-      </ul>
-    </nav>
-    <div class="language-toggle">
-      <button id="langToggle">🌐 EN/DE</button>
-      <button id="themeToggle" aria-pressed="false">☀️ Light Theme</button>
-    </div>
-    <div class="hamburger">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </header>
-
-  <!-- Main Content -->
-  <main>
-
-    <!-- Hero / Intro Section -->
-    <section id="hero">
-      <div class="hero-box">
-        <div class="hero-box__bg"></div>
-        <div class="container hero-box__content">
-          <p class="intro-text" data-i18n="introText"></p>
-          <h1 data-i18n="name"></h1>
-          <p class="intro-text" data-i18n="introText2"></p>
-          <h2 data-i18n="headline"></h2>
-          <p class="bio" data-i18n="bio"></p>
-          <a href="assets/PhilippStockerlCV.pdf" class="btn" target="_blank" data-i18n="downloadCV" data-i18n-href="downloadCVHref"></a>
-        </div>
-      </div>
-
-
-    </section>
-
-
-    <!-- Sidebar & Section of Main -->
-    <section class="content-sections">
-      <div class="content-sidebar">
-        <nav>
-          <ul>
-            <li><a href="#hero" data-i18n="navAbout"></a></li>
-            <li><a href="#projects" data-i18n="navProjects"></a></li>
-            <li><a href="#experience" data-i18n="navExperience"></a></li>
-            <li><a href="#skills" data-i18n="navSkills"></a></li>
-          </ul>
-        </nav>
-      </div>
-      <div class="content-main">
-        <div class="projects-slab section-slab">
-        <section id="projects" class="projects-content">
-
-
-          <div class="container projects-content__inner">
-            <div class="projects-carousel-wrap">
-              <div class="projects-carousel" aria-label="Projects carousel">
-                <div class="content-box project-box hover-pop">
-                  <h3 data-i18n="proj1Title"></h3>
-                  <h4 data-i18n="proj1Subtitle"></h4>
-                  <p data-i18n="proj1Desc"></p>
-                  <div class="tags">
-                    <span class="tag">Simulation</span>
-                    <span class="tag">Python</span>
-                    <span class="tag" data-type="blender" data-src="./assets/blenderModels/networkFlow.glb">3D Model Example</span>
-                  </div>
-                  <div class="project-actions">
-                    <button class="btn project-preset-btn" type="button" data-preset="8" data-i18n="projView3D"></button>
-                  </div>
-                </div>
-                <div class="content-box project-box hover-pop">
-                  <h3 data-i18n="proj2Title"></h3>
-                  <h4 data-i18n="proj2Subtitle"></h4>
-                  <p data-i18n="proj2Desc"></p>
-                  <div class="tags">
-                    <span class="tag">Random Facility Location</span>
-                    <span class="tag">Guroby Python</span>
-                  </div>
-                  <div class="project-actions">
-                    <button class="btn project-preset-btn" type="button" data-preset="9" data-i18n="projView3D"></button>
-                  </div>
-                </div>
-
-
-                <div class="content-box project-box hover-pop">
-                  <h3 data-i18n="proj3Title"></h3>
-                  <h4 data-i18n="proj3Subtitle"></h4>
-                  <p data-i18n="proj3Desc"></p>
-                  <div class="tags">
-                    <span class="tag">Blending Problems</span>
-                    <span class="tag">Knappsack Problems</span>
-                    <span class="tag">Cutting Stock Problems</span>
-                    <span class="tag">Bin Packing Problems</span>
-                    <span class="tag">Travelling Salesman Problems</span>
-                    <span class="tag">IBM CPLEX</span>
-                  </div>
-                  <div class="project-actions">
-                    <button class="btn project-preset-btn" type="button" data-preset="10" data-i18n="projView3D"></button>
-                  </div>
-                </div>
-
-
-                <div class="content-box project-box hover-pop">
-                  <h3 data-i18n="proj4Title"></h3>
-                  <h4 data-i18n="proj4Subtitle"></h4>
-                  <p data-i18n="proj4Desc"></p>
-                  <div class="tags">
-                    <span class="tag">Business Process Modelling (BPM)</span>
-                    <span class="tag">UML</span>
-                    <span class="tag">ABAP</span>
-                  </div>
-                  <div class="project-actions">
-                    <button class="btn project-preset-btn" type="button" data-preset="11" data-i18n="projView3D"></button>
-                  </div>
-                </div>
-
-                <div class="content-box project-box hover-pop">
-                  <h3 data-i18n="proj5Title"></h3>
-                  <h4 data-i18n="proj5Subtitle"></h4>
-                  <p data-i18n="proj5Desc"></p>
-                  <div class="tags">
-                    <span class="tag">Network Flow Optimization</span>
-                    <span class="tag">Guroby Python</span>
-                  </div>
-                  <div class="project-actions">
-                    <button class="btn project-preset-btn" type="button" data-preset="12" data-i18n="projView3D"></button>
-                  </div>
-                </div>
-
-                <div class="content-box project-box hover-pop">
-                  <h3 data-i18n="proj6Title"></h3>
-                  <h4 data-i18n="proj6Subtitle"></h4>
-                  <p data-i18n="proj6Desc"></p>
-                  <div class="tags">
-                    <span class="tag">Group Project</span>
-                    <span class="tag">HTML</span>
-                    <span class="tag">JS</span>
-                    <span class="tag">CSS</span>
-                    <span class="tag">Java</span>
-                  </div>
-                  <div class="project-actions">
-                    <button class="btn project-preset-btn" type="button" data-preset="13" data-i18n="projView3D"></button>
-                  </div>
-                </div>
-              </div>
-              <div class="projects-carousel-controls" aria-hidden="true">
-                <button class="projects-carousel-btn projects-carousel-prev" type="button" aria-label="Previous project">▲</button>
-                <button class="projects-carousel-btn projects-carousel-next" type="button" aria-label="Next project">▼</button>
-              </div>
-              <div class="projects-carousel-indicator" aria-hidden="true"></div>
-            </div>
-          </div>
-
-        </section>
-        </div>
-
-        <div class="section-slab experience-slab">
-        <section id="experience" class="experience-content">
-          <!-- Decorative polygons with nodes (Experience) -->
-
-          <div class="experience-carousel-wrap" aria-label="Experience carousel">
-            <div class="experience-carousel-track">
-              <article class="content-box experience-box hover-pop">
-                <h3 data-i18n="exp1Title"></h3>
-                <h4 data-i18n="exp1Subtitle"></h4>
-                <p data-i18n="exp1Desc"></p>
-                <div class="tags">
-                  <span class="tag">ERP</span>
-                  <span class="tag">SAP S/4HANA</span>
-                  <span class="tag">Customizing & Development</span>
-                </div>
-              </article>
-              <article class="content-box experience-box hover-pop">
-                <h3 data-i18n="exp2Title"></h3>
-                <h4 data-i18n="exp2Subtitle"></h4>
-                <p data-i18n="exp2Desc"></p>
-                <div class="tags">
-                  <span class="tag">Negotiation</span>
-                  <span class="tag">Procurement & production management</span>
-                  <span class="tag">Harvard concept</span>
-                </div>
-              </article>
-              <article class="content-box experience-box hover-pop">
-                <h3 data-i18n="exp3Title"></h3>
-                <h4 data-i18n="exp3Subtitle"></h4>
-                <p data-i18n="exp3Desc"></p>
-                <div class="tags">
-                  <span class="tag">Data Science</span>
-                  <span class="tag">Predictive Modeling</span>
-                  <span class="tag">Business Decisions</span>
-                </div>
-              </article>
-
-              <article class="content-box experience-box hover-pop" aria-hidden="true">
-                <h3 data-i18n="exp1Title"></h3>
-                <h4 data-i18n="exp1Subtitle"></h4>
-                <p data-i18n="exp1Desc"></p>
-                <div class="tags">
-                  <span class="tag">ERP</span>
-                  <span class="tag">SAP S/4HANA</span>
-                  <span class="tag">Customizing & Development</span>
-                </div>
-              </article>
-              <article class="content-box experience-box hover-pop" aria-hidden="true">
-                <h3 data-i18n="exp2Title"></h3>
-                <h4 data-i18n="exp2Subtitle"></h4>
-                <p data-i18n="exp2Desc"></p>
-                <div class="tags">
-                  <span class="tag">Negotiation</span>
-                  <span class="tag">Procurement & production management</span>
-                  <span class="tag">Harvard concept</span>
-                </div>
-              </article>
-              <article class="content-box experience-box hover-pop" aria-hidden="true">
-                <h3 data-i18n="exp3Title"></h3>
-                <h4 data-i18n="exp3Subtitle"></h4>
-                <p data-i18n="exp3Desc"></p>
-                <div class="tags">
-                  <span class="tag">Data Science</span>
-                  <span class="tag">Predictive Modeling</span>
-                  <span class="tag">Business Decisions</span>
-                </div>
-              </article>
-            </div>
-          </div>
-        </section>
-        </div>
-
-        <section id="skills" class="skills-content skills-grid-only" aria-label="Skills"></section>
-
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Footer -->
-  <footer id="footer">
-    <p data-i18n="footer"></p>
-  </footer>
-
-  <script type="module" src="js/three/main.js"></script>
-  <script src="js/translation.js"></script>
-
-  <script>
-    document.getElementById("langToggle").addEventListener("click", () => {
-      const current = localStorage.getItem("lang") || "en";
-      const next = current === "en" ? "de" : "en";
-      switchLanguage(next);
-    });
-
-    const themeToggle = document.getElementById("themeToggle");
-    const THEME_PREF_KEY = "themePreference";
-    const themeMediaQuery = window.matchMedia?.("(prefers-color-scheme: dark)");
-
-    function getStoredThemePreference() {
-      const stored = localStorage.getItem(THEME_PREF_KEY);
-      return stored === "light" || stored === "dark" ? stored : null;
-    }
-
-    function getSystemTheme() {
-      return themeMediaQuery?.matches ? "dark" : "light";
-    }
-
-    function setTheme(theme, { persist = true } = {}) {
-      const nextTheme = theme === "light" ? "light" : "dark";
-      const isLight = nextTheme === "light";
-      document.body.classList.toggle("theme-light", isLight);
-      document.body.classList.toggle("theme-dark", !isLight);
-      if (persist) localStorage.setItem(THEME_PREF_KEY, nextTheme);
-      updateThemeButton();
-      window.dispatchEvent(new CustomEvent("themechange", { detail: { theme: nextTheme } }));
-    }
-
-    function updateThemeButton() {
-      const isLight = document.body.classList.contains("theme-light");
-      themeToggle.textContent = isLight ? "🌙 Dark" : "☀️ Light";
-      themeToggle.setAttribute("aria-pressed", isLight ? "true" : "false");
-    }
-
-    const savedThemePreference = getStoredThemePreference();
-    setTheme(savedThemePreference || getSystemTheme(), { persist: false });
-
-    if (themeMediaQuery) {
-      const onSystemThemeChange = (event) => {
-        if (getStoredThemePreference()) return;
-        setTheme(event.matches ? "dark" : "light", { persist: false });
-      };
-
-      if (typeof themeMediaQuery.addEventListener === "function") {
-        themeMediaQuery.addEventListener("change", onSystemThemeChange);
-      } else if (typeof themeMediaQuery.addListener === "function") {
-        themeMediaQuery.addListener(onSystemThemeChange);
-      }
-    }
-
-    themeToggle.addEventListener("click", () => {
-      const isLight = document.body.classList.contains("theme-light");
-      setTheme(isLight ? "dark" : "light", { persist: true });
-    });
-  </script>
-
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Philipp Stockerl — optimization-based data science and operational decision making."
+    />
+    <meta name="author" content="Philipp Stockerl" />
+    <meta name="robots" content="index, follow" />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: dark)"
+      content="#070a12"
+    />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: light)"
+      content="#f4f6fa"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Philipp Stockerl | Portfolio" />
+    <meta
+      property="og:description"
+      content="Optimization-based data science for operational decision making."
+    />
+    <meta
+      property="og:url"
+      content="https://philippstockerl.github.io/Portfolio-Website/"
+    />
+    <meta
+      property="og:image"
+      content="https://philippstockerl.github.io/Portfolio-Website/assets/logo.png"
+    />
+    <meta name="twitter:card" content="summary" />
+    <link
+      rel="canonical"
+      href="https://philippstockerl.github.io/Portfolio-Website/"
+    />
+    <link rel="icon" href="%BASE_URL%assets/logo.png" />
+    <title>Philipp Stockerl | Portfolio</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
