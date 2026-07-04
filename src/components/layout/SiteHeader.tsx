@@ -26,8 +26,8 @@ export function SiteHeader({
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl rounded-2xl border border-line bg-header px-4 shadow-lg shadow-black/5 backdrop-blur-xl sm:px-5">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-header shadow-lg shadow-black/5 backdrop-blur-xl">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between gap-4">
           <a
             href="#hero"
