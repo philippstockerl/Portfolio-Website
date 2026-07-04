@@ -40,7 +40,7 @@
 }
 
 :root[data-theme='dark'] {
-  --surface-page: #070a12;
+  --surface-page: #0f172a;
   --surface-panel: rgb(13 18 31 / 74%);
   --surface-panel-strong: rgb(20 27 45 / 90%);
   --surface-header: rgb(9 13 23 / 82%);
