@@ -46,7 +46,7 @@ export function SiteHeader({
 
           <nav
             aria-label={content.controls.primaryNavigation}
-            className="hidden md:block"
+            className="hidden lg:block"
           >
             <ul className="flex items-center gap-1">
               {content.navigation.map((item) => (
@@ -101,7 +101,7 @@ export function SiteHeader({
               }
               aria-expanded={menuOpen}
               aria-controls="mobile-navigation"
-              className="control-button grid md:hidden"
+              className="control-button grid lg:hidden"
             >
               {menuOpen ? (
                 <CloseIcon className="h-5 w-5" />
@@ -116,7 +116,7 @@ export function SiteHeader({
           <nav
             id="mobile-navigation"
             aria-label={content.controls.mobileNavigation}
-            className="pb-4 md:hidden"
+            className="pb-4 lg:hidden"
           >
             <ul className="grid gap-1 border-t border-line pt-3">
               {content.navigation.map((item) => (

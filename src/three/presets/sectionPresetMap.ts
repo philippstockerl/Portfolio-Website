@@ -2,6 +2,7 @@ import type { SectionId } from '../../app/navigation'
 
 export const sectionPresetMap = {
   hero: 0,
+  pipeline: 3,
   projects: 1,
   experience: 2,
   skills: 6,

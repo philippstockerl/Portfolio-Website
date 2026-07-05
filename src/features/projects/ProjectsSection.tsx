@@ -6,6 +6,7 @@ import type {
   AssetLoadStatus,
   ProjectAssetDescriptor,
 } from '../../three/assets/types'
+import { getProjectAnchor } from './projectNavigation'
 import { ProjectVisualizationControls } from './ProjectVisualizationControls'
 
 interface ProjectsSectionProps {
@@ -41,8 +42,9 @@ export function ProjectsSection({
           return (
             <article
               key={project.id}
+              id={getProjectAnchor(project.id)}
               data-asset-selected={isSelected}
-              className="group flex min-h-80 flex-col rounded-3xl border border-line bg-panel p-6 shadow-lg shadow-black/5 backdrop-blur-lg transition duration-300 hover:-translate-y-1 hover:border-accent/60 hover:bg-panel-strong sm:p-7"
+              className="group flex min-h-80 scroll-mt-28 flex-col rounded-3xl border border-line bg-panel p-6 shadow-lg shadow-black/5 backdrop-blur-lg transition duration-300 hover:-translate-y-1 hover:border-accent/60 hover:bg-panel-strong sm:p-7"
             >
               <div className="flex items-center justify-between gap-4">
                 <span className="font-mono text-xs tracking-[0.18em] text-accent">

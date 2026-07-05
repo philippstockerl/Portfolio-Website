@@ -6,6 +6,7 @@ import { SocialRail } from '../components/layout/SocialRail'
 import { portfolioContent } from '../content/portfolio'
 import { ExperienceSection } from '../features/experience/ExperienceSection'
 import { HeroSection } from '../features/hero/HeroSection'
+import { EndToEndSection } from '../features/pipeline/EndToEndSection'
 import { ProjectsSection } from '../features/projects/ProjectsSection'
 import { SkillsSection } from '../features/skills/SkillsSection'
 import { ThreeBackground } from '../three/ThreeBackground'
@@ -68,6 +69,7 @@ export function App() {
       <main id="main-content" className="relative z-10">
         <HeroSection hero={content.hero} />
         <div className="space-y-8 px-4 pb-20 sm:px-6 lg:px-8">
+          <EndToEndSection content={content} />
           <ProjectsSection
             activeAssetId={
               activeSection === 'projects' ? (selectedAsset?.id ?? null) : null

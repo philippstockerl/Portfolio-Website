@@ -28,6 +28,17 @@ export function HeroSection({ hero }: { hero: PortfolioContent['hero'] }) {
             {hero.bio}
           </p>
 
+          <ul className="mt-7 flex max-w-3xl flex-wrap gap-2">
+            {hero.proofPoints.map((point) => (
+              <li
+                key={point}
+                className="rounded-full border border-line bg-panel px-3 py-1.5 font-mono text-[0.7rem] tracking-wide text-muted"
+              >
+                {point}
+              </li>
+            ))}
+          </ul>
+
           <div className="mt-9 flex flex-wrap items-center gap-3">
             <a
               href={hero.cvHref}
