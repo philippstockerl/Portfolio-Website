@@ -68,6 +68,16 @@
   font-family:
     ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Monaco, Consolas,
     'Liberation Mono', 'Courier New', monospace;
+
+  /* Monospace runs wider than Inter at the same size, so scale the whole
+     rem-based layout down a notch (16px → 14.4px) to match the other themes. */
+  font-size: 90%;
+}
+
+/* The hero name is the widest display text on the site; mono glyph cells
+   would let it dominate the viewport, so cap it separately in matrix mode. */
+:root[data-theme='matrix'] #hero-heading {
+  font-size: clamp(2.75rem, 7vw, 5rem);
 }
 
 /* Monospace glyphs collide under the tight display tracking used by the
