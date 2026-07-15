@@ -1,45 +1,48 @@
 import type { PortfolioContent } from '../../content/portfolio'
 import { socialLinks } from '../../content/portfolio'
 import { ArrowDownIcon, ArrowUpRightIcon } from '../../components/ui/Icons'
+import { pageHref } from '../../app/routes'
 
 export function HeroSection({ hero }: { hero: PortfolioContent['hero'] }) {
   return (
     <section
       id="hero"
       aria-labelledby="hero-heading"
-      className="relative flex min-h-svh scroll-mt-28 items-center px-6 pt-28 pb-16 sm:px-8 lg:px-12"
+      className="relative flex min-h-svh scroll-mt-28 items-center px-6 pt-28 pb-24 sm:px-8 lg:px-12"
     >
       <div className="mx-auto w-full max-w-7xl">
-        <div className="max-w-4xl rounded-[2rem] border border-line bg-hero p-7 shadow-2xl shadow-black/10 backdrop-blur-md sm:p-10 lg:p-14">
+        <div className="hero-veil relative max-w-3xl">
           <p className="font-mono text-xs tracking-[0.24em] text-accent uppercase">
             {hero.eyebrow}
           </p>
           <h1
             id="hero-heading"
-            className="mt-4 text-5xl font-semibold tracking-[-0.055em] text-ink sm:text-7xl"
+            className="mt-5 text-5xl font-semibold tracking-[-0.055em] text-ink sm:text-7xl lg:text-8xl"
           >
             {hero.name}
           </h1>
-          <p className="mt-10 text-sm font-medium text-muted">{hero.focus}</p>
-          <p className="mt-3 max-w-4xl text-3xl leading-[1.08] font-semibold tracking-[-0.045em] text-balance text-ink sm:text-5xl lg:text-6xl">
-            {hero.headline}
-          </p>
-          <p className="mt-7 max-w-2xl text-base leading-7 text-muted sm:text-lg">
-            {hero.bio}
-          </p>
 
-          <ul className="mt-7 flex max-w-3xl flex-wrap gap-2">
-            {hero.proofPoints.map((point) => (
-              <li
-                key={point}
-                className="rounded-full border border-line bg-panel px-3 py-1.5 font-mono text-[0.7rem] tracking-wide text-muted"
-              >
-                {point}
+          <ul className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-1.5 font-mono text-[0.7rem] tracking-wide text-muted">
+            {hero.meta.map((item, index) => (
+              <li key={item} className="flex items-center gap-3">
+                {index > 0 ? (
+                  <span aria-hidden="true" className="text-accent">
+                    ·
+                  </span>
+                ) : null}
+                {item}
               </li>
             ))}
           </ul>
 
-          <div className="mt-9 flex flex-wrap items-center gap-3">
+          <p className="mt-12 max-w-2xl text-2xl leading-[1.15] font-semibold tracking-[-0.035em] text-balance text-ink sm:text-4xl">
+            {hero.headline}
+          </p>
+          <p className="mt-6 max-w-xl text-base leading-7 text-muted sm:text-lg sm:leading-8">
+            {hero.bio}
+          </p>
+
+          <div className="mt-10 flex flex-wrap items-center gap-3">
             <a
               href={hero.cvHref}
               target="_blank"
@@ -50,15 +53,15 @@ export function HeroSection({ hero }: { hero: PortfolioContent['hero'] }) {
               <ArrowDownIcon className="h-4 w-4" />
             </a>
             <a
-              href="#projects"
-              className="inline-flex items-center gap-2 rounded-full border border-line bg-panel px-5 py-3 text-sm font-semibold text-ink transition hover:border-accent focus-visible:outline-2 focus-visible:outline-accent"
+              href={pageHref('projects')}
+              className="inline-flex items-center gap-2 rounded-full border border-line bg-panel px-5 py-3 text-sm font-semibold text-ink backdrop-blur transition hover:border-accent focus-visible:outline-2 focus-visible:outline-accent"
             >
               {hero.projectsLabel}
               <ArrowUpRightIcon className="h-4 w-4" />
             </a>
           </div>
 
-          <div className="mt-8 flex items-center gap-3 2xl:hidden">
+          <div className="mt-9 flex items-center gap-3 2xl:hidden">
             {socialLinks.map((link) => (
               <a
                 key={link.label}
@@ -66,7 +69,7 @@ export function HeroSection({ hero }: { hero: PortfolioContent['hero'] }) {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={link.label}
-                className="grid h-10 w-10 place-items-center rounded-full border border-line bg-panel"
+                className="grid h-10 w-10 place-items-center rounded-full border border-line bg-panel backdrop-blur transition hover:border-accent"
               >
                 <img src={link.icon} alt="" className="theme-icon h-4 w-4" />
               </a>

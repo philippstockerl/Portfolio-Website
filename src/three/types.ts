@@ -5,7 +5,7 @@ import type {
   ProjectAssetDescriptor,
 } from './assets/types'
 
-export type ThreeTheme = 'dark' | 'light'
+export type ThreeTheme = 'dark' | 'light' | 'matrix'
 
 export type VectorTuple = readonly [number, number, number]
 

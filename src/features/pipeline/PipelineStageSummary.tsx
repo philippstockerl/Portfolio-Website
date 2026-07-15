@@ -1,5 +1,4 @@
-import type { MouseEvent } from 'react'
-
+import { pageHref } from '../../app/routes'
 import { ArrowUpRightIcon } from '../../components/ui/Icons'
 import type {
   PipelineCapabilityStatus,
@@ -7,7 +6,6 @@ import type {
   PortfolioContent,
   ProjectContent,
 } from '../../content/portfolio'
-import { getProjectAnchor } from '../projects/projectNavigation'
 import { getPipelineStageAnchor } from './pipelineNavigation'
 
 interface PipelineStageSummaryProps {
@@ -45,31 +43,6 @@ export function PipelineStageSummary({
     const project = projects.find((item) => item.id === projectId)
     return project ? [project] : []
   })
-
-  const navigateToProject = (
-    event: MouseEvent<HTMLAnchorElement>,
-    projectId: ProjectContent['id'],
-  ) => {
-    if (
-      event.defaultPrevented ||
-      event.button !== 0 ||
-      event.metaKey ||
-      event.ctrlKey ||
-      event.shiftKey ||
-      event.altKey
-    )
-      return
-
-    event.preventDefault()
-    const anchor = getProjectAnchor(projectId)
-    window.history.pushState(null, '', `#${anchor}`)
-    document.getElementById(anchor)?.scrollIntoView({
-      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
-        ? 'auto'
-        : 'smooth',
-      block: 'start',
-    })
-  }
 
   return (
     <article
@@ -206,8 +179,7 @@ export function PipelineStageSummary({
               {relatedProjects.map((project) => (
                 <a
                   key={project.id}
-                  href={`#${getProjectAnchor(project.id)}`}
-                  onClick={(event) => navigateToProject(event, project.id)}
+                  href={pageHref('projects', project.id)}
                   className="inline-flex items-center gap-2 rounded-full border border-line bg-page/55 px-4 py-2 text-sm font-medium text-ink transition hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                 >
                   {project.title}

@@ -52,6 +52,30 @@
   --accent-contrast: #090c16;
 }
 
+:root[data-theme='matrix'] {
+  --surface-page: #000000;
+  --surface-panel: rgb(1 12 4 / 76%);
+  --surface-panel-strong: rgb(3 20 8 / 92%);
+  --surface-header: rgb(0 7 2 / 85%);
+  --surface-hero: rgb(0 10 3 / 62%);
+  --text-primary: #ffffff;
+  --text-muted: #a3c2ab;
+  --border-subtle: rgb(0 255 65 / 22%);
+  --accent: #00ff41;
+  --accent-contrast: #001905;
+
+  /* Terminal typography for the whole page, matching the theme. */
+  font-family:
+    ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+}
+
+/* Monospace glyphs collide under the tight display tracking used by the
+   sans-serif themes, so relax negative letter-spacing in matrix mode. */
+:root[data-theme='matrix'] [class*='tracking-[-'] {
+  letter-spacing: -0.01em;
+}
+
 html {
   min-width: 320px;
   scroll-behavior: smooth;
@@ -99,25 +123,30 @@ body {
   outline-offset: 2px;
 }
 
-.section-shell {
-  width: 100%;
-  max-width: 80rem;
-  margin-inline: auto;
-  padding: clamp(4rem, 8vw, 7rem) clamp(1.25rem, 4vw, 4rem);
-  border: 1px solid var(--border-subtle);
-  border-radius: 2rem;
-  background: color-mix(in srgb, var(--surface-page) 72%, transparent);
-  box-shadow: 0 30px 80px rgb(0 0 0 / 7%);
-  backdrop-filter: blur(18px);
+/* Soft radial scrim that keeps hero text readable without boxing it in. */
+.hero-veil::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: -3rem -4rem;
+  border-radius: 4rem;
+  background: radial-gradient(
+    110% 110% at 32% 38%,
+    color-mix(in srgb, var(--surface-page) 82%, transparent) 0%,
+    color-mix(in srgb, var(--surface-page) 52%, transparent) 58%,
+    transparent 100%
+  );
 }
 
-#projects[data-asset-active='true'] {
-  background: color-mix(in srgb, var(--surface-page) 54%, transparent);
-  backdrop-filter: none;
-}
-
-:root[data-theme='dark'] #projects[data-asset-active='true'] {
-  background: color-mix(in srgb, var(--surface-page) 40%, transparent);
+/* Fades a horizontally scrolling row into the background at both edges. */
+.edge-fade-x {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 7%,
+    black 93%,
+    transparent
+  );
 }
 
 #projects article[data-asset-selected='true'] {
@@ -131,7 +160,8 @@ body {
   opacity: 0.78;
 }
 
-:root[data-theme='dark'] .theme-icon {
+:root[data-theme='dark'] .theme-icon,
+:root[data-theme='matrix'] .theme-icon {
   filter: invert(1);
 }
 
@@ -149,15 +179,25 @@ body {
   height: 100%;
 }
 
+/* Matrix glyph rain — sits above the 3D grid, below the page content. */
+.matrix-rain {
+  position: fixed;
+  z-index: 1;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.matrix-rain__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 button,
 a {
   -webkit-tap-highlight-color: transparent;
-}
-
-@media (max-width: 639px) {
-  .section-shell {
-    border-radius: 1.5rem;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -7,23 +7,19 @@ export function ExperienceSection({ content }: { content: PortfolioContent }) {
     <section
       id="experience"
       aria-labelledby="experience-heading"
-      className="section-shell scroll-mt-28"
+      className="scroll-mt-28"
     >
-      <SectionHeading
-        id="experience-heading"
-        intro={content.experienceIntro}
-        align="right"
-      />
+      <SectionHeading id="experience-heading" intro={content.experienceIntro} />
 
-      <div className="mt-12 ml-auto max-w-5xl border-l border-line pl-5 sm:pl-8">
-        {content.experience.map((experience, index) => (
+      <div className="mt-14 border-l border-line pl-5 sm:pl-8">
+        {content.experience.map((experience) => (
           <article
             key={experience.id}
-            className="relative border-b border-line py-8 first:pt-2 last:border-b-0 sm:grid sm:grid-cols-[7rem_1fr] sm:gap-8"
+            className="relative border-b border-line py-8 first:pt-2 last:border-b-0 sm:grid sm:grid-cols-[8.5rem_1fr] sm:gap-8"
           >
             <span className="absolute top-10 -left-[1.55rem] h-3 w-3 rounded-full border-2 border-accent bg-page sm:-left-[2.15rem]" />
-            <p className="font-mono text-xs tracking-[0.18em] text-accent">
-              {String(index + 1).padStart(2, '0')}
+            <p className="font-mono text-xs leading-5 tracking-[0.08em] text-accent">
+              {experience.period}
             </p>
             <div className="mt-4 sm:mt-0">
               <h3 className="text-xl font-semibold tracking-[-0.025em] text-ink sm:text-2xl">

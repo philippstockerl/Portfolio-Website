@@ -7,7 +7,7 @@ function getInitialSection(): SectionId {
   return isSectionId(hash) ? hash : 'hero'
 }
 
-export function useActiveSection(): SectionId {
+export function useActiveSection(refreshKey?: unknown): SectionId {
   const [activeSection, setActiveSection] =
     useState<SectionId>(getInitialSection)
 
@@ -64,7 +64,8 @@ export function useActiveSection(): SectionId {
       observer.disconnect()
       observedEntries.clear()
     }
-  }, [])
+    // The observed sections are re-mounted whenever the route changes.
+  }, [refreshKey])
 
   return activeSection
 }

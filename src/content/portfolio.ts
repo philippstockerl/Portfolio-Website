@@ -72,8 +72,27 @@ export interface ExperienceContent {
   description: string
   id: string
   organization: string
+  period: string
   tags: string[]
   title: string
+}
+
+export interface EducationContent {
+  degree: string
+  focus: string
+  id: string
+  institution: string
+  period: string
+}
+
+export interface LanguageContent {
+  id: string
+  level: string
+  name: string
+}
+
+export interface SectionTeaser {
+  cta: string
 }
 
 export interface SkillContent {
@@ -91,9 +110,12 @@ export interface SectionIntro {
 
 export interface PortfolioContent {
   controls: {
+    backToHome: string
     closeMenu: string
+    education: string
     home: string
     language: string
+    languages: string
     mobileNavigation: string
     openMenu: string
     pipelineEvidence: string
@@ -114,6 +136,7 @@ export interface PortfolioContent {
     visualizationReducedMotion: string
     visualizationReady: string
   }
+  education: EducationContent[]
   experience: ExperienceContent[]
   experienceIntro: SectionIntro
   footer: {
@@ -128,10 +151,12 @@ export interface PortfolioContent {
     eyebrow: string
     focus: string
     headline: string
+    meta: string[]
     name: string
     proofPoints: string[]
     projectsLabel: string
   }
+  languages: LanguageContent[]
   navigation: NavigationItem[]
   pipelineIntro: SectionIntro
   pipelineStages: PipelineStageContent[]
@@ -139,6 +164,12 @@ export interface PortfolioContent {
   projectsIntro: SectionIntro
   skills: SkillContent[]
   skillsIntro: SectionIntro
+  teasers: {
+    experience: SectionTeaser
+    pipeline: SectionTeaser
+    projects: SectionTeaser
+    skills: SectionTeaser
+  }
 }
 
 export const socialLinks = [
@@ -161,13 +192,16 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
     navigation: [
       { id: 'hero', label: 'About' },
       { id: 'pipeline', label: 'Process' },
-      { id: 'projects', label: 'Case studies' },
+      { id: 'projects', label: 'Projects' },
       { id: 'experience', label: 'Experience' },
       { id: 'skills', label: 'Skills' },
     ],
     controls: {
+      backToHome: 'Back to overview',
+      education: 'Education',
       home: 'Home',
       language: 'Switch language to German',
+      languages: 'Languages',
       theme: 'Toggle color theme',
       openMenu: 'Open navigation',
       closeMenu: 'Close navigation',
@@ -177,7 +211,7 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
       pipelineEvidence: 'Experience evidence',
       pipelineDeliverables: 'What I deliver',
       pipelineMethods: 'Tools & methods',
-      pipelineRelatedWork: 'Related case studies',
+      pipelineRelatedWork: 'Related projects',
       pipelineStatus: {
         applied: 'Applied',
         prototyped: 'Prototyped',
@@ -195,11 +229,16 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
         'Animation is paused because reduced motion is enabled.',
     },
     hero: {
-      eyebrow: 'Data engineer with an operations perspective',
+      eyebrow: 'Data & process engineering with an operations perspective',
       name: 'Philipp Stockerl.',
       focus: 'My focus',
       headline: 'Data Engineering for Industrial Operations',
       bio: 'I transform production and logistics processes into reliable data products—from OT data acquisition and ETL pipelines to SQL models, ERP/MES integration, BI applications, and operational optimization.',
+      meta: [
+        'B.Sc. Business Informatics · University of Passau',
+        'Process & Production Excellence · Hatz Components',
+        'Passau, Germany',
+      ],
       proofPoints: [
         'IT/OT integration',
         'ETL & SQL data models',
@@ -208,7 +247,7 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
       ],
       cvLabel: 'Download my CV',
       cvHref: publicAsset('assets/PhilippStockerlCV.pdf'),
-      projectsLabel: 'View case studies',
+      projectsLabel: 'View my projects',
     },
     pipelineIntro: {
       eyebrow: 'End-to-end focus',
@@ -420,7 +459,7 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
       },
     ],
     projectsIntro: {
-      eyebrow: 'Case studies',
+      eyebrow: 'Personal projects',
       title: 'From mathematical models to usable systems.',
       description:
         'Projects across optimization, data science, enterprise systems, and interface development.',
@@ -504,31 +543,94 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
     },
     experience: [
       {
-        id: 'erp-sap',
-        title: 'ERP & SAP Intern — Process Integration & Development',
-        organization: '4process AG · msg systems AG',
+        id: 'hatz',
+        title: 'Production Optimization & Factory Digitalization',
+        organization: 'Hatz Components · Ruhstorf a. d. Rott',
+        period: 'Apr 2026 – today',
         description:
-          'Customized SAP S/4HANA processes, developed SAP Fiori applications, and supported ERP analytics and workflow optimization.',
-        tags: ['ERP', 'SAP S/4HANA', 'Development'],
+          'Process & Production Excellence internship: centralized machine- and quality-data acquisition, a pilot ETL/ELT system, lakehouse-oriented database design, MES/ERP integration along SAP data hierarchies, and BI/KPI concepts for the smart factory.',
+        tags: ['ETL', 'ISA-95', 'MES & ERP', 'BI/KPI'],
       },
       {
-        id: 'procurement',
-        title: 'Procurement Logistics — Negotiation & Process Optimization',
-        organization: 'ZF Friedrichshafen',
+        id: 'four-process',
+        title: 'Business Process Modeling & ERP Integration',
+        organization: '4process AG · Passau',
+        period: 'Oct – Nov 2024',
         description:
-          'Applied Harvard negotiation strategies and supported process optimization in procurement and supply-chain projects.',
-        tags: ['Procurement', 'Negotiation', 'Process optimization'],
+          'Business process analysis and modeling for manufacturing and logistics; supported ERP integration and data migration in SAP S/4HANA environments.',
+        tags: ['BPMN', 'SAP S/4HANA', 'Data migration'],
       },
       {
-        id: 'production-logistics',
-        title: 'Production & Logistics Assistant',
-        organization:
-          'Ensinger Plastics · Kunststoffwerke Katzbach Grupor · Deutsche Post DHL',
+        id: 'zf',
+        title: 'Negotiation Strategies in Procurement Logistics',
+        organization: 'ZF Group · Passau',
+        period: 'Jun – Aug 2024',
         description:
-          'Supported production and logistics operations while developing a practical understanding of process constraints and business decisions.',
-        tags: ['Production', 'Logistics', 'Operations'],
+          'Analyzed procurement and supply-chain processes, built KPI overviews for strategic sourcing, and applied Harvard-concept negotiation strategies.',
+        tags: ['Procurement', 'KPI analysis', 'Negotiation'],
+      },
+      {
+        id: 'msg',
+        title: 'Software Development SAP Fiori',
+        organization: 'msg systems AG · Passau',
+        period: 'Mar – Apr 2024',
+        description:
+          'Developed UI and backend components with SAP Fiori and ABAP RAP, integrating analytics into SAP S/4HANA environments.',
+        tags: ['SAP Fiori', 'ABAP RAP', 'Analytics'],
+      },
+      {
+        id: 'siemens',
+        title: 'Continuous Improvement & Factory Digitalization',
+        organization: 'Siemens AG · Cham',
+        period: 'Feb – Jul 2018',
+        description:
+          'Contributed to process digitalization and the improvement of administrative production processes; supported project organization and stakeholder communication.',
+        tags: ['KVP', 'Digitalization', 'Production'],
+      },
+      {
+        id: 'operations',
+        title: 'Operational Roles in Production, Quality & Logistics',
+        organization: 'Ensinger · Deutsche Post DHL · Grupor',
+        period: '2019 – 2025',
+        description:
+          'Hands-on work in plastics extrusion, quality assurance, logistics, and packaging — the operational grounding behind my data and process engineering focus.',
+        tags: ['Production', 'Quality', 'Logistics'],
       },
     ],
+    education: [
+      {
+        id: 'bsc-wi',
+        degree: 'B.Sc. Business Informatics',
+        focus: 'Business Decisions & Data Science',
+        institution: 'University of Passau',
+        period: 'Apr 2024 – today',
+      },
+      {
+        id: 'bsc-wiwi',
+        degree: 'B.Sc. Economics & Business Administration',
+        focus: 'Supply Chain / Operations Management & Information Systems',
+        institution: 'University of Passau',
+        period: 'Oct 2021 – Apr 2026',
+      },
+      {
+        id: 'abitur',
+        degree: 'General University Entrance Qualification',
+        focus: 'Economics & Administration',
+        institution: 'Staatliche Fachoberschule Cham',
+        period: 'Aug 2017 – Oct 2020',
+      },
+    ],
+    languages: [
+      { id: 'de', name: 'German', level: 'Native' },
+      { id: 'en', name: 'English', level: 'C2' },
+      { id: 'es', name: 'Spanish', level: 'B1' },
+    ],
+    teasers: {
+      pipeline: { cta: 'Explore all six stages' },
+      projects: { cta: 'View all projects' },
+      experience: { cta: 'Full journey & education' },
+      skills: { cta: 'All capabilities & languages' },
+    },
     skillsIntro: {
       eyebrow: 'Capabilities',
       title: 'A toolkit for operational decisions.',
@@ -551,11 +653,11 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
           'Algorithms, experiments, automation, and maintainable application logic.',
       },
       {
-        id: 'data-science',
-        title: 'Data Science',
-        subtitle: 'Analysis & visualization',
+        id: 'data-engineering',
+        title: 'Data Engineering & BI',
+        subtitle: 'ETL, Airflow & Qlik Sense',
         description:
-          'Data preparation and modeling for decision support and evaluation.',
+          'Pipelines, data models, and BI dashboards that turn operational data into decisions.',
       },
       {
         id: 'web-development',
@@ -588,13 +690,16 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
     navigation: [
       { id: 'hero', label: 'Über mich' },
       { id: 'pipeline', label: 'Prozesskette' },
-      { id: 'projects', label: 'Fallstudien' },
+      { id: 'projects', label: 'Projekte' },
       { id: 'experience', label: 'Erfahrung' },
       { id: 'skills', label: 'Fähigkeiten' },
     ],
     controls: {
+      backToHome: 'Zurück zur Übersicht',
+      education: 'Bildung',
       home: 'Startseite',
       language: 'Sprache auf Englisch wechseln',
+      languages: 'Sprachen',
       theme: 'Farbschema wechseln',
       openMenu: 'Navigation öffnen',
       closeMenu: 'Navigation schließen',
@@ -604,7 +709,7 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
       pipelineEvidence: 'Erfahrungsnachweis',
       pipelineDeliverables: 'Was ich umsetze',
       pipelineMethods: 'Tools & Methoden',
-      pipelineRelatedWork: 'Passende Fallstudien',
+      pipelineRelatedWork: 'Passende Projekte',
       pipelineStatus: {
         applied: 'Angewendet',
         prototyped: 'Als Prototyp',
@@ -622,11 +727,16 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
         'Die Animation ist aufgrund der Einstellung für reduzierte Bewegung pausiert.',
     },
     hero: {
-      eyebrow: 'Data Engineer mit Operations-Perspektive',
+      eyebrow: 'Data & Process Engineering mit Operations-Perspektive',
       name: 'Philipp Stockerl.',
       focus: 'Mein Fokus',
       headline: 'Data Engineering für industrielle Prozesse',
       bio: 'Ich entwickle den Weg von Produktions- und Logistikdaten zu nutzbaren Datenprodukten – von OT-Quellen und ETL-Pipelines über SQL-Datenmodelle und ERP-/MES-Integration bis zu BI-Anwendungen und operativer Optimierung.',
+      meta: [
+        'B.Sc. Wirtschaftsinformatik · Universität Passau',
+        'Process & Production Excellence · Hatz Components',
+        'Passau, Deutschland',
+      ],
       proofPoints: [
         'IT/OT-Integration',
         'ETL & SQL-Datenmodelle',
@@ -635,7 +745,7 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
       ],
       cvLabel: 'Lebenslauf herunterladen',
       cvHref: publicAsset('assets/PhilippStockerlCV_DE.pdf'),
-      projectsLabel: 'Fallstudien ansehen',
+      projectsLabel: 'Projekte ansehen',
     },
     pipelineIntro: {
       eyebrow: 'End-to-End-Fokus',
@@ -853,7 +963,7 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
       },
     ],
     projectsIntro: {
-      eyebrow: 'Fallstudien',
+      eyebrow: 'Persönliche Projekte',
       title: 'Von mathematischen Modellen zu nutzbaren Systemen.',
       description:
         'Projekte aus Optimierung, Data Science, Enterprise Systems und Interface-Entwicklung.',
@@ -937,31 +1047,94 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
     },
     experience: [
       {
-        id: 'erp-sap',
-        title: 'ERP & SAP Praktikant — Prozessintegration & Entwicklung',
-        organization: '4process AG · msg systems AG',
+        id: 'hatz',
+        title: 'Produktionsoptimierung & Fabrikdigitalisierung',
+        organization: 'Hatz Components · Ruhstorf a. d. Rott',
+        period: 'Apr 2026 – heute',
         description:
-          'Anpassung von SAP-S/4HANA-Prozessen, Entwicklung von SAP-Fiori-Anwendungen und Unterstützung von ERP-Analysen und Workflow-Optimierung.',
-        tags: ['ERP', 'SAP S/4HANA', 'Entwicklung'],
+          'Praktikum Process & Production Excellence: zentrale Erfassung von Maschinen- und Qualitätsdaten, ein Pilot-ETL/ELT-System, Lakehouse-orientiertes Datenbankdesign, MES-/ERP-Verknüpfung über SAP-Datenhierarchien und BI-/KPI-Konzepte für die Smart Factory.',
+        tags: ['ETL', 'ISA-95', 'MES & ERP', 'BI/KPI'],
       },
       {
-        id: 'procurement',
-        title: 'Beschaffungslogistik — Verhandlung & Prozessoptimierung',
-        organization: 'ZF Friedrichshafen',
+        id: 'four-process',
+        title: 'Geschäftsprozessmodellierung & ERP-Integration',
+        organization: '4process AG · Passau',
+        period: 'Okt – Nov 2024',
         description:
-          'Anwendung von Harvard-Verhandlungsstrategien und Unterstützung von Prozessoptimierungen in Einkauf und Supply Chain.',
-        tags: ['Beschaffung', 'Verhandlung', 'Prozessoptimierung'],
+          'Geschäftsprozessanalyse und Modellierung für Fertigung und Logistik; Unterstützung bei ERP-Integration und Datenmigration in SAP-S/4HANA-Umgebungen.',
+        tags: ['BPMN', 'SAP S/4HANA', 'Datenmigration'],
       },
       {
-        id: 'production-logistics',
-        title: 'Produktions- & Logistikassistent',
-        organization:
-          'Ensinger Plastics · Kunststoffwerke Katzbach Grupor · Deutsche Post DHL',
+        id: 'zf',
+        title: 'Verhandlungsstrategien in der Beschaffungslogistik',
+        organization: 'ZF Group · Passau',
+        period: 'Jun – Aug 2024',
         description:
-          'Unterstützung in Produktion und Logistik mit einem praxisnahen Verständnis für Prozessrestriktionen und betriebliche Entscheidungen.',
-        tags: ['Produktion', 'Logistik', 'Operations'],
+          'Analyse von Beschaffungs- und Supply-Chain-Prozessen, KPI-Übersichten im strategischen Sourcing und Anwendung von Verhandlungsstrategien nach dem Harvard-Konzept.',
+        tags: ['Beschaffung', 'KPI-Analyse', 'Verhandlung'],
+      },
+      {
+        id: 'msg',
+        title: 'Softwareentwicklung SAP Fiori',
+        organization: 'msg systems AG · Passau',
+        period: 'Mrz – Apr 2024',
+        description:
+          'Entwicklung von UI- und Backend-Komponenten mit SAP Fiori und ABAP RAP sowie Integration von Analytics in SAP-S/4HANA-Umgebungen.',
+        tags: ['SAP Fiori', 'ABAP RAP', 'Analytics'],
+      },
+      {
+        id: 'siemens',
+        title: 'KVP & Fabrikdigitalisierung',
+        organization: 'Siemens AG · Cham',
+        period: 'Feb – Jul 2018',
+        description:
+          'Mitarbeit an Prozessdigitalisierung und Verbesserung administrativer Produktionsprozesse; Unterstützung bei Projektorganisation und Stakeholder-Kommunikation.',
+        tags: ['KVP', 'Digitalisierung', 'Produktion'],
+      },
+      {
+        id: 'operations',
+        title: 'Operative Rollen in Produktion, Qualität & Logistik',
+        organization: 'Ensinger · Deutsche Post DHL · Grupor',
+        period: '2019 – 2025',
+        description:
+          'Praktische Arbeit in Kunststoffextrusion, Qualitätssicherung, Logistik und Verpackung – die operative Basis hinter meinem Fokus auf Data & Process Engineering.',
+        tags: ['Produktion', 'Qualität', 'Logistik'],
       },
     ],
+    education: [
+      {
+        id: 'bsc-wi',
+        degree: 'B.Sc. Wirtschaftsinformatik',
+        focus: 'Business Decisions & Data Science',
+        institution: 'Universität Passau',
+        period: 'Apr 2024 – heute',
+      },
+      {
+        id: 'bsc-wiwi',
+        degree: 'B.Sc. Wirtschaftswissenschaften',
+        focus: 'Supply Chain / Operations Management & Information Systems',
+        institution: 'Universität Passau',
+        period: 'Okt 2021 – Apr 2026',
+      },
+      {
+        id: 'abitur',
+        degree: 'Allgemeines Abitur',
+        focus: 'Wirtschaft und Verwaltung',
+        institution: 'Staatliche Fachoberschule Cham',
+        period: 'Aug 2017 – Okt 2020',
+      },
+    ],
+    languages: [
+      { id: 'de', name: 'Deutsch', level: 'Muttersprache' },
+      { id: 'en', name: 'Englisch', level: 'C2' },
+      { id: 'es', name: 'Spanisch', level: 'B1' },
+    ],
+    teasers: {
+      pipeline: { cta: 'Alle sechs Stationen ansehen' },
+      projects: { cta: 'Alle Projekte ansehen' },
+      experience: { cta: 'Werdegang & Bildung ansehen' },
+      skills: { cta: 'Fähigkeiten & Sprachen ansehen' },
+    },
     skillsIntro: {
       eyebrow: 'Fähigkeiten',
       title: 'Ein Werkzeugkasten für operative Entscheidungen.',
@@ -984,11 +1157,11 @@ export const portfolioContent: Record<Locale, PortfolioContent> = {
           'Algorithmen, Experimente, Automatisierung und wartbare Anwendungslogik.',
       },
       {
-        id: 'data-science',
-        title: 'Data Science',
-        subtitle: 'Analyse & Visualisierung',
+        id: 'data-engineering',
+        title: 'Data Engineering & BI',
+        subtitle: 'ETL, Airflow & Qlik Sense',
         description:
-          'Datenaufbereitung und Modellierung für Entscheidungsunterstützung und Evaluation.',
+          'Pipelines, Datenmodelle und BI-Dashboards, die operative Daten in Entscheidungen überführen.',
       },
       {
         id: 'web-development',

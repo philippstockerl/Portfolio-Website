@@ -1,10 +1,16 @@
 import type { SectionIntro } from '../../content/portfolio'
 
 interface SectionHeadingProps {
-  align?: 'left' | 'right'
+  align?: 'center' | 'left' | 'right'
   id: string
   intro: SectionIntro
 }
+
+const alignClasses = {
+  center: 'mx-auto text-center',
+  left: '',
+  right: 'ml-auto text-right',
+} as const
 
 export function SectionHeading({
   align = 'left',
@@ -12,9 +18,7 @@ export function SectionHeading({
   intro,
 }: SectionHeadingProps) {
   return (
-    <div
-      className={`max-w-3xl ${align === 'right' ? 'ml-auto text-right' : ''}`}
-    >
+    <div className={`max-w-3xl ${alignClasses[align]}`}>
       <p className="font-mono text-xs tracking-[0.24em] text-accent uppercase">
         {intro.eyebrow}
       </p>

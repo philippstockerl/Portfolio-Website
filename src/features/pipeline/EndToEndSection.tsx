@@ -11,7 +11,7 @@ export function EndToEndSection({ content }: { content: PortfolioContent }) {
     <section
       id="pipeline"
       aria-labelledby="pipeline-heading"
-      className="section-shell scroll-mt-24"
+      className="scroll-mt-24"
     >
       <SectionHeading id="pipeline-heading" intro={content.pipelineIntro} />
 

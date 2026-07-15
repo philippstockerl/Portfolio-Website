@@ -6,7 +6,7 @@ export function SkillsSection({ content }: { content: PortfolioContent }) {
     <section
       id="skills"
       aria-labelledby="skills-heading"
-      className="section-shell scroll-mt-28"
+      className="scroll-mt-28"
     >
       <SectionHeading id="skills-heading" intro={content.skillsIntro} />
 

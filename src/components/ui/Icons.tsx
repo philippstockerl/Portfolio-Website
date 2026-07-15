@@ -22,6 +22,15 @@ export function ArrowDownIcon(props: IconProps) {
   )
 }
 
+export function ArrowLeftIcon(props: IconProps) {
+  return (
+    <svg {...defaultProps} {...props}>
+      <path d="M19 12H5" />
+      <path d="m12 19-7-7 7-7" />
+    </svg>
+  )
+}
+
 export function ArrowUpRightIcon(props: IconProps) {
   return (
     <svg {...defaultProps} {...props}>
@@ -46,6 +55,19 @@ export function MenuIcon(props: IconProps) {
       <path d="M4 7h16" />
       <path d="M4 12h16" />
       <path d="M4 17h16" />
+    </svg>
+  )
+}
+
+export function MatrixRainIcon(props: IconProps) {
+  return (
+    <svg {...defaultProps} {...props}>
+      <path d="M5 3v4" />
+      <path d="M5 11v3" />
+      <path d="M12 5v6" />
+      <path d="M12 15v4" />
+      <path d="M19 4v3" />
+      <path d="M19 11v5" />
     </svg>
   )
 }

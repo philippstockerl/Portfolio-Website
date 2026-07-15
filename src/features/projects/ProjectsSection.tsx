@@ -30,7 +30,7 @@ export function ProjectsSection({
       aria-labelledby="projects-heading"
       data-asset-active={activeAssetId !== null}
       data-asset-state={activeAssetId ? assetStatus.state : 'idle'}
-      className="section-shell scroll-mt-28"
+      className="scroll-mt-28"
     >
       <SectionHeading id="projects-heading" intro={content.projectsIntro} />
 

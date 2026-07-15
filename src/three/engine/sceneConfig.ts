@@ -21,6 +21,7 @@ export interface GlassThemeConfig {
 export const GRID_THEMES: Record<ThreeTheme, GridThemeConfig> = {
   dark: { main: 0xcdd2db, grid: 0xa3a9b6, opacity: 0.1 },
   light: { main: 0x3a3f4c, grid: 0x5b6270, opacity: 0.1 },
+  matrix: { main: 0x00ff41, grid: 0x00c437, opacity: 0.16 },
 }
 
 export const GLASS_THEMES: Record<ThreeTheme, GlassThemeConfig> = {
@@ -39,5 +40,13 @@ export const GLASS_THEMES: Record<ThreeTheme, GlassThemeConfig> = {
     roughness: 0.22,
     clearcoat: 0.35,
     clearcoatRoughness: 0.25,
+  },
+  matrix: {
+    color: 0x00ff41,
+    opacity: 0.05,
+    transmission: 0.35,
+    roughness: 0.18,
+    clearcoat: 0.4,
+    clearcoatRoughness: 0.2,
   },
 }

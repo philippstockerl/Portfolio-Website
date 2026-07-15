@@ -1,10 +1,17 @@
 import { useState } from 'react'
 
 import type { SectionId } from '../../app/navigation'
+import { pageHref } from '../../app/routes'
 import type { Locale, PortfolioContent } from '../../content/portfolio'
 import { publicAsset } from '../../lib/publicAsset'
 import type { Theme } from '../../app/providers/theme-context'
-import { CloseIcon, MenuIcon, MoonIcon, SunIcon } from '../ui/Icons'
+import {
+  CloseIcon,
+  MatrixRainIcon,
+  MenuIcon,
+  MoonIcon,
+  SunIcon,
+} from '../ui/Icons'
 
 interface SiteHeaderProps {
   activeSection: SectionId
@@ -30,7 +37,7 @@ export function SiteHeader({
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between gap-4">
           <a
-            href="#hero"
+            href={pageHref('hero')}
             className="flex items-center gap-3 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
             aria-label={`Philipp Stockerl — ${content.controls.home}`}
           >
@@ -52,7 +59,7 @@ export function SiteHeader({
               {content.navigation.map((item) => (
                 <li key={item.id}>
                   <a
-                    href={`#${item.id}`}
+                    href={pageHref(item.id)}
                     aria-current={
                       activeSection === item.id ? 'location' : undefined
                     }
@@ -82,13 +89,15 @@ export function SiteHeader({
               type="button"
               onClick={onToggleTheme}
               aria-label={content.controls.theme}
-              aria-pressed={theme === 'light'}
               className="control-button grid"
             >
-              {theme === 'dark' ? (
-                <SunIcon className="h-4 w-4" />
-              ) : (
+              {/* Shows the theme the button switches to: light → dark → matrix. */}
+              {theme === 'light' ? (
                 <MoonIcon className="h-4 w-4" />
+              ) : theme === 'dark' ? (
+                <MatrixRainIcon className="h-4 w-4" />
+              ) : (
+                <SunIcon className="h-4 w-4" />
               )}
             </button>
             <button
@@ -122,7 +131,7 @@ export function SiteHeader({
               {content.navigation.map((item) => (
                 <li key={item.id}>
                   <a
-                    href={`#${item.id}`}
+                    href={pageHref(item.id)}
                     onClick={() => setMenuOpen(false)}
                     aria-current={
                       activeSection === item.id ? 'location' : undefined

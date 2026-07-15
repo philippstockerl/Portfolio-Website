@@ -4,12 +4,12 @@ import { ThemeContext, type Theme } from './theme-context'
 
 const storageKey = 'portfolio-theme'
 
+const themeCycle: readonly Theme[] = ['light', 'dark', 'matrix']
+
 function readStoredTheme(): Theme | null {
   try {
     const storedTheme = window.localStorage.getItem(storageKey)
-    return storedTheme === 'dark' || storedTheme === 'light'
-      ? storedTheme
-      : null
+    return themeCycle.find((theme) => theme === storedTheme) ?? null
   } catch {
     return null
   }
@@ -38,14 +38,17 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
-    document.documentElement.style.colorScheme = theme
+    // 'matrix' is not a valid CSS color-scheme; it behaves like a dark theme.
+    document.documentElement.style.colorScheme =
+      theme === 'matrix' ? 'dark' : theme
   }, [theme])
 
   const value = useMemo(
     () => ({
       theme,
       toggleTheme: () => {
-        const nextTheme = theme === 'dark' ? 'light' : 'dark'
+        const nextTheme =
+          themeCycle[(themeCycle.indexOf(theme) + 1) % themeCycle.length]
         setPreference(nextTheme)
         try {
           window.localStorage.setItem(storageKey, nextTheme)

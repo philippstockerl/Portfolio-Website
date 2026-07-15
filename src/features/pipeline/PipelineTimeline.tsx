@@ -1,5 +1,6 @@
 import { useEffect, useRef, type MouseEvent } from 'react'
 
+import { pageHref } from '../../app/routes'
 import type {
   PipelineStageContent,
   PipelineStageId,
@@ -36,7 +37,8 @@ export function PipelineTimeline({
 
     event.preventDefault()
     const anchor = getPipelineStageAnchor(stageId)
-    window.history.pushState(null, '', `#${anchor}`)
+    // Keep the route-style hash so a reload stays on the end-to-end page.
+    window.history.pushState(null, '', pageHref('pipeline', stageId))
     document.getElementById(anchor)?.scrollIntoView({
       behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
         ? 'auto'
@@ -110,7 +112,7 @@ export function PipelineTimeline({
                 ) : null}
 
                 <a
-                  href={`#${getPipelineStageAnchor(stage.id)}`}
+                  href={pageHref('pipeline', stage.id)}
                   aria-current={isActive ? 'step' : undefined}
                   data-pipeline-node={stage.id}
                   data-state={
